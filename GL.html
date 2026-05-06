@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, print-scale: 1;">
+    <title>Guest Lecture Completion Certificate | Vocational Education Tripura</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.3;
+            color: #000;
+            background: #fff;
+            padding: 8px;
+            max-width: 210mm;
+            margin: 0 auto;
+            font-size: 12px;
+            margin-top: 0;
+        }
+        
+        /* Optimized header for A4 - Reduced spacing */
+        .print-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #000;
+            justify-content: center;
+            margin-top: 0;
+        }
+        
+        .logo-container {
+            flex-shrink: 0;
+            margin-right: 0px;
+            margin-top: 1px;
+        }
+        
+        .logo {
+            width: 65px;
+            height: auto;
+            max-height: 65px;
+            object-fit: contain;
+        }
+        
+        .header-content {
+            flex: 1;
+            text-align: center;
+            max-width: calc(100% - 70px);
+        }
+        
+        .print-header h1 {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            width: 100%;
+            line-height: 1.1;
+        }
+        
+        .print-header h2 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 2px;
+            text-align: center;
+            width: 100%;
+            line-height: 1.1;
+        }
+        
+        .print-header p {
+            font-size: 12px;
+            margin-bottom: 1px;
+            text-align: center;
+            width: 100%;
+            line-height: 1.1;
+        }
+        
+        .form-section {
+            margin-bottom: 6px;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 4px;
+            padding-bottom: 1px;
+            border-bottom: 1px solid #000;
+        }
+        
+        .form-group {
+            margin-bottom: 5px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 1px;
+            font-size: 11px;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 3px;
+            border: 1px solid #999;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11px;
+            background: #fff;
+        }
+        
+        .form-group select {
+            height: 26px;
+        }
+        
+        .form-group textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 5px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            min-width: 140px;
+        }
+        
+        .box {
+            border: 2px solid #000;
+            padding: 6px;
+            margin-bottom: 6px;
+            background: #fff;
+            page-break-inside: avoid;
+        }
+        
+        /* Manual Signature Areas */
+        .manual-signature-area {
+            margin: 10px 0 6px 0;
+            padding: 4px 0;
+        }
+        
+        .manual-signature-box {
+            border: 2px solid #000;
+            padding: 10px;
+            margin: 8px 0;
+            display: flex;
+            gap: 12px;
+            background: #fff;
+            min-height: 140px;
+            page-break-inside: avoid;
+        }
+        
+        .signature-half {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .signature-half.left {
+            border-right: 1px solid #999;
+            padding-right: 12px;
+        }
+        
+        .signature-half.right {
+            padding-left: 12px;
+        }
+        
+        .signature-header {
+            font-weight: bold;
+            font-size: 11px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .signature-header .underline {
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            border-bottom: 1px solid #000;
+        }
+        
+        .signature-space {
+            height: 30px;
+            margin: 10px 0 6px 0;
+            border-bottom: 1px dashed #999;
+        }
+        
+        .signature-instruction {
+            font-size: 9px;
+            color: #666;
+            text-align: center;
+            font-style: italic;
+            margin-top: 4px;
+        }
+        
+        .right-aligned {
+            text-align: right;
+        }
+        
+        .form-line {
+            margin-bottom: 9px;
+            text-align: left;
+        }
+        
+        .form-line label {
+            display: inline-block;
+            margin-right: 6px;
+            font-weight: bold;
+            font-size: 11px;
+            min-width: 80px;
+        }
+        
+        .dotted-line {
+            display: inline-block;
+            width: 200px;
+            border-bottom: 1px dotted #000;
+            height: 18px;
+            vertical-align: middle;
+        }
+        
+        .blank-space {
+            height: 80px;
+            margin: 8px 0;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 10px;
+            padding-top: 6px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .btn-print {
+            padding: 6px 16px;
+            background: #fff;
+            border: 2px solid #000;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-print:hover {
+            background: #f5f5f5;
+        }
+        
+        .btn-print:disabled {
+            background: #f0f0f0;
+            border-color: #999;
+            color: #666;
+            cursor: not-allowed;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #000;
+        }
+        
+        .instruction {
+            font-size: 9px;
+            color: #666;
+            margin-top: 2px;
+            font-style: italic;
+        }
+        
+        .manual-note {
+            font-size: 9px;
+            color: #d00;
+            text-align: center;
+            margin: 6px 0;
+            font-style: italic;
+        }
+        
+        .compact-textarea {
+            min-height: 50px !important;
+        }
+        
+        .error-message {
+            color: #d00;
+            font-size: 9px;
+            margin-top: 1px;
+            display: none;
+        }
+        
+        .selection-warning {
+            color: #d00;
+            font-size: 10px;
+            text-align: center;
+            margin-top: 5px;
+            font-weight: bold;
+            display: none;
+        }
+        
+        /* Date input hint styling */
+        .date-hint {
+            font-size: 9px;
+            color: #666;
+            margin-top: 2px;
+            font-style: italic;
+        }
+        
+        /* Print styles */
+        @media print {
+            @page {
+                size: A4;
+                margin: 1.8cm 2.2cm 2cm 2.2cm;
+            }
+            
+            body {
+                padding: 0;
+                font-size: 11px;
+                max-width: 100%;
+                line-height: 1.2;
+                margin-top: 0;
+            }
+            
+            .button-container, .instruction, .manual-note, .selection-warning, .date-hint {
+                display: none !important;
+            }
+            
+            .box, .manual-signature-box {
+                border: 2px solid #000 !important;
+                page-break-inside: avoid;
+            }
+            
+            .form-group input, .form-group textarea, .form-group select {
+                border: none !important;
+                border-bottom: 1px solid #ccc !important;
+                background: #fff !important;
+                padding: 2px 0 !important;
+            }
+            
+            .print-header {
+                margin-bottom: 4px !important;
+                padding-bottom: 2px !important;
+                margin-top: 0 !important;
+            }
+            
+            .logo {
+                width: 60px !important;
+            }
+            
+            .print-header h1 {
+                font-size: 16px !important;
+            }
+            
+            .print-header h2 {
+                font-size: 13px !important;
+            }
+            
+            .print-header p {
+                font-size: 9px !important;
+            }
+            
+            .box {
+                padding: 5px !important;
+                margin-bottom: 5px !important;
+            }
+            
+            .section-title {
+                margin-bottom: 3px !important;
+                font-size: 11px !important;
+            }
+            
+            .form-group {
+                margin-bottom: 4px !important;
+            }
+            
+            .form-group label {
+                margin-bottom: 1px !important;
+                font-size: 10px !important;
+            }
+            
+            .form-row {
+                gap: 4px !important;
+                margin-bottom: 4px !important;
+            }
+            
+            .manual-signature-area {
+                margin: 6px 0 4px 0 !important;
+            }
+            
+            .manual-signature-box {
+                padding: 8px !important;
+                margin: 6px 0 !important;
+                min-height: 130px !important;
+            }
+            
+            .signature-header {
+                font-size: 10px !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .signature-space {
+                height: 25px !important;
+                margin: 15px 0 4px 0 !important;
+            }
+            
+            .form-group textarea {
+                min-height: 45px !important;
+            }
+            
+            .compact-textarea {
+                min-height: 45px !important;
+            }
+            
+            .form-line {
+                margin-bottom: 8px !important;
+            }
+            
+            .dotted-line {
+                width: 180px !important;
+                height: 16px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-header">
+        <div class="logo-container">
+            <img src="SSLOGO.jpg" alt="Vocational Education Logo" class="logo" onerror="this.style.opacity='0'; this.style.border='1px dashed #ccc';">
+        </div>
+        <div class="header-content">
+            <h1>Guest Lecture Session</h1>
+            <h2>Vocationalisation of School Education Project, Tripura</h2>
+            <p>Vocational Training Provider: SIBIN Learning Cart Private Limited</p>
+            <p>Guest Lecture Session Completion Certificate</p>
+        </div>
+    </div>
+
+    <form id="lectureForm">
+        <!-- Project Details -->
+        <div class="form-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="projectYear" class="required">Project Starting Year</label>
+                    <select id="projectYear" required>
+                        <option value="">Select Year</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                    </select>
+                    <div class="error-message" id="projectYearError">Required field</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pabYear" class="required">PAB Approval Year</label>
+                    <select id="pabYear" required>
+                        <option value="">Select Year</option>
+                        <option value="2018-19">2018-19</option>
+                        <option value="2019-20">2019-20</option>
+                        <option value="2020-21">2020-21</option>
+                        <option value="2021-22">2021-22</option>
+                        <option value="2022-23">2022-23</option>
+                        <option value="2023-24">2023-24</option>
+                        <option value="2024-25">2024-25</option>
+                        <option value="2025-26">2025-26</option>
+                        <option value="2026-27">2026-27</option>
+                        <option value="2027-28">2027-28</option>
+                        <option value="2028-29">2028-29</option>
+                        <option value="2029-30">2029-30</option>
+                    </select>
+                    <div class="error-message" id="pabYearError">Required field</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box 1: School & Session Details -->
+        <div class="box">
+            <div class="section-title">School & Session Details</div>
+            
+            <div class="form-group">
+                <label for="schoolName" class="required">School Name</label>
+                <input type="text" id="schoolName" placeholder="Enter full school name">
+                <div class="error-message" id="schoolNameError">Required field</div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phase" class="required">Phase</label>
+                    <select id="phase">
+                        <option value="">Select Phase</option>
+                        <option value="I">I</option>
+                        <option value="II">II</option>
+                        <option value="III">III</option>
+                        <option value="IV">IV</option>
+                        <option value="V">V</option>
+                        <option value="VI">VI</option>
+                        <option value="VII">VII</option>
+                        <option value="VIII">VIII</option>
+                        <option value="IX">IX</option>
+                        <option value="X">X</option>
+                        <option value="PMSHRI-I">PMSHRI-I</option>
+                        <option value="PMSHRI-II">PMSHRI-II</option>
+                        <option value="PMSHRI-III">PMSHRI-III</option>
+                        <option value="PMSHRI-IV">PMSHRI-IV</option>
+                        <option value="PMSHRI-V">PMSHRI-V</option>
+                        <option value="Hub & Spoke-I">Hub & Spoke-I</option>
+                        <option value="Hub & Spoke-II">Hub & Spoke-II</option>
+                        <option value="Hub & Spoke-III">Hub & Spoke-III</option>
+                    </select>
+                    <div class="error-message" id="phaseError">Required field</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="udise" class="required">UDISE</label>
+                    <input type="text" id="udise" placeholder="UDISE Code">
+                    <div class="error-message" id="udiseError">Required field</div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="sector" class="required">Sector</label>
+                    <select id="sector">
+                        <option value="">Select Sector</option>
+                        <option value="Agriculture">Agriculture (TBSE) </option>
+                        <option value="Agriculture (CBSE)">Agriculture (CBSE)</option>
+                        <option value="Automotive (TBSE)">Automotive (TBSE)</option>
+                        <option value="Automotive (CBSE)">Automotive (CBSE)</option>
+                        <option value="Beauty & Wellness">Beauty & Wellness</option>
+                        <option value="Electronics">Electronics (TBSE)</option>
+                        <option value="Electronics & Hardware">Electronics & Hardware (CBSE)</option>
+                        <option value="Information Technology">Information Technology (CBSE)</option>
+                        <option value="IT-ITeS">IT-ITeS (TBSE)</option>
+                        <option value="Organised Retail">Organised Retail (TBSE)</option>
+                        <option value="Power">Power (TBSE)</option>
+                        <option value="Retail">Retail (CBSE)</option>
+                        <option value="Tourism & Hospitality">Tourism & Hospitality (TBSE)</option>
+                    </select>
+                    <div class="error-message" id="sectorError">Required field</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="jobRole" class="required">Job Role</label>
+                    <input type="text" id="jobRole" readonly style="background-color: #f5f5f5;">
+                    <div class="error-message" id="jobRoleError">Required field</div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="className" class="required">Class</label>
+                    <select id="className">
+                        <option value="">Select Class</option>
+                        <option value="Class-IX">Class-IX</option>
+                        <option value="Class-X">Class-X</option>
+                        <option value="Class-XI">Class-XI</option>
+                        <option value="Class-XII">Class-XII</option>
+                    </select>
+                    <div class="error-message" id="classNameError">Required field</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="conductedOn" class="required">Conducted On</label>
+                    <input type="text" id="conductedOn" placeholder="DD-MMM-YYYY (e.g., 15-May-2025)" autocomplete="off" maxlength="11">
+                    <div class="date-hint">Format: 2-digit day, hyphen, 3-letter month, hyphen, 4-digit year (e.g., 06-May-2026)</div>
+                    <div class="error-message" id="conductedOnError">Invalid format! Please use DD-MMM-YYYY (e.g., 15-May-2025)</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="sessionNo" class="required">GL Session No</label>
+                <select id="sessionNo">
+                    <option value="">Select Session</option>
+                    <option value="GL-01">GL-01</option>
+                    <option value="GL-02">GL-02</option>
+                    <option value="GL-03">GL-03</option>
+                    <option value="GL-04">GL-04</option>
+                    <option value="GL-05">GL-05</option>
+                    <option value="GL-06">GL-06</option>
+                    <option value="GL-07">GL-07</option>
+                    <option value="GL-08">GL-08</option>
+                    <option value="GL-09">GL-09</option>
+                    <option value="GL-10">GL-10</option>
+                    <option value="GL-11">GL-11</option>
+                    <option value="GL-12">GL-12</option>
+                </select>
+                <div class="error-message" id="sessionNoError">Required field</div>
+            </div>
+        </div>
+
+        <!-- Box 2: Guest Lecture Resource Person Details -->
+        <div class="box">
+            <div class="section-title">Guest Lecture Resource Person Details</div>
+            
+            <div class="form-group">
+                <label for="guestName" class="required">Name</label>
+                <input type="text" id="guestName" placeholder="Full name of guest lecturer">
+                <div class="error-message" id="guestNameError">Required field</div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="qualification" class="required">Qualification</label>
+                    <input type="text" id="qualification" placeholder="e.g., M.Tech, MBA">
+                    <div class="error-message" id="qualificationError">Required field</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="organization" class="required">Organization</label>
+                    <input type="text" id="organization" placeholder="Organization name">
+                    <div class="error-message" id="organizationError">Required field</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="designation" class="required">Designation</label>
+                <input type="text" id="designation" placeholder="Current designation">
+                <div class="error-message" id="designationError">Required field</div>
+            </div>
+        </div>
+
+        <!-- Box 3: Topics Covered -->
+        <div class="box">
+            <div class="section-title">Topics Covered (Elaborate in brief)</div>
+            <div class="form-group">
+                <textarea id="topics" class="compact-textarea" placeholder="Provide detailed description of topics covered during the guest lecture..."></textarea>
+                <div class="error-message" id="topicsError">Required field</div>
+            </div>
+        </div>
+
+        <!-- MANUAL: Guest Lecturer Signature Area -->
+        <div class="manual-signature-area">
+            <div class="section-title">Full Signature of the Guest Lecturer</div>
+            <div class="signature-space"></div>
+            <div class="signature-instruction">Please sign above this line & No initial signature is accepted</div>
+        </div>
+
+        <!-- MANUAL: Signature Box divided in 2 equal parts -->
+        <div class="manual-signature-box">
+            <!-- Left Part -->
+            <div class="signature-half left">
+                <div class="signature-header">
+                    For, SIBIN Learning Cart Private Limited
+                    <div class="underline"></div>
+                </div>
+                <div class="signature-space"></div>
+                <div class="signature-instruction">(Name & Signature of Vocational Teacher)</div>
+            </div>
+            
+            <!-- Right Part -->
+            <div class="signature-half right">
+                <div class="signature-header">
+                    Acknowledged by:
+                    <div class="underline"></div>
+                </div>
+                
+                <div class="form-line">
+                    <label>Full Name:</label>
+                    <span class="dotted-line"></span>
+                </div>
+                
+                <div class="form-line">
+                    <label>Designation:</label>
+                    <span class="dotted-line"></span>
+                </div>
+                
+                <div class="blank-space"></div>
+                
+                <div class="signature-space"></div>
+                <div class="signature-instruction">(Signature with seal of Principal / Vice-principal / HM / AHM / TIC / In-charge)</div>
+            </div>
+        </div>
+        
+        <div class="manual-note">
+            Note: All signature areas are for manual completion after printing.
+        </div>
+
+        <div class="button-container">
+            <div class="selection-warning" id="selectionWarning">
+                Please select Project Starting Year & PAB Approval Year to enable printing
+            </div>
+            <button type="button" class="btn-print" id="printButton" disabled onclick="validateAndPrint()">Print Form</button>
+        </div>
+    </form>
+
+    <script>
+        // ----- STRICT DATE VALIDATION for DD-MMM-YYYY format (no calendar) -----
+        const conductedOnInput = document.getElementById('conductedOn');
+        const dateErrorSpan = document.getElementById('conductedOnError');
+        
+        // Valid month abbreviations (3 letters, first capital, rest lowercase)
+        const validMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        
+        // Function to validate DD-MMM-YYYY format strictly
+        function isValidDateFormat(dateStr) {
+            if (!dateStr || typeof dateStr !== 'string') return false;
+            const trimmed = dateStr.trim();
+            
+            // Regex pattern: exactly two digits, hyphen, three letters (case insensitive but we'll check case later), hyphen, four digits
+            const pattern = /^(\d{2})-([A-Za-z]{3})-(\d{4})$/;
+            const match = trimmed.match(pattern);
+            if (!match) return false;
+            
+            const day = parseInt(match[1], 10);
+            const monthStr = match[2];
+            const year = parseInt(match[3], 10);
+            
+            // Check day range (01-31)
+            if (day < 1 || day > 31) return false;
+            
+            // Check month is valid (case-insensitive but we expect proper case, yet accept any case for validation)
+            const monthCapitalized = monthStr.charAt(0).toUpperCase() + monthStr.slice(1).toLowerCase();
+            if (!validMonths.includes(monthCapitalized)) return false;
+            
+            // Check year range (reasonable: 1900-2100)
+            if (year < 1900 || year > 2100) return false;
+            
+            // Additional date validity check for months having 30/31 days and Feb 28/29
+            const monthIndex = validMonths.indexOf(monthCapitalized);
+            const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+            if (day > daysInMonth) return false;
+            
+            return true;
+        }
+        
+        // Auto-format helper: as user types, we can auto-correct common mistakes but only accept valid final format
+        function autoFormatDate(inputStr) {
+            // Remove any extra spaces
+            let cleaned = inputStr.trim().replace(/\s+/g, '');
+            // If user typed dd-mm-yyyy with numeric month, we don't auto convert (keep as is, validation will fail)
+            // But if they typed like "06-may-2026", we can capitalize first letter of month
+            const parts = cleaned.split('-');
+            if (parts.length === 3) {
+                let day = parts[0];
+                let month = parts[1];
+                let year = parts[2];
+                // If month is 3 letters (any case), capitalize properly
+                if (month && month.length === 3 && /^[A-Za-z]{3}$/.test(month)) {
+                    month = month.charAt(0).toUpperCase() + month.slice(1).toLowerCase();
+                    return `${day}-${month}-${year}`;
+                }
+            }
+            return cleaned;
+        }
+        
+        // Real-time validation and visual feedback (without auto-correcting aggressively, just guide)
+        conductedOnInput.addEventListener('input', function(e) {
+            let rawValue = this.value;
+            // Remove any unwanted characters? No, we just validate on blur, but we can clear error as they type
+            dateErrorSpan.style.display = 'none';
+            this.style.borderColor = '#999';
+        });
+        
+        // On blur: strict validation, reject if not exactly DD-MMM-YYYY with valid date
+        conductedOnInput.addEventListener('blur', function() {
+            let rawValue = this.value.trim();
+            
+            if (rawValue === "") {
+                dateErrorSpan.style.display = 'block';
+                dateErrorSpan.innerText = 'Date is required! Please enter in DD-MMM-YYYY format (e.g., 06-May-2026)';
+                this.style.borderColor = '#d00';
+                return;
+            }
+            
+            // Try to auto-format mild improvements (capitalize month first letter)
+            let formatted = autoFormatDate(rawValue);
+            if (formatted !== rawValue) {
+                this.value = formatted;
+                rawValue = formatted;
+            }
+            
+            // Strict validation
+            if (!isValidDateFormat(rawValue)) {
+                dateErrorSpan.style.display = 'block';
+                dateErrorSpan.innerText = 'Invalid format! Must be DD-MMM-YYYY (e.g., 15-May-2025). Use 2-digit day, hyphen, 3-letter month (Jan/Feb/Mar/Apr/May/Jun/Jul/Aug/Sep/Oct/Nov/Dec), hyphen, 4-digit year.';
+                this.style.borderColor = '#d00';
+            } else {
+                dateErrorSpan.style.display = 'none';
+                this.style.borderColor = '#999';
+            }
+        });
+        
+        // Set default date to today in DD-MMM-YYYY format (no calendar, manual entry pre-filled)
+        function setDefaultDate() {
+            const today = new Date();
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const day = today.getDate().toString().padStart(2, '0');
+            const month = months[today.getMonth()];
+            const year = today.getFullYear();
+            const defaultDate = `${day}-${month}-${year}`;
+            conductedOnInput.value = defaultDate;
+            // Validate default (should be valid)
+            if (isValidDateFormat(defaultDate)) {
+                dateErrorSpan.style.display = 'none';
+                conductedOnInput.style.borderColor = '#999';
+            }
+        }
+        
+        // Set default date on load
+        setDefaultDate();
+        
+        // DOM elements for project/PAB
+        const projectYearSelect = document.getElementById('projectYear');
+        const pabYearSelect = document.getElementById('pabYear');
+        const printButton = document.getElementById('printButton');
+        const selectionWarning = document.getElementById('selectionWarning');
+        
+        function checkRequiredSelections() {
+            const projectYearSelected = projectYearSelect.value !== '';
+            const pabYearSelected = pabYearSelect.value !== '';
+            if (projectYearSelected && pabYearSelected) {
+                printButton.disabled = false;
+                selectionWarning.style.display = 'none';
+            } else {
+                printButton.disabled = true;
+                selectionWarning.style.display = 'block';
+            }
+        }
+        
+        projectYearSelect.addEventListener('change', function() {
+            checkRequiredSelections();
+            const error = document.getElementById('projectYearError');
+            if (error) { error.style.display = 'none'; this.style.borderColor = '#999'; }
+        });
+        
+        pabYearSelect.addEventListener('change', function() {
+            checkRequiredSelections();
+            const error = document.getElementById('pabYearError');
+            if (error) { error.style.display = 'none'; this.style.borderColor = '#999'; }
+        });
+        
+        checkRequiredSelections();
+        
+        // Job Role Mapping (preserved fully)
+        const jobRoleMapping = {
+            'Organised Retail-Class-IX': 'Retail Store Operations Assistant',
+            'Organised Retail-Class-X': 'Retail Store Operations Assistant',
+            'Organised Retail-Class-XI': 'Retail Sales Associate',
+            'Organised Retail-Class-XII': 'Retail Sales Associate',
+            'Retail-Class-IX': 'Store Operations Assistant',
+            'Retail-Class-X': 'Store Operations Assistant',
+            'Retail-Class-XI': 'Sales Associate',
+            'Retail-Class-XII': 'Sales Associate',
+            'Agriculture-Class-IX': 'Solanaceous Crop Cultivator',
+            'Agriculture-Class-X': 'Solanaceous Crop Cultivator',
+            'Agriculture-Class-XI': 'Gardener',
+            'Agriculture-Class-XII': 'Gardener',
+            'Agriculture (CBSE)-Class-IX': 'Solanaceous Crop Cultivator',
+            'Agriculture (CBSE)-Class-X': 'Solanaceous Crop Cultivator',
+            'Agriculture (CBSE)-Class-XI': 'Agriculture Extension Worker',
+            'Agriculture (CBSE)-Class-XII': 'Agriculture Extension Worker',
+            'IT-ITeS-Class-IX': 'Domestic Data Entry Operator',
+            'IT-ITeS-Class-X': 'Domestic Data Entry Operator',
+            'IT-ITeS-Class-XI': 'Domestic CRM Voice',
+            'IT-ITeS-Class-XII': 'Domestic CRM Voice',
+            'Information Technology-Class-IX': 'Domestic Data Entry Operator',
+            'Information Technology-Class-X': 'Domestic Data Entry Operator',
+            'Information Technology-Class-XI': 'Domestic IT Helpdesk Assistant',
+            'Information Technology-Class-XII': 'Domestic IT Helpdesk Assistant',
+            'Automotive (TBSE)-Class-IX': 'Four Wheeler Service Assistant',
+            'Automotive (TBSE)-Class-X': 'Four Wheeler Service Assistant',
+            'Automotive (TBSE)-Class-XI': 'Four Wheeler Service Technician',
+            'Automotive (TBSE)-Class-XII': 'Four Wheeler Service Technician',
+            'Automotive (CBSE)-Class-IX': 'Sales Executive Dealer',
+            'Automotive (CBSE)-Class-X': 'Sales Executive Dealer',
+            'Automotive (CBSE)-Class-XI': 'Automotive Service Technician',
+            'Automotive (CBSE)-Class-XII': 'Automotive Service Technician',
+            'Electronics-Class-IX': 'Assistant Installation Computing and Peripherals',
+            'Electronics-Class-X': 'Assistant Installation Computing and Peripherals',
+            'Electronics-Class-XI': 'Field Technician Computing and Peripherals',
+            'Electronics-Class-XII': 'Field Technician Computing and Peripherals',
+            'Electronics & Hardware-Class-IX': 'Field Technician - Other Home Appliances',
+            'Electronics & Hardware-Class-X': 'Field Technician - Other Home Appliances',
+            'Electronics & Hardware-Class-XI': 'Installation Technician - Computing And Peripherals',
+            'Electronics & Hardware-Class-XII': 'Installation Technician - Computing And Peripherals',
+            'Beauty & Wellness-Class-IX': 'Assistant Beauty Therapist',
+            'Beauty & Wellness-Class-X': 'Assistant Beauty Therapist',
+            'Beauty & Wellness-Class-XI': 'Beauty Therapist',
+            'Beauty & Wellness-Class-XII': 'Beauty Therapist',
+            'Power-Class-IX': 'Consumer Energy Meter Technician',
+            'Power-Class-X': 'Consumer Energy Meter Technician',
+            'Power-Class-XI': 'Distribution Lineman',
+            'Power-Class-XII': 'Distribution Lineman',
+            'Tourism & Hospitality-Class-IX': 'Food and Beverage Service Trainee',
+            'Tourism & Hospitality-Class-X': 'Food and Beverage Service Trainee',
+            'Tourism & Hospitality-Class-XI': 'Customer Service Executive (Meet and Greet)',
+            'Tourism & Hospitality-Class-XII': 'Customer Service Executive (Meet and Greet)'
+        };
+        
+        function updateJobRole() {
+            const sector = document.getElementById('sector').value;
+            const className = document.getElementById('className').value;
+            const jobRoleInput = document.getElementById('jobRole');
+            if (sector && className) {
+                const key = `${sector}-${className}`;
+                const jobRole = jobRoleMapping[key];
+                jobRoleInput.value = jobRole || '';
+            } else {
+                jobRoleInput.value = '';
+            }
+        }
+        
+        document.getElementById('sector').addEventListener('change', function() {
+            updateJobRole();
+            const error = document.getElementById('sectorError');
+            if (error) { error.style.display = 'none'; this.style.borderColor = '#999'; }
+        });
+        document.getElementById('className').addEventListener('change', function() {
+            updateJobRole();
+            const error = document.getElementById('classNameError');
+            if (error) { error.style.display = 'none'; this.style.borderColor = '#999'; }
+        });
+        
+        function validateForm() {
+            let isValid = true;
+            const fields = [
+                'projectYear', 'pabYear', 'schoolName', 'phase', 'udise', 
+                'sector', 'jobRole', 'className', 'sessionNo',
+                'guestName', 'qualification', 'organization', 'designation', 'topics'
+            ];
+            fields.forEach(field => {
+                const input = document.getElementById(field);
+                const error = document.getElementById(field + 'Error');
+                let value = (input.tagName === 'SELECT' || input.tagName === 'INPUT') ? input.value.trim() : input.value;
+                if (!value) {
+                    if (error) error.style.display = 'block';
+                    if (input) input.style.borderColor = '#d00';
+                    isValid = false;
+                } else {
+                    if (error) error.style.display = 'none';
+                    if (input) input.style.borderColor = '#999';
+                }
+            });
+            
+            // Validate date field with strict DD-MMM-YYYY
+            const dateValue = conductedOnInput.value.trim();
+            if (!dateValue || !isValidDateFormat(dateValue)) {
+                dateErrorSpan.style.display = 'block';
+                dateErrorSpan.innerText = 'Invalid format! Must be DD-MMM-YYYY (e.g., 15-May-2025)';
+                conductedOnInput.style.borderColor = '#d00';
+                isValid = false;
+            } else {
+                dateErrorSpan.style.display = 'none';
+                conductedOnInput.style.borderColor = '#999';
+            }
+            return isValid;
+        }
+        
+        function validateAndPrint() {
+            if (!projectYearSelect.value || !pabYearSelect.value) {
+                alert("Please select both Project Starting Year and PAB Approval Year before printing");
+                return;
+            }
+            // Trigger blur to ensure latest validation
+            conductedOnInput.dispatchEvent(new Event('blur'));
+            if (validateForm()) {
+                setTimeout(() => {
+                    window.print();
+                }, 100);
+            } else {
+                alert("Please fill in all required fields correctly. Date must be in DD-MMM-YYYY format (e.g., 06-May-2026)");
+            }
+        }
+        
+        // Add event listeners for other fields to clear errors
+        const otherInputs = document.querySelectorAll('input, textarea, select');
+        otherInputs.forEach(input => {
+            if (input.id !== 'projectYear' && input.id !== 'pabYear' && input.id !== 'conductedOn') {
+                input.addEventListener('input', function() {
+                    const error = document.getElementById(this.id + 'Error');
+                    if (error) {
+                        error.style.display = 'none';
+                        this.style.borderColor = '#999';
+                    }
+                });
+                if (input.tagName === 'SELECT') {
+                    input.addEventListener('change', function() {
+                        const error = document.getElementById(this.id + 'Error');
+                        if (error) {
+                            error.style.display = 'none';
+                            this.style.borderColor = '#999';
+                        }
+                    });
+                }
+            }
+        });
+        
+        updateJobRole();
+    </script>
+</body>
+</html>
