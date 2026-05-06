@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vocational Education & PM SHRI Projects</title>
+
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background: #f4f7fb;
+    color: #333;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0d47a1, #1976d2);
+    color: white;
+    padding: 20px 40px;
+    text-align: center;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 28px;
+  }
+
+  .container {
+    padding: 30px 40px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  thead {
+    background: #1976d2;
+    color: white;
+  }
+
+  th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f9f9f9;
+  }
+
+  .badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    background: #43a047;
+  }
+
+  footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 13px;
+    color: #777;
+  }
+
+  .print-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  /* PRINT STYLES */
+  @media print {
+
+    body {
+      background: white;
+    }
+
+    header {
+      background: none;
+      color: black;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .print-btn {
+      display: none;
+    }
+
+    .card {
+      box-shadow: none;
+      border: none;
+      max-height: none;
+      overflow: visible;
+    }
+
+    table {
+      font-size: 12px;
+    }
+
+    thead {
+      background: #ddd !important;
+      color: black;
+    }
+
+    .badge {
+      background: black;
+      color: white;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 12px;
+    }
+
+    tr {
+      page-break-inside: avoid;
+    }
+  }
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Vocational Education (VE) Project Overview</h1>
+</header>
+
+<button class="print-btn" onclick="window.print()">🖨 Print</button>
+
+<div class="container">
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Name of Project</th>
+          <th>Sector</th>
+          <th>PSY</th>
+          <th>Phase</th>
+          <th>PAB</th>
+          <th>Additional Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Your same data -->
+        <tr><td>VE 24 Schools</td><td>1</td><td>2019</td><td>I</td><td>2018-19</td><td></td></tr>
+        <tr><td>VE 24 Schools</td><td>2</td><td>2022</td><td>I</td><td>2022-23</td><td><span class="badge">31 Addl VE</span></td></tr>
+        <tr><td>VE 56 Schools</td><td>1</td><td>2020</td><td>II</td><td>2019-20</td><td></td></tr>
+        <tr><td>VE 56 Schools</td><td>2</td><td>2022</td><td>II</td><td>2022-23</td><td><span class="badge">31 Addl VE</span></td></tr>
+        <tr><td>VE 56 Schools</td><td>2</td><td>2024</td><td>II</td><td>2023-24</td><td><span class="badge">55 Addl VE</span></td></tr>
+        <tr><td>VE 55 Schools</td><td>1</td><td>2021</td><td>III</td><td>2020-21</td><td></td></tr>
+        <tr><td>VE 55 Schools</td><td>2</td><td>2022</td><td>III</td><td>2022-23</td><td><span class="badge">31 Addl VE</span></td></tr>
+        <tr><td>VE 55 Schools(2nd Sector)</td><td>2</td><td>2024</td><td>III</td><td>2023-24</td><td><span class="badge">55 Addl VE</span></td></tr>
+        <tr><td>VE 70 Schools</td><td>1</td><td>2022</td><td>IV</td><td>2021-22</td><td></td></tr>
+        <tr><td>VE 90 Schools</td><td>1</td><td>2023</td><td>V</td><td>2022-23</td><td></td></tr>
+        <tr><td>72 VE Schools</td><td>1</td><td>2024</td><td>VI</td><td>2023-2024</td><td></td></tr>
+        <tr><td>102 VE Schools</td><td>1</td><td>2025</td><td>VII</td><td>2024-2025</td><td></td></tr>
+	<tr><td>102 VE Schools</td><td>2</td><td>2025</td><td>VII</td><td>2024-2025</td><td></td></tr>
+        <tr><td>8 VE Schools</td><td>1</td><td>2025</td><td>VIII</td><td>2024-25</td><td></td></tr>
+        <tr><td>2 PMSHRI</td><td>1</td><td>2024</td><td>PMSHRI-I</td><td>2023-24</td><td></td></tr>
+        <tr><td>1 PMSHRI (2 Sectors)</td><td>1</td><td>2024</td><td>PMSHRI-II</td><td>2023-24</td><td></td></tr>
+        <tr><td>1 PMSHRI (1 Sector)</td><td>1</td><td>2024</td><td>PMSHRI-III</td><td>2023-24</td><td></td></tr>
+        <tr><td>3 PMSHRI</td><td>1</td><td>2025</td><td>PMSHRI-IV</td><td>2024-25</td><td></td></tr>
+        <tr><td>1 PM SHRI School (2025)</td><td>1</td><td>2025</td><td>PMSHRI-V</td><td>2024-25</td><td></td></tr>
+        <tr><td>VE 16 Hub & Spoke Schools</td><td>1</td><td>2022</td><td>Hub & Spoke-I</td><td>2022-23</td><td></td></tr>
+        <tr><td>VE 16 Hub & Spoke Schools</td><td>1</td><td>2023</td><td>Hub & Spoke-II</td><td>2023-24</td><td></td></tr>
+        <tr><td>VE 22 Hub & Spoke Schools</td><td>1</td><td>2025</td><td>Hub & Spoke-III</td><td>2024-25</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  2026 Vocational Education Project Dashboard
+</footer>
+
+</body>
+</html>

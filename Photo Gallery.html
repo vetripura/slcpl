@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            color: #343a40;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .gallery-item {
+            width: 30%;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+        }
+
+        .caption {
+            padding: 15px;
+            text-align: center;
+            background-color: #343a40;
+            color: #ffffff;
+            font-size: 1em;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-item {
+                width: 48%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <h1>Photo Gallery</h1>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo1.jpg" alt="Photo 1">
+                <div class="caption"> Student Examination</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo2.jpg" alt="Photo 2">
+                <div class="caption">Industry Visit Session (Retail Sector) </div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo3.jpg" alt="Photo 3">
+                <div class="caption">Teachers' Training </div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo4.jpg" alt="photo4">
+                <div class="caption">Gokulpur High (Automotive Sector Lab) </div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo5.jpg" alt="photo5">
+                <div class="caption">Various Tools Under Agriculture Sector </div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo6.jpg" alt="photo6">
+                <div class="caption">Various Tools Under Electronics & Hardware Sector </div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo7.jpg" alt="photo7">
+                <div class="caption">Practical Lab(Tourism & Hospitality Sector)</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo8.jpg" alt="Photo 8">
+                <div class="caption"> Guest Lecture Session</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo9.jpg" alt="Photo 9">
+                <div class="caption">Lab setup</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo10.jpg" alt="Photo 10">
+                <div class="caption">Industry Visit (Aitomotive)</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo11.jpg" alt="Photo 11">
+                <div class="caption">Industry Visit (IT-ITeS)</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Photo Gallery Source/photo12.jpg" alt="photo12">
+                <div class="caption">ICT Tools model prepared by VE Students of Hokhu Twisa HS </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

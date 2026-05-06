@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Calculator | SIBIN LEARNING CART</title>
+    <style>
+        :root {
+            --primary: #8a1b56;
+            --secondary: #ff6b00;
+            --accent: #ffcc00;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo {
+            height: 80px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+        
+        .calculator-container {
+            display: flex;
+            gap: 2rem;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .calculator-form {
+            flex: 1;
+            padding: 3rem;
+            background: white;
+        }
+        
+        .calculator-image {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .calculator-image img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(255,107,0,0.2);
+            outline: none;
+        }
+        
+        input[readonly] {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--primary);
+            border-color: #dee2e6;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(138,27,86,0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138,27,86,0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .results {
+            margin-top: 2rem;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .instructions {
+            margin-top: 2rem;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .instructions h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .instructions ul {
+            padding-left: 1.5rem;
+        }
+        
+        .instructions li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        .scrolling-message {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .scrolling-message p {
+            animation: marquee 15s linear infinite;
+            display: inline-block;
+            padding-left: 100%;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        @media (max-width: 992px) {
+            .calculator-container {
+                flex-direction: column;
+            }
+            
+            .calculator-image {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        .highlight {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="SIBIN 20X5.jpg" alt="Sibin Learning Cart Logo" class="logo">
+            </div>
+            <h1>ATTENDANCE CALCULATOR</h1>
+            <h2>SIBIN LEARNING CART PRIVATE LIMITED</h2>
+        </header>
+        
+        <div class="calculator-container">
+            <div class="calculator-form">
+                <form>
+                    <div class="form-group">
+                        <label for="daysInMonth">Number of Days in the Month</label>
+                        <input type="number" id="daysInMonth" name="daysInMonth" placeholder="e.g. 30">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="holidays">Number of Holidays (including Sundays)</label>
+                        <input type="number" id="holidays" name="holidays" placeholder="e.g. 4">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="daysOnLeave">Number of Days on Leave</label>
+                        <input type="number" id="daysOnLeave" name="daysOnLeave" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="leaveWithoutPay">Leave without Pay (LWP)</label>
+                        <input type="number" id="leaveWithoutPay" name="leaveWithoutPay" value="0">
+                    </div>
+                    
+                    <button type="button" class="btn" onclick="calculateDays()">Calculate Attendance</button>
+                    
+                    <div class="results">
+                        <div class="form-group">
+                            <label for="daysPresent">Days Present</label>
+                            <input type="number" id="daysPresent" name="daysPresent" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="totalPayableDays">Total Payable Days</label>
+                            <input type="number" id="totalPayableDays" name="totalPayableDays" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="instructions">
+                        <h3>Important Instructions</h3>
+                        <ul>
+                            <li>Verify <span class="highlight">Holiday count</span> from your supervisor before calculation</li>
+                            <li>Maximum <span class="highlight">3 days</span> of leave can be availed in a month</li>
+                            <li>For <span class="highlight">LWP</span>, confirm the count from your supervisor</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="scrolling-message">
+                        <p>For holiday information including Sundays, please check the WhatsApp community • Updated monthly •</p>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="calculator-image">
+                <img src="https://img.freepik.com/free-vector/business-team-putting-together-jigsaw-puzzle-isolated-flat-vector-illustration-cartoon-partners-working-connection-teamwork-partnership-cooperation-concept_74855-9814.jpg" alt="Attendance Illustration">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateDays() {
+            // Get input values
+            const daysInMonth = parseInt(document.getElementById("daysInMonth").value) || 0;
+            const holidays = parseInt(document.getElementById("holidays").value) || 0;
+            const daysOnLeave = parseInt(document.getElementById("daysOnLeave").value) || 0;
+            const leaveWithoutPay = parseInt(document.getElementById("leaveWithoutPay").value) || 0;
+            
+            // Validate inputs
+            if (daysInMonth <= 0) {
+                alert("Please enter valid number of days in month");
+                return;
+            }
+            
+            if (holidays < 0 || daysOnLeave < 0 || leaveWithoutPay < 0) {
+                alert("Negative values are not allowed");
+                return;
+            }
+            
+            if (holidays >= daysInMonth) {
+                alert("Holidays cannot exceed total days in month");
+                return;
+            }
+            
+            // Calculate results
+            const daysPresent = daysInMonth - holidays - daysOnLeave - leaveWithoutPay;
+            const totalPayableDays = daysInMonth - leaveWithoutPay;
+            
+            // Display results
+            document.getElementById("daysPresent").value = daysPresent;
+            document.getElementById("totalPayableDays").value = totalPayableDays;
+            
+            // Visual feedback
+            const btn = document.querySelector('.btn');
+            btn.textContent = 'Calculated!';
+            btn.style.background = 'linear-gradient(to right, #4CAF50, #2E7D32)';
+            
+            setTimeout(() => {
+                btn.textContent = 'Calculate Again';
+                btn.style.background = 'linear-gradient(to right, var(--primary), var(--secondary))';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
