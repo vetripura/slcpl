@@ -1,584 +1,719 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SIBIN Learning Cart • dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <!-- Font & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(145deg, #eff2fc 0%, #e9eefa 100%);
-      color: #1e293b;
-      padding: 2rem 1.5rem;
-      min-height: 100vh;
-    }
+<title>SLCPL Tripura Dashboard</title>
 
-    /* main container */
-    .dashboard {
-      max-width: 1440px;
-      margin: 0 auto;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    /* header */
-    .app-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 2.5rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-    .brand h1 {
-      font-weight: 700;
-      font-size: 2rem;
-      background: linear-gradient(135deg, #19335A, #2f5b8c);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -0.5px;
-    }
+<style>
 
-    .brand span {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: #4b5e7a;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(4px);
-      padding: 0.25rem 1rem;
-      border-radius: 40px;
-      margin-left: 0.75rem;
-    }
+:root{
+  --bg:#380725;
+  --glass:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.08);
+  --text:#ffffff;
+  --muted:#ead9e2;
+  --shadow:0 10px 30px rgba(0,0,0,0.35);
+}
 
-    .date-time-card {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(8px);
-      padding: 0.7rem 1.6rem;
-      border-radius: 60px;
-      box-shadow: 0 6px 14px rgba(0,20,40,0.06);
-      border: 1px solid rgba(255,255,255,0.8);
-      font-weight: 500;
-      color: #1e3b5c;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1rem;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    .date-time-card i {
-      color: #2f5b8c;
-    }
+body{
+  font-family:'Inter',sans-serif;
+  background:
+    radial-gradient(circle at top left,#5d1241 0%,transparent 25%),
+    radial-gradient(circle at bottom right,#240315 0%,transparent 25%),
+    var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
 
-    /* slideshow – completely reframed for mobile without cropping */
-    .slides-wrapper {
-      background: rgba(255,255,255,0.3);
-      backdrop-filter: blur(4px);
-      border-radius: 2rem;
-      padding: 1rem;
-      margin-bottom: 2.8rem;
-      box-shadow: 0 15px 35px -10px rgba(0,35,75,0.15);
-      border: 1px solid rgba(255,255,255,0.5);
-    }
+.dashboard{
+  width:min(1450px,94%);
+  margin:auto;
+  padding:25px 0 50px;
+}
 
-    .slideshow-container {
-      max-width: 1200px;
-      position: relative;
-      margin: auto;
-      border-radius: 1.5rem;
-      overflow: hidden;
-      box-shadow: 0 10px 25px -8px rgba(0,0,0,0.1);
-    }
+.topbar{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
 
-    .mySlides {
-      display: none;
-      background-color: #cbd5e1; /* fallback behind image */
-    }
+.top-card{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:15px 20px;
+  border-radius:18px;
+  background:var(--glass);
+  border:1px solid var(--border);
+  backdrop-filter:blur(14px);
+  box-shadow:var(--shadow);
+  min-width:250px;
+}
 
-    .mySlides img {
-      width: 100%;
-      height: auto;
-      max-height: 380px;
-      object-fit: contain;
-      object-position: center;
-      display: block;
-      background-color: #1e2f47;
-      margin: 0 auto;
-    }
+.hero-title{
+  padding:42px;
+  border-radius:30px;
+  margin-bottom:35px;
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.03)
+  );
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:var(--shadow);
+}
 
-    .mySlides img[src*="data:image"] {
-      object-fit: contain;
-    }
+.hero-title h1{
+  font-size:clamp(1.2rem,4vw,3.8rem);
+  font-weight:900;
+  line-height:1.1;
 
-    .numbertext {
-      position: absolute;
-      top: 16px;
-      left: 20px;
-      background: rgba(0,0,0,0.2);
-      backdrop-filter: blur(6px);
-      color: white;
-      padding: 0.4rem 1rem;
-      border-radius: 60px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      border: 1px solid rgba(255,255,255,0.2);
-      z-index: 10;
-    }
+  /* KEEP IN ONE LINE */
+  white-space:nowrap;
 
-    .text {
-      position: absolute;
-      bottom: 16px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 20, 40, 0.6);
-      backdrop-filter: blur(10px);
-      color: #fff;
-      padding: 0.5rem 2rem;
-      border-radius: 60px;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-      border: 1px solid rgba(255,255,255,0.2);
-      white-space: nowrap;
-      z-index: 10;
-    }
+  /* SHOW FULL TEXT */
+  overflow:visible;
+  text-overflow:unset;
 
-    .dot-container {
-      text-align: center;
-      margin-top: 1rem;
-    }
+  /* OPTIONAL */
+  letter-spacing:-1px;
+}
+}
 
-    .dot {
-      height: 10px;
-      width: 10px;
-      margin: 0 5px;
-      background-color: #b0c4de;
-      border-radius: 30px;
-      display: inline-block;
-      transition: 0.3s;
-      cursor: pointer;
-    }
+```css id="pq3mnd"
+.hero-title p{
+  margin-top:18px;
+  max-width:760px;
+  line-height:1.8;
+  color:var(--muted);
 
-    .dot.active {
-      background-color: #1f4973;
-      width: 26px;
-    }
+  text-align:justify;}
 
-    /* main grid – elegant cards */
-    .links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.8rem;
-      margin-bottom: 3rem;
-    }
+.slider{
+  position:relative;
+  overflow:hidden;
+  border-radius:28px;
+  margin-bottom:40px;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:var(--shadow);
+}
 
-    .category-card {
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(12px);
-      border-radius: 2rem;
-      padding: 1.5rem 1.3rem;
-      box-shadow: 0 20px 35px -12px rgba(0,45,75,0.12);
-      border: 1px solid rgba(255,255,255,0.7);
-      transition: transform 0.2s ease, box-shadow 0.2s;
-    }
+.slide{
+  display:none;
+  position:relative;
+}
 
-    .category-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 28px 38px -15px rgba(12, 52, 86, 0.2);
-      background: rgba(255,255,255,0.8);
-    }
+.slide img{
+  width:100%;
+  aspect-ratio:1080/216;
+  object-fit:cover;
+  filter:brightness(0.7);
+}
 
-    .category-title {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #19335A;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid rgba(47, 91, 140, 0.2);
-      padding-bottom: 0.65rem;
-    }
+.overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to right,
+    rgba(56,7,37,0.92),
+    rgba(56,7,37,0.25)
+  );
+}
 
-    .category-title i {
-      font-size: 1.5rem;
-      color: #2f5b8c;
-      background: rgba(47,91,140,0.1);
-      padding: 0.4rem;
-      border-radius: 14px;
-    }
+.slide-content{
+  position:absolute;
+  left:50px;
+  bottom:35px;
+}
 
-    .link-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
+.slide-content h2{
+  font-size:clamp(1.5rem,4vw,3rem);
+  font-weight:800;
+}
 
-    .link-item {
-      list-style: none;
-    }
+.slide-content p{
+  margin-top:10px;
+  color:#f3dce6;
+}
 
-    .link-item a {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      padding: 0.7rem 1rem;
-      background: rgba(255,255,255,0.5);
-      border-radius: 1.5rem;
-      color: #1e3b5c;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      border: 1px solid transparent;
-      transition: all 0.2s;
-      word-break: break-word;
-    }
+.slider-nav{
+  position:absolute;
+  right:30px;
+  bottom:20px;
+  display:flex;
+  gap:10px;
+}
 
-    .link-item a:hover {
-      background: white;
-      border-color: #cbd5e1;
-      box-shadow: 0 4px 10px rgba(0,30,50,0.05);
-      color: #0c2a44;
-    }
+.dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.35);
+  cursor:pointer;
+}
 
-    .link-item a i {
-      width: 1.4rem;
-      color: #2f5b8c;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
+.dot.active{
+  width:34px;
+  border-radius:50px;
+  background:#d6a9c1;
+}
 
-    /* priority / blink modified as soft pulse */
-    .priority-link a {
-      background: rgba(255, 230, 230, 0.7);
-      border-left: 5px solid #d14b4b;
-      font-weight: 600;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:28px;
+}
 
-    .priority-link a:hover {
-      background: #ffebeb;
-    }
+.card{
+  padding:28px;
+  border-radius:30px;
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,0.07),
+    rgba(255,255,255,0.03)
+  );
+  border:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  box-shadow:var(--shadow);
+}
 
-    .blink-soft {
-      animation: softPulse 2s infinite;
-    }
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:28px;
+}
 
-    @keyframes softPulse {
-      0% { opacity: 1; background-color: rgba(255, 200, 200, 0.3); }
-      50% { opacity: 0.9; background-color: rgba(255, 160, 160, 0.5); }
-      100% { opacity: 1; background-color: rgba(255, 200, 200, 0.3); }
-    }
+.icon{
+  width:62px;
+  height:62px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.1);
+  font-size:1.3rem;
+}
 
-    /* rainbow text */
-    .rainbow-text {
-      background: linear-gradient(130deg, #1f5e8e, #4b3b7c, #b13e5c);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 700;
-    }
+.links{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
 
-    /* 🎯 HIGHLIGHTED LINK — GENERATE/DOWNLOAD COMPLETION CERTIFICATE (eye‑catching) */
-    .highlight-cta a {
-      background: linear-gradient(145deg, #f9e68c, #ffd966) !important;
-      border: 2px solid #d4a017 !important;
-      color: #2c3e4f !important;
-      font-weight: 700 !important;
-      box-shadow: 0 8px 18px rgba(212, 160, 23, 0.3) !important;
-      transform: scale(1.02);
-      transition: all 0.2s ease !important;
-      position: relative;
-    }
+.links a,
+.quick-links a{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:16px 18px;
+  border-radius:18px;
+  text-decoration:none;
+  color:white;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.06);
+  transition:0.3s;
+}
 
-    .highlight-cta a i {
-      color: #b34180 !important;  /* a pop of contrasting color */
-      font-size: 1.3rem !important;
-    }
+.links a:hover,
+.quick-links a:hover{
+  background:rgba(255,255,255,0.1);
+  transform:translateX(5px);
+}
 
-    .highlight-cta a:hover {
-      background: linear-gradient(145deg, #ffe174, #fecb4c) !important;
-      box-shadow: 0 12px 24px rgba(180, 130, 20, 0.45) !important;
-      transform: scale(1.04) translateY(-2px);
-      border-color: #b88a1f !important;
-    }
+.highlight{
+  background:rgba(255,255,255,0.09)!important;
+  border:1px solid rgba(255,255,255,0.14)!important;
+}
 
-    /* bottom row: calendar + extra */
-    .info-panel {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.8rem;
-      margin-top: 1rem;
-    }
+.bottom{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:28px;
+  margin-top:40px;
+}
 
-    .calendar-card {
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(12px);
-      border-radius: 2rem;
-      padding: 1.5rem;
-      border: 1px solid rgba(255,255,255,0.8);
-    }
+.panel{
+  padding:28px;
+  border-radius:28px;
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,0.07),
+    rgba(255,255,255,0.03)
+  );
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:var(--shadow);
+}
 
-    .calendar-card h3 {
-      font-weight: 600;
-      color: #1e3b5c;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+.panel iframe{
+  width:100%;
+  height:280px;
+  border:none;
+  border-radius:18px;
+}
 
-    .calendar-card iframe {
-      width: 100%;
-      height: 240px;
-      border-radius: 1.2rem;
-      border: 1px solid white;
-      background: #fff;
-    }
+.quick-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:20px;
+}
 
-    .photo-memento {
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(12px);
-      border-radius: 2rem;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+.footer{
+  margin-top:45px;
+  padding-top:22px;
+  text-align:center;
+  color:#e9cad9;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
 
-    .photo-memento p {
-      font-weight: 500;
-      color: #294e73;
-    }
+@media(max-width:900px){
+  .bottom{
+    grid-template-columns:1fr;
+  }
 
-    .mini-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1.2rem;
-    }
+  .slide img{
+    aspect-ratio:1080/350;
+  }
+}
 
-    .mini-links a {
-      background: white;
-      padding: 0.5rem 1.2rem;
-      border-radius: 40px;
-      text-decoration: none;
-      font-weight: 500;
-      color: #19335A;
-      border: 1px solid rgba(0,0,0,0.04);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-      transition: all 0.2s;
-    }
+@media(max-width:600px){
 
-    .mini-links a:hover {
-      background: #f0f4ff;
-      transform: translateY(-2px);
-    }
+  .dashboard{
+    width:95%;
+  }
 
-    /* responsiveness */
-    @media (max-width: 700px) {
-      .info-panel {
-        grid-template-columns: 1fr;
-      }
-      .text {
-        font-size: 0.75rem;
-        padding: 0.3rem 1rem;
-        white-space: normal;
-        max-width: 90%;
-        text-align: center;
-        line-height: 1.3;
-      }
-      .app-header {
-        flex-direction: column;
-        align-items: start;
-      }
-      .slides-wrapper {
-        padding: 0.6rem;
-      }
-      .mySlides img {
-        max-height: 280px;
-      }
-    }
+  .topbar{
+    flex-direction:column;
+  }
 
-    /* extra polish */
-    hr {
-      border: 1px solid rgba(47,91,140,0.1);
-      margin: 2rem 0 1rem;
-    }
+  .top-card{
+    width:100%;
+  }
 
-    .footer-note {
-      text-align: center;
-      color: #4f658d;
-      font-weight: 400;
-      font-size: 0.9rem;
-      margin-top: 2rem;
-    }
-  </style>
+  .slide img{
+    aspect-ratio:1080/450;
+  }
+}
+
+</style>
 </head>
+
 <body>
+
 <div class="dashboard">
-  <!-- header with dynamic time & date -->
-  <div class="app-header">
-    <div class="brand">
-      <h1>SIBIN Learning Cart Private Limited</h1>
-    </div>
-    <div class="date-time-card" id="currentDateTime">
-      <i class="far fa-calendar-alt"></i>
-      <span>loading...</span>
-    </div>
-  </div>
 
-  <!-- slideshow – fully visible on mobile -->
-  <div class="slides-wrapper">
-    <div class="slideshow-container">
-      <div class="mySlides fade">
-        <div class="numbertext">1 | 4</div>
-        <img src="1.jpg" alt="industry immersion" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'1200\' height=\'340\' viewBox=\'0 0 1200 340\'%3E%3Crect width=\'1200\' height=\'340\' fill=\'%2319335A\'/%3E%3Ctext x=\'60\' y=\'200\' font-family=\'Inter\' font-size=\'40\' fill=\'%23ffffff\' font-weight=\'600\'%3E📘 1.jpg (fallback)%3C/text%3E%3C/svg%3E'; this.alt='fallback'">
-        <div class="text">Collaborative learning</div>
-      </div>
-      <div class="mySlides fade">
-        <div class="numbertext">2 | 4</div>
-        <img src="2.jpg" alt="industry visit session" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'1200\' height=\'340\' viewBox=\'0 0 1200 340\'%3E%3Crect width=\'1200\' height=\'340\' fill=\'%232f5b8c\'/%3E%3Ctext x=\'60\' y=\'200\' font-family=\'Inter\' font-size=\'40\' fill=\'%23ffffff\'%3E🏭 2.jpg (fallback)%3C/text%3E%3C/svg%3E'">
-        <div class="text">Industry Visit Session</div>
-      </div>
-      <div class="mySlides fade">
-        <div class="numbertext">3 | 4</div>
-        <img src="3.jpg" alt="practical class" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'1200\' height=\'340\' viewBox=\'0 0 1200 340\'%3E%3Crect width=\'1200\' height=\'340\' fill=\'%23425c7e\'/%3E%3Ctext x=\'60\' y=\'200\' font-family=\'Inter\' font-size=\'40\' fill=\'%23ffffff\'%3E🔧 3.jpg (fallback)%3C/text%3E%3C/svg%3E'">
-        <div class="text">Practical Class</div>
-      </div>
-      <div class="mySlides fade">
-        <div class="numbertext">4 | 4</div>
-        <img src="4.jpg" alt="book distribution" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'1200\' height=\'340\' viewBox=\'0 0 1200 340\'%3E%3Crect width=\'1200\' height=\'340\' fill=\'%23614782\'/%3E%3Ctext x=\'60\' y=\'200\' font-family=\'Inter\' font-size=\'40\' fill=\'%23ffffff\'%3E📚 4.jpg (fallback)%3C/text%3E%3C/svg%3E'">
-        <div class="text">Book Distribution</div>
-      </div>
-    </div>
-    <div class="dot-container">
-      <span class="dot" onclick="currentSlide(1)"></span>
-      <span class="dot" onclick="currentSlide(2)"></span>
-      <span class="dot" onclick="currentSlide(3)"></span>
-      <span class="dot" onclick="currentSlide(4)"></span>
-    </div>
-  </div>
+<div class="topbar">
 
-  <!-- main link cards -->
-  <div class="links-grid">
-    <!-- Documentation -->
-    <div class="category-card">
-      <div class="category-title"><i class="fas fa-file-alt"></i>Documentation</div>
-      <div class="link-list">
-        <div class="link-item"><a href="https://pmevetripura.sibinlearningcart.com/"></i> Monthly Documentation Upload</a></div>
-        <div class="link-item"><a href="https://pmevetripura.sibinlearningcart.com/"></i> Quarterly Documentation</a></div>
-        <div class="link-item"><a href="Formats.html" class="rainbow-text"><i class="fas fa-file-pdf"></i> All Document Formats <span style="font-size:0.8rem;">↗</span></a></div>
-      </div>
-    </div>
-
-    <!-- Forms & Submissions -->
-    <div class="category-card">
-      <div class="category-title"><i class="fas fa-clipboard-check"></i>Forms & Submissions</div>
-      <div class="link-list">
-        <div class="link-item"><a href="https://docs.google.com/spreadsheets/d/1zK1qdjshzXaGUK3aqP_nl1UUis979wQA4ydd4pPl1mE/edit?gid=0#gid=0" target="_blank"><i class="fas fa-building"></i> Industry Visit Approval Form</a></div>
-        <div class="link-item"><a href="https://forms.gle/XR9G6gEQs1qE8A4q8" target="_blank"><i class="fas fa-wifi"></i> Internet Challan Submission</a></div>
-        <div class="link-item"><a href="https://forms.gle/ztTco8bqBoVo9Wtd8" target="_blank"><i class="fas fa-truck"></i> Books/Stationary Delivery Challan</a></div>
-        <div class="link-item"><a href="https://forms.gle/Do4DDzpAyEsiPC3h7" target="_blank"><i class="fas fa-microscope"></i> Vocational Lab Handover Form</a></div>
-        <div class="link-item priority-link"><a href="https://forms.gle/ZocofhJ9FB6jejQp6" target="_blank" class="blink-soft"><i class="fas fa-sync-alt"></i> Lab Status Update (Friday)</a></div>
-      </div>
-    </div>
-
-    <!-- Resources -->
-    <div class="category-card">
-      <div class="category-title"><i class="fas fa-book-open"></i>Resources</div>
-      <div class="link-list">
-        <div class="link-item"><a href="https://www.psscive.ac.in/" target="_blank"><i class="fas fa-university"></i> PSSCIVE, Bhopal</a></div>
-        <div class="link-item"><a href="Phase.html"><i class="fas fa-project-diagram"></i> Know your Project Phase</a></div>
-        <div class="link-item"><a href="JR.html" target="_blank"><i class="fas fa-briefcase"></i> Sector & Class wise Job Roles</a></div>
-        <div class="link-item"><a href="Holiday.pdf" target="_blank"><i class="fas fa-calendar-alt"></i> Holiday List</a></div>
-      </div>
-    </div>
-
-    <!-- Tools & Updates -->
-    <div class="category-card">
-      <div class="category-title"><i class="fas fa-tools"></i>Tools & Updates</div>
-      <div class="link-list">
-        <div class="link-item"><a href="Attendance calculator.html"><i class="fas fa-calculator"></i> Attendance Calculator</a></div>
-        <div class="link-item"><a href="https://play.google.com/store/apps/details?id=qandle.android&hl=en_IN" target="_blank"><i class="fas fa-clock"></i> Attendance App (Qandle)</a></div>
-        <div class="link-item"><a href="https://pmevetripura.sibinlearningcart.com/#/login" target="_blank"><i class="fas fa-graduation-cap"></i> School Education Portal (MIS)</a></div>
-        <div class="link-item"><a href="Supervisors.html"><i class="fas fa-envelope"></i> Mail IDs of Project Supervisors</a></div>
-        <div class="link-item"><a href="Photo Gallery.html"><i class="fas fa-images"></i> Photo Gallery</a></div>
-        <div class="link-item"><a href="https://docs.google.com/forms/d/e/1FAIpQLSel2B0toZwZ1srJIvRYywJO6G9T7Z8iBISJvhW8BJ3rGfEtUQ/viewform" target="_blank"><i class="fas fa-briefcase"></i> Application for Vocational Teacher</a></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- bottom info panel: calendar + quick links with HIGHLIGHTED link -->
-  <div class="info-panel">
-    <div class="calendar-card">
-      <h3><i class="fas fa-calendar-week"></i> Important Dates</h3>
-      <!-- embed Indian holiday calendar (public) -->
-      <iframe src="https://calendar.google.com/calendar/embed?src=en.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKolkata" style="border:0; width:100%; height:220px;"></iframe>
-    </div>
-    <div class="photo-memento">
-      <p><i class="fas fa-camera-retro" style="margin-right: 8px;"></i> <strong>Quick Access</strong> — important resources at your fingertips</p>
-      <div class="mini-links">
-        <a href="Photo Gallery.html"><i class="fas fa-eye"></i> Photo Gallery</a>
-        <!-- 🎯 THIS LINK NOW HIGHLIGHTED with special class -->
-        <a href="Formats.html" class="highlight-cta"><i class="fas fa-download"></i> Generate/Download Completion Certificate</a>
-        <a href="Holiday.pdf" style="background:#edf2f9;"><i class="fas fa-calendar-check"></i> School Holiday List</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- subtle footer with updated dynamic time -->
-  <hr>
-  <div class="footer-note">
-    <span><i class="far fa-clock"></i> live dashboard · </span>
-    <span id="footerTime"></span>
-  </div>
+<div class="top-card">
+<i class="fa-solid fa-location-dot"></i>
+<span id="ipInfo">Fetching IP...</span>
 </div>
 
-<!-- javascript (unchanged) -->
+<div class="top-card">
+<i class="fa-solid fa-globe"></i>
+<span id="browserInfo">Detecting Browser...</span>
+</div>
+
+<div class="top-card">
+<i class="fa-regular fa-clock"></i>
+<span id="dateTime">Loading...</span>
+</div>
+
+</div>
+
+<div class="hero-title">
+
+<h1>SIBIN Learning Cart Private Limited</h1>
+
+<p>
+A centralized digital platform empowering Vocational Teachers across Tripura to efficiently manage documentation, resources, reporting, and project implementation.
+</p>
+
+</div>
+
+<div class="slider">
+
+<div class="slide">
+<img src="1.jpg">
+<div class="slide-content">
+<p>SLCPL Tripura.</p>
+</div>
+</div>
+
+<div class="slide">
+<img src="2.jpg">
+<div class="overlay"></div>
+<div class="slide-content">
+<h2>Industry Visit Sessions</h2>
+<p>Practical exposure and real-world learning.</p>
+</div>
+</div>
+
+<div class="slide">
+<img src="3.jpg">
+<div class="overlay"></div>
+<div class="slide-content">
+<h2>Hands-On Training</h2>
+<p>Interactive practical classes.</p>
+</div>
+</div>
+
+<div class="slide">
+<img src="4.jpg">
+<div class="overlay"></div>
+<div class="slide-content">
+<h2>Book Distribution</h2>
+<p>Resource support for students.</p>
+</div>
+</div>
+
+<div class="slider-nav">
+<span class="dot active"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+</div>
+
+</div>
+
+<div class="grid">
+
+<!-- Documentation -->
+
+<div class="card">
+
+<div class="card-title">
+<div class="icon">
+<i class="fa-solid fa-file-lines"></i>
+</div>
+<h3>Documentation</h3>
+</div>
+
+<div class="links">
+
+<a href="https://pmevetripura.sibinlearningcart.com/" target="_blank">
+<i class="fa-solid fa-upload"></i>
+<span>Monthly Documentation Upload</span>
+</a>
+
+<a href="https://pmevetripura.sibinlearningcart.com/" target="_blank">
+<i class="fa-solid fa-chart-line"></i>
+<span>Quarterly Documentation</span>
+</a>
+
+<a href="Formats.html" class="highlight">
+<i class="fa-solid fa-file-pdf"></i>
+<span>Completion Certificate & Formats</span>
+</a>
+
+</div>
+
+</div>
+
+<!-- Forms -->
+
+<div class="card">
+
+<div class="card-title">
+<div class="icon">
+<i class="fa-solid fa-clipboard-check"></i>
+</div>
+<h3>Forms & Submissions</h3>
+</div>
+
+<div class="links">
+
+<a href="https://docs.google.com/spreadsheets/d/1zK1qdjshzXaGUK3aqP_nl1UUis979wQA4ydd4pPl1mE/edit?gid=0#gid=0" target="_blank">
+<i class="fa-solid fa-building"></i>
+<span>Industry Visit Approval</span>
+</a>
+
+<a href="https://forms.gle/XR9G6gEQs1qE8A4q8" target="_blank">
+<i class="fa-solid fa-wifi"></i>
+<span>Internet Challan Submission</span>
+</a>
+
+<a href="https://forms.gle/ztTco8bqBoVo9Wtd8" target="_blank">
+<i class="fa-solid fa-truck"></i>
+<span>Books Delivery Challan</span>
+</a>
+
+<a href="https://forms.gle/Do4DDzpAyEsiPC3h7" target="_blank">
+<i class="fa-solid fa-flask"></i>
+<span>Vocational Lab Handover</span>
+</a>
+
+<a href="https://forms.gle/ZocofhJ9FB6jejQp6" target="_blank" class="highlight">
+<i class="fa-solid fa-bolt"></i>
+<span>Lab Status Update (Friday)</span>
+</a>
+
+</div>
+
+</div>
+
+<!-- Resources -->
+
+<div class="card">
+
+<div class="card-title">
+<div class="icon">
+<i class="fa-solid fa-book-open-reader"></i>
+</div>
+<h3>Resources</h3>
+</div>
+
+<div class="links">
+
+<a href="https://www.psscive.ac.in/" target="_blank">
+<i class="fa-solid fa-graduation-cap"></i>
+<span>PSSCIVE Bhopal</span>
+</a>
+
+<a href="Phase.html">
+<i class="fa-solid fa-diagram-project"></i>
+<span>Know Your Project Phase</span>
+</a>
+
+<a href="JR.html">
+<i class="fa-solid fa-briefcase"></i>
+<span>Sector & Job Roles</span>
+</a>
+
+<a href="Holiday.pdf" target="_blank">
+<i class="fa-solid fa-calendar-days"></i>
+<span>Holiday List</span>
+</a>
+
+</div>
+
+</div>
+
+<!-- Tools -->
+
+<div class="card">
+
+<div class="card-title">
+<div class="icon">
+<i class="fa-solid fa-screwdriver-wrench"></i>
+</div>
+<h3>Tools & Updates</h3>
+</div>
+
+<div class="links">
+
+<a href="Attendance calculator.html">
+<i class="fa-solid fa-calculator"></i>
+<span>Attendance Calculator</span>
+</a>
+
+<a href="https://play.google.com/store/apps/details?id=qandle.android&hl=en_IN" target="_blank">
+<i class="fa-solid fa-mobile-screen"></i>
+<span>Attendance App</span>
+</a>
+
+<a href="https://pmevetripura.sibinlearningcart.com/#/login" target="_blank">
+<i class="fa-solid fa-school"></i>
+<span>School Education Portal</span>
+</a>
+
+<a href="Supervisors.html">
+<i class="fa-solid fa-envelope"></i>
+<span>Supervisor Mail IDs</span>
+</a>
+
+<a href="Photo Gallery.html">
+<i class="fa-solid fa-images"></i>
+<span>Photo Gallery</span>
+</a>
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSel2B0toZwZ1srJIvRYywJO6G9T7Z8iBISJvhW8BJ3rGfEtUQ/viewform" target="_blank">
+<i class="fa-solid fa-user-plus"></i>
+<span>Application for Vocational Teacher</span>
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="bottom">
+
+<div class="panel">
+
+<h3>
+<i class="fa-solid fa-calendar-week"></i>
+Important Dates
+</h3>
+
+<iframe src="https://calendar.google.com/calendar/embed?src=en.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKolkata"></iframe>
+
+</div>
+
+<div class="panel">
+
+<h3>
+<i class="fa-solid fa-bolt"></i>
+Quick Access
+</h3>
+
+<p style="line-height:1.8;color:#ecd8e2;">
+Important resources and quick navigation shortcuts.
+</p>
+
+<div class="quick-links">
+
+<a href="Photo Gallery.html">
+<i class="fa-solid fa-image"></i>
+Photo Gallery
+</a>
+
+<a href="Formats.html" class="highlight">
+<i class="fa-solid fa-download"></i>
+Generate / Download Completion Certificate
+</a>
+
+<a href="Holiday.pdf" target="_blank">
+<i class="fa-solid fa-calendar-check"></i>
+Holiday List
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+2026 ✮ VE Division, SLCPL Tripura
+</div>
+
+</div>
+
 <script>
-  let slideIndex = 1;
-  showSlides(slideIndex);
 
-  function plusSlides(n) { showSlides(slideIndex += n); }
-  function currentSlide(n) { showSlides(slideIndex = n); }
+function updateDateTime(){
 
-  function showSlides(n) {
-    let i;
-    const slides = document.getElementsByClassName("mySlides");
-    const dots = document.getElementsByClassName("dot");
-    if (slides.length === 0) return;
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-    for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-    for (i = 0; i < dots.length; i++) { dots[i].className = dots[i].className.replace(" active", ""); }
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
+  const now = new Date();
+
+  const options = {
+    weekday:'short',
+    year:'numeric',
+    month:'short',
+    day:'numeric',
+    hour:'2-digit',
+    minute:'2-digit',
+    second:'2-digit'
+  };
+
+  document.getElementById("dateTime").innerHTML =
+    now.toLocaleDateString('en-US',options);
+}
+
+setInterval(updateDateTime,1000);
+updateDateTime();
+
+fetch("https://ipapi.co/json/")
+.then(response => response.json())
+.then(data => {
+  document.getElementById("ipInfo").innerHTML =
+    `${data.ip} • ${data.city}, ${data.country_name}`;
+})
+.catch(() => {
+  document.getElementById("ipInfo").innerHTML =
+    "Unable to fetch IP";
+});
+
+function getBrowserInfo(){
+
+  const ua = navigator.userAgent;
+
+  let browser = "Unknown Browser";
+
+  if(ua.includes("Chrome")){
+    browser = "Google Chrome";
   }
 
-  setInterval(() => { plusSlides(1) }, 4200);
-
-  function updateDateTime() {
-    const now = new Date();
-    const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    const dateStr = now.toLocaleDateString('en-US', options);
-    const timeEl = document.getElementById('currentDateTime');
-    if (timeEl) timeEl.innerHTML = `<i class="far fa-calendar-alt" style="margin-right: 6px;"></i> ${dateStr}`;
-    const footerTime = document.getElementById('footerTime');
-    if (footerTime) footerTime.innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  else if(ua.includes("Firefox")){
+    browser = "Mozilla Firefox";
   }
-  setInterval(updateDateTime, 1000);
-  window.onload = updateDateTime;
 
-  const dots = document.getElementsByClassName("dot");
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].addEventListener("click", function() { currentSlide(i+1); });
+  else if(ua.includes("Safari")){
+    browser = "Safari";
   }
+
+  else if(ua.includes("Edge")){
+    browser = "Microsoft Edge";
+  }
+
+  const device =
+    /Mobi|Android/i.test(ua)
+    ? "Mobile Device"
+    : "Desktop Device";
+
+  document.getElementById("browserInfo").innerHTML =
+    `${browser} • ${device}`;
+}
+
+getBrowserInfo();
+
+let slideIndex = 0;
+
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+
+function showSlides(){
+
+  slides.forEach(slide => {
+    slide.style.display = "none";
+  });
+
+  dots.forEach(dot => {
+    dot.classList.remove("active");
+  });
+
+  slideIndex++;
+
+  if(slideIndex > slides.length){
+    slideIndex = 1;
+  }
+
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].classList.add("active");
+}
+
+showSlides();
+
+setInterval(showSlides,4500);
+
+dots.forEach((dot,index)=>{
+
+  dot.addEventListener("click",()=>{
+
+    slideIndex = index;
+    showSlides();
+
+  });
+
+});
+
 </script>
+
 </body>
 </html>
