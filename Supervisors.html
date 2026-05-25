@@ -1,607 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>SIBIN Learning Cart | VE Team Directory - Tripura</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Google Fonts: Poppins for clean modern look, Inter as fallback -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (free icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>SIBIN VE · Smart Contact Directory | To + CC All</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            background: linear-gradient(145deg, #f4f9ff 0%, #e9f0fa 100%);
-            font-family: 'Inter', sans-serif;
-            padding: 2rem 1.5rem;
-            min-height: 100vh;
-            color: #1a2c3e;
-        }
+    body {
+      background: linear-gradient(145deg, #eef2f8 0%, #e0e8f0 100%);
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 2rem 1.5rem;
+    }
 
-        /* main container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+    /* modern glassmorphism container */
+    .directory-card {
+      max-width: 1100px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(0px);
+      border-radius: 2rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
 
-        /* header section with brand & badge */
-        .brand-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
+    /* header modern layout */
+    .directory-header {
+      padding: 2rem 2rem 1.2rem 2rem;
+      background: #ffffff;
+      border-bottom: 1px solid #eef2f9;
+    }
 
-        .company-badge {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(255,255,255,0.65);
-            backdrop-filter: blur(6px);
-            padding: 0.5rem 1.5rem;
-            border-radius: 100px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
-            margin-bottom: 1.2rem;
-            border: 1px solid rgba(46, 125, 188, 0.2);
-        }
+    .title-section {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
 
-        .company-badge i {
-            font-size: 1.6rem;
-            color: #1e6f9f;
-            margin-right: 10px;
-        }
+    .title-section h1 {
+      font-size: 1.95rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #122b44, #1f4b74);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin: 0;
+      line-height: 1.2;
+    }
 
-        .company-badge span {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            font-size: 0.9rem;
-            color: #1e4a6b;
-        }
+    .badge {
+      background: #eef2fc;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1f5480;
+      letter-spacing: 0.3px;
+      border: 0.5px solid #cddef5;
+    }
 
-        h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #1F4E6E, #2c7cb6);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
+    .org-sub {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.35rem;
+    }
 
-        .location-tag {
-            background: linear-gradient(120deg, #2c7cb6, #5fa7cf);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            font-size: inherit;
-        }
+    .location-tag {
+      font-size: 0.9rem;
+      color: #2b577d;
+      background: #f1f6fe;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-        .subhead {
-            font-size: 1.1rem;
-            color: #4a627a;
-            font-weight: 500;
-            border-bottom: 2px solid rgba(44, 124, 182, 0.3);
-            display: inline-block;
-            padding-bottom: 6px;
-            margin-top: 6px;
-        }
+    .click-hint {
+      background: #eef2fa;
+      padding: 0.3rem 1rem;
+      border-radius: 28px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1d4e7a;
+    }
 
-        .team-intro {
-            display: flex;
-            justify-content: center;
-            gap: 1.8rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
+    .click-hint i {
+      font-style: normal;
+      font-weight: 600;
+      background: #1e4870;
+      color: white;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      margin-right: 0.5rem;
+      font-size: 0.75rem;
+    }
 
-        .stat-chip {
-            background: white;
-            border-radius: 40px;
-            padding: 0.5rem 1.4rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: #1e6f9f;
-            border: 1px solid #cde3f0;
-        }
+    /* table container — clean & minimal */
+    .table-container {
+      padding: 0.5rem 2rem 2rem 2rem;
+      background: #ffffff;
+    }
 
-        .stat-chip i {
-            font-size: 1rem;
-        }
+    .table-wrapper {
+      border-radius: 1.25rem;
+      overflow-x: auto;
+      border: 1px solid #eef2f8;
+      background: #fff;
+      transition: all 0.2s;
+    }
 
-        /* grid layout for cards */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.8rem;
-            margin-top: 2rem;
-        }
+    .contact-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+      min-width: 560px;
+      font-family: 'Inter', system-ui;
+    }
 
-        /* modern card design */
-        .team-card {
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(0px);
-            border-radius: 32px;
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0,0,0,0.02);
-            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-            overflow: hidden;
-            border: 1px solid rgba(144, 188, 216, 0.4);
-            position: relative;
-        }
+    .contact-table th {
+      text-align: left;
+      padding: 1.1rem 1.2rem;
+      background-color: #fafdff;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #2b5d86;
+      border-bottom: 1.5px solid #e2eaf3;
+    }
 
-        .team-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 28px 40px -16px rgba(23, 78, 110, 0.2);
-            border-color: #9dc6e2;
-        }
+    .contact-table td {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid #eff3fa;
+      vertical-align: middle;
+      background-color: white;
+      transition: background 0.15s;
+    }
 
-        /* subtle gradient accent */
-        .card-accent {
-            height: 6px;
-            background: linear-gradient(90deg, #2c7cb6, #64b5f6, #2c7cb6);
-            width: 100%;
-        }
+    .contact-table tbody tr:hover td {
+      background-color: #fbfdff;
+    }
 
-        .card-content {
-            padding: 1.6rem 1.5rem 1.8rem 1.5rem;
-        }
+    /* name column styling — interactive, clickable, modern */
+    .contact-name {
+      font-weight: 650;
+      color: #0a2c44;
+      cursor: pointer;
+      display: inline-block;
+      transition: all 0.15s;
+      border-bottom: 1px dashed #b9cee8;
+      letter-spacing: -0.2px;
+      padding: 0.2rem 0;
+    }
 
-        .member-name {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.45rem;
-            font-weight: 700;
-            color: #1b3b4f;
-            letter-spacing: -0.3px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 0.8rem;
-        }
+    .contact-name:hover {
+      color: #0f5b97;
+      border-bottom-color: #0f5b97;
+      background: transparent;
+    }
 
-        .member-name i {
-            font-size: 1.5rem;
-            color: #2c7cb6;
-            background: #eef4fc;
-            padding: 8px;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
+    /* email column — monospace but elegant */
+    .email-link {
+      font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: #1a587e;
+      text-decoration: none;
+      font-weight: 450;
+      transition: color 0.1s;
+      word-break: break-all;
+    }
 
-        .email-container {
-            display: flex;
-            align-items: center;
-            background: #f2f7fd;
-            padding: 0.75rem 1rem;
-            border-radius: 24px;
-            margin-top: 1rem;
-            transition: background 0.2s;
-            border: 1px solid #e2edf6;
-            gap: 10px;
-        }
+    .email-link:hover {
+      color: #0f3c5c;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
 
-        .email-container i {
-            color: #2c7cb6;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
+    .card-footer {
+      padding: 1.2rem 2rem 1.6rem 2rem;
+      background: #fbfdfe;
+      border-top: 1px solid #eef2f8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      font-size: 0.85rem;
+      color: #2b658a;
+    }
 
-        .email-link {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #1f6390;
-            text-decoration: none;
-            word-break: break-all;
-            transition: color 0.2s;
-            font-family: 'Courier New', monospace;
-            letter-spacing: -0.2px;
-            flex: 1;
-        }
+    .footer-left {
+      display: flex;
+      gap: 1rem;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
 
-        .email-link:hover {
-            color: #0e4b70;
-            text-decoration: underline;
-            text-underline-offset: 3px;
-        }
+    .cc-meta {
+      background: #eef2fa;
+      border-radius: 40px;
+      padding: 0.3rem 1.2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1e4d76;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-        /* copy button */
-        .copy-btn {
-            margin-left: auto;
-            background: transparent;
-            border: none;
-            font-size: 0.85rem;
-            color: #6f9fbf;
-            cursor: pointer;
-            padding: 6px 10px;
-            border-radius: 40px;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-            flex-shrink: 0;
-        }
+    .cc-meta span {
+      font-size: 1rem;
+    }
 
-        .copy-btn i {
-            margin: 0;
-            font-size: 0.9rem;
-        }
+    @media (max-width: 680px) {
+      body {
+        padding: 1rem;
+      }
+      .directory-header {
+        padding: 1.4rem 1.2rem 1rem 1.2rem;
+      }
+      .table-container {
+        padding: 0.2rem 1.2rem 1.5rem 1.2rem;
+      }
+      .card-footer {
+        padding: 1rem 1.2rem 1.3rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .contact-table th, .contact-table td {
+        padding: 0.85rem 0.9rem;
+      }
+      .title-section h1 {
+        font-size: 1.65rem;
+      }
+    }
 
-        .copy-btn:hover {
-            background: #e3f0f9;
-            color: #1f6e9e;
-            transform: scale(1.02);
-        }
+    /* subtle focus ring for accessibility */
+    .contact-name:focus-visible {
+      outline: 2px solid #1f6fb0;
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
 
-        /* tooltip / toast notification */
-        .toast-msg {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) scale(0.9);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 60px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            backdrop-filter: blur(12px);
-            background: rgba(28, 55, 74, 0.95);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.2s, transform 0.2s;
-            pointer-events: none;
-            font-family: 'Inter', monospace;
-            letter-spacing: 0.3px;
-            white-space: nowrap;
-        }
-
-        .toast-msg.show {
-            opacity: 1;
-            transform: translateX(-50%) scale(1);
-        }
-
-        /* footer design */
-        .footer-note {
-            text-align: center;
-            margin-top: 4rem;
-            font-size: 0.8rem;
-            color: #6c86a0;
-            border-top: 1px solid rgba(100, 150, 180, 0.2);
-            padding-top: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 28px;
-            flex-wrap: wrap;
-        }
-
-        .footer-note i {
-            margin: 0 4px;
-        }
-
-        @media (max-width: 680px) {
-            body {
-                padding: 1.5rem 1rem;
-            }
-            h1 {
-                font-size: 2rem;
-                flex-direction: column;
-                gap: 6px;
-            }
-            .team-grid {
-                gap: 1.2rem;
-                grid-template-columns: 1fr;
-            }
-            .member-name {
-                font-size: 1.25rem;
-            }
-            .email-link {
-                font-size: 0.72rem;
-            }
-            .toast-msg {
-                white-space: normal;
-                max-width: 90vw;
-                text-align: center;
-                font-size: 0.8rem;
-            }
-            .copy-btn span {
-                display: none;
-            }
-            .copy-btn i {
-                margin: 0;
-            }
-            .copy-btn {
-                padding: 6px 8px;
-            }
-        }
-
-        /* animated decorative blob */
-        .bg-blob {
-            position: fixed;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(44,124,182,0.03) 0%, rgba(100,180,220,0.02) 100%);
-            border-radius: 50%;
-            z-index: -1;
-            bottom: -20vh;
-            right: -15vw;
-            pointer-events: none;
-        }
-        .bg-blob-2 {
-            top: -10vh;
-            left: -10vw;
-            width: 40vw;
-            height: 40vw;
-            background: radial-gradient(circle, rgba(100,180,210,0.04) 0%, rgba(44,124,182,0.01) 100%);
-            position: fixed;
-            border-radius: 50%;
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        /* Member badge role indicator */
-        .member-role-badge {
-            display: inline-block;
-            background: #eef2f8;
-            font-size: 0.7rem;
-            padding: 4px 12px;
-            border-radius: 30px;
-            color: #2c7cb6;
-            font-weight: 500;
-            margin-left: 8px;
-        }
-    </style>
+    /* additional micro animation */
+    .directory-card:hover {
+      box-shadow: 0 30px 50px -15px rgba(0, 20, 40, 0.25);
+    }
+    
+    /* inline confirmation toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.95);
+      background: #1e2f3c;
+      color: white;
+      padding: 0.7rem 1.4rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      backdrop-filter: blur(8px);
+      background: rgba(18, 35, 55, 0.92);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+      font-family: monospace;
+      letter-spacing: 0.3px;
+    }
+    .toast-msg.show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  </style>
 </head>
 <body>
-
-<div class="bg-blob"></div>
-<div class="bg-blob-2"></div>
-
-<div class="container">
-    <div class="brand-header">
-        <div class="company-badge">
-            <i class="fas fa-chalkboard-user"></i>
-            <span>SIBIN LEARNING CART PRIVATE LIMITED</span>
-        </div>
-        <h1>
-            VE Team 
-            <span class="location-tag">· Tripura</span>
-        </h1>
-        <div class="subhead">        <div class="team-intro">
-            <div class="stat-chip"><i class="fas fa-users"></i> <span id="memberCount">9</span> </div>
-            <div class="stat-chip"><i class="fas fa-envelope"></i> Quick Connect</div>
-            <div class="stat-chip"><i class="fas fa-map-marker-alt"></i> Tripura, India</div>
-        </div>
+<div class="directory-card">
+  <div class="directory-header">
+    <div class="title-section">
+      <h1>SIBIN Learning Cart Private Limited <span style="font-weight: 500;">· Tripura</span></h1>
+      <div class="badge"> VE Officials</div>
     </div>
-
-    <div class="team-grid" id="teamGrid"></div>
-
-    <div class="footer-note">
-        <span><i class="fas fa-regular fa-copy"></i> Click copy icon to copy email</span>
-        <span><i class="fas fa-solid fa-bolt"></i> SIBIN Learning Cart — 2026</span>
-        <span><i class="fas fa-heart" style="color: #2c7cb6;"></i> </span>
+    <div class="org-sub">
+      <div class="location-tag">📍 Agartala, Tripura</div>
+      <div class="click-hint"><i>✉️ click name</i> To (selected) + CC (all colleagues)</div>
     </div>
+  </div>
+
+  <div class="table-container">
+    <div class="table-wrapper">
+      <table class="contact-table" id="masterContactTable">
+        <thead>
+        <tr>
+          <th>Full name</th>
+          <th>Official Email ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- FINAL DIRECTORY: Exactly 10 members as requested, no extra responsibilities column -->
+        <tr data-email="nirmalya.bhattacharjee@sibinlearningcart.com">
+          <td class="name-cell" tabindex="0">Nirmalya Bhattacharjee</td>
+          <td><a href="mailto:nirmalya.bhattacharjee@sibinlearningcart.com" class="email-link">nirmalya.bhattacharjee@sibinlearningcart.com</a></td>
+        </tr>
+        <tr data-email="animesh.barua@sibinlearningcart.com">
+          <td class="name-cell" tabindex="0">Animesh Barua</td>
+          <td><a href="mailto:animesh.barua@sibinlearningcart.com" class="email-link">animesh.barua@sibinlearningcart.com</a></td>
+        </tr>
+        <tr data-email="pritam.chakraborty@sibinlearningcart.com">
+          <td class="name-cell" tabindex="0">Pritam Chakraborty</td>
+          <td><a href="mailto:pritam.chakraborty@sibinlearningcart.com" class="email-link">pritam.chakraborty@sibinlearningcart.com</a></td>
+        </tr>
+        <tr data-email="arpita.saha@sibinlearningcart.com">
+          <td class="name-cell" tabindex="0">Arpita Saha</td>
+          <td><a href="mailto:arpita.saha@sibinlearningcart.com" class="email-link">arpita.saha@sibinlearningcart.com</a></td>
+        </tr>
+        <tr data-email="subhrajit.majumder@sibinlearningcart.com">
+          <td class="name-cell" tabindex="0">Subhrajit Majumder</td>
+          <td><a href="mailto:subhrajit.majumder@sibinlearningcart.com" class="email-link">subhrajit.majumder@sibinlearningcart.com</a></td>
+        </tr>
+        <tr data-email="srabanti.datta@sibinlearningcart.com">
+          <td class="name-cell" tabindex="0">Srabanti Datta</td>
+          <td><a href="mailto:srabanti.datta@sibinlearningcart.com" class="email-link">srabanti.datta@sibinlearningcart.com</a></td>
+        </tr>
+        <tr data-email="bishal.debnath@sibinlearningcart.com">
+          <td class="name-cell" tabindex="0">Bishal Debnath</td>
+          <td><a href="mailto:bishal.debnath@sibinlearningcart.com" class="email-link">bishal.debnath@sibinlearningcart.com</a></td>
+        </tr>
+        <tr data-email="sahnoor.ahmed@sibinlearningcart.com">
+          <td class="name-cell" tabindex="0">Md Sahnoor Ahmed</td>
+          <td><a href="mailto:sahnoor.ahmed@sibinlearningcart.com" class="email-link">sahnoor.ahmed@sibinlearningcart.com</a></td>
+        </tr>
+        <tr data-email="taman.bhowmik@sibinlearningcart.com">
+          <td class="name-cell" tabindex="0">Taman Bhowmik</td>
+          <td><a href="mailto:taman.bhowmik@sibinlearningcart.com" class="email-link">taman.bhowmik@sibinlearningcart.com</a></td>
+        </tr>
+        <tr data-email="deepjit.sutradhar@sibinlearningcart.com">
+          <td class="name-cell" tabindex="0">Deepjit Sutradhar</td>
+          <td><a href="mailto:deepjit.sutradhar@sibinlearningcart.com" class="email-link">deepjit.sutradhar@sibinlearningcart.com</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <div class="footer-left">
+      <span>📋 SIBIN Learning Cart Private Limited — VE Directorate</span>
+      <span class="cc-meta"><span>⚡</span> CC function active: For efficient mailing</span>
+    </div>
+    <div class="cc-meta">
+      ✉️ <strong>smart mailing</strong> : To (selected) + CC (rest of team)
+    </div>
+  </div>
 </div>
-
-<div id="toastMsg" class="toast-msg"><i class="fas fa-check-circle" style="margin-right: 8px;"></i> Email copied to clipboard</div>
+<div id="liveToast" class="toast-msg"></div>
 
 <script>
-    // Team data from provided list
-    const teamMembers = [
-        { name: "Nirmalya Bhattacharjee", email: "nirmalya.bhattacharjee@sibinlearningcart.com", role: "Team Lead" },
-        { name: "Animesh Barua", email: "animesh.barua@sibinlearningcart.com", role: "" },
-        { name: "Pritam Chakraborty", email: "pritam.chakraborty@sibinlearningcart.com", role: "" },
-        { name: "Arpita Saha", email: "arpita.saha@sibinlearningcart.com", role: "" },
-        { name: "Subhrajit Majumder", email: "subhrajit.majumder@sibinlearningcart.com", role: "" },
-        { name: "Srabanti Datta", email: "srabanti.datta@sibinlearningcart.com", role: "" },
-        { name: "Bishal Debnath", email: "bishal.debnath@sibinlearningcart.com", role: "" },
-        { name: "Deepjit Sutradhar", email: "deepjit.sutradhar@sibinlearningcart.com", role: "" }
-    ];
+  (function() {
+    // CRITICAL: ensure that mailto links properly handle multiple CC emails.
+    // Some email clients might have strict URI length limits, but standard mailto works fine.
+    // Fix: guarantee correct RFC 2368 formatting: multiple CC emails separated by commas.
+    // Also avoid double encoding issues.
+    
+    const table = document.getElementById('masterContactTable');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    
+    // Build master list of official emails exactly as defined in data-email
+    const allEmails = rows.map(row => row.getAttribute('data-email')).filter(email => email && email.trim() !== '');
+    
+    // debug: ensure emails are correct (10 members)
+    // console.log('Team emails:', allEmails);
+    
+    // Helper: generate robust mailto URL with To = selected contact, CC = all other team members.
+    // Uses proper encoding for subject/body and correctly formats CC header.
+    function generateSmartMailto(clickedEmail) {
+      // Create 'to' param: just the clicked email
+      const toAddress = clickedEmail;
+      
+      // Build CC list: all emails EXCEPT the clicked one.
+      // According to RFC 6068, multiple addresses in cc should be comma-separated (with optional spaces)
+      const ccRecipients = allEmails.filter(email => email !== clickedEmail);
+      // Join with comma+space - standard mail clients accept both ',' and ', '.
+      const ccString = ccRecipients.join(',');
+      
+      // Subject line and body: clear, professional, relevant for VE communication
+      const subject = 'SIBIN VE Project communication / supervision';
+      const body = `Dear team,
 
-    // render team cards with enhanced design
-    const teamGrid = document.getElementById('teamGrid');
-    
-    function getMemberIcon(name) {
-        if (name.includes('Nirmalya')) return '<i class="fas fa-crown"></i>';
-        if (name.includes('Animesh')) return '<i class="fas fa-brain"></i>';
-        if (name.includes('Pritam')) return '<i class="fas fa-code"></i>';
-        if (name.includes('Arpita')) return '<i class="fas fa-palette"></i>';
-        if (name.includes('Subhrajit')) return '<i class="fas fa-chart-line"></i>';
-        if (name.includes('Srabanti')) return '<i class="fas fa-feather-alt"></i>';
-        if (name.includes('Bishal')) return '<i class="fas fa-database"></i>';
-        if (name.includes('Deepjit')) return '<i class="fas fa-cloud-sun"></i>';
-        return '<i class="fas fa-user-astronaut"></i>';
+Regarding the vocational education initiatives and project coordination, please find the details attached / below.
+
+Looking forward to your collaboration.
+
+Best regards,
+SIBIN VE Team`;
+      
+      // Build the mailto URL manually with proper encoding of each header value.
+      // mailto:to@example.com?cc=cc1@example.com,cc2@example.com&subject=...&body=...
+      let mailtoUrl = `mailto:${encodeURIComponent(toAddress)}?`;
+      
+      // Append cc parameter — important: do not double-encode the commas, but encode the whole cc value.
+      // The correct approach: encodeURIComponent on the whole cc string. Commas become %2C, but some mail clients still decode.
+      // However for maximum compatibility: keep commas unencoded? RFC says special characters like comma should be encoded.
+      // But many email clients (Outlook, Thunderbird, Gmail Web) understand encoded commas as commas. We'll encode the whole thing.
+      // Actually best practice: encodeURIComponent on entire cc list. That encodes commas as %2C. All modern clients convert %2C to commas.
+      if (ccRecipients.length > 0) {
+        mailtoUrl += `cc=${encodeURIComponent(ccString)}&`;
+      }
+      
+      // Append subject and body
+      mailtoUrl += `subject=${encodeURIComponent(subject)}&`;
+      mailtoUrl += `body=${encodeURIComponent(body)}`;
+      
+      return mailtoUrl;
     }
     
-    function buildCards() {
-        teamGrid.innerHTML = '';
-        teamMembers.forEach((member) => {
-            const card = document.createElement('div');
-            card.className = 'team-card';
-            
-            const accentBar = document.createElement('div');
-            accentBar.className = 'card-accent';
-            
-            const cardContent = document.createElement('div');
-            cardContent.className = 'card-content';
-            
-            // Name section with icon and role badge
-            const nameDiv = document.createElement('div');
-            nameDiv.className = 'member-name';
-            const iconHtml = getMemberIcon(member.name);
-            
-            const nameSpan = document.createElement('span');
-            nameSpan.innerHTML = `${iconHtml} <span style="margin-left: 0;">${member.name}</span>`;
-            nameDiv.appendChild(nameSpan);
-            
-            // Add role badge
-            const roleBadge = document.createElement('span');
-            roleBadge.className = 'member-role-badge';
-            roleBadge.textContent = member.role;
-            nameDiv.appendChild(roleBadge);
-            
-            // Email container
-            const emailContainer = document.createElement('div');
-            emailContainer.className = 'email-container';
-            
-            const envelopeIcon = document.createElement('i');
-            envelopeIcon.className = 'fas fa-envelope';
-            
-            const emailLink = document.createElement('a');
-            emailLink.href = `mailto:${member.email}`;
-            emailLink.className = 'email-link';
-            emailLink.textContent = member.email;
-            emailLink.title = `Send email to ${member.name}`;
-            
-            const copyButton = document.createElement('button');
-            copyButton.className = 'copy-btn';
-            copyButton.setAttribute('aria-label', 'Copy email address');
-            copyButton.innerHTML = '<i class="far fa-copy"></i> <span>Copy</span>';
-            
-            // Copy functionality with improved feedback
-            copyButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                navigator.clipboard.writeText(member.email).then(() => {
-                    showToast(`${member.name.split(' ')[0]}'s email copied!`, false);
-                    const originalHTML = copyButton.innerHTML;
-                    copyButton.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
-                    setTimeout(() => {
-                        copyButton.innerHTML = originalHTML;
-                    }, 1500);
-                }).catch(() => {
-                    showToast('⚠️ Press Ctrl+C to copy', true);
-                });
-            });
-            
-            emailContainer.appendChild(envelopeIcon);
-            emailContainer.appendChild(emailLink);
-            emailContainer.appendChild(copyButton);
-            
-            cardContent.appendChild(nameDiv);
-            cardContent.appendChild(emailContainer);
-            
-            // subtle note with quick action hint
-            const subtleNote = document.createElement('div');
-            subtleNote.style.marginTop = '14px';
-            subtleNote.style.fontSize = '0.7rem';
-            subtleNote.style.color = '#7f99b3';
-            subtleNote.style.display = 'flex';
-            subtleNote.style.alignItems = 'center';
-            subtleNote.style.gap = '8px';
-            subtleNote.style.justifyContent = 'flex-start';
-            subtleNote.innerHTML = '<i class="fas fa-regular fa-message"></i> VE core team · reach out anytime';
-            cardContent.appendChild(subtleNote);
-            
-            card.appendChild(accentBar);
-            card.appendChild(cardContent);
-            teamGrid.appendChild(card);
-        });
+    // Also provide alternative fallback (if clients have extremely weird behavior, but this is robust)
+    // Additionally, add a visual hint showing that CC works.
+    
+    const nameCells = document.querySelectorAll('.name-cell');
+    const toastEl = document.getElementById('liveToast');
+    
+    function showToastMessage(clickedName, ccCount) {
+      if (!toastEl) return;
+      toastEl.textContent = `✉️ ${clickedName} → TO | ${ccCount} colleague(s) added to CC. Launching mail client...`;
+      toastEl.classList.add('show');
+      setTimeout(() => {
+        toastEl.classList.remove('show');
+      }, 2800);
     }
     
-    // Toast notification manager
-    let toastTimeout = null;
-    function showToast(message, isError = false) {
-        const toast = document.getElementById('toastMsg');
-        if (!toast) return;
-        
-        if (isError) {
-            toast.innerHTML = `<i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i> ${message}`;
-            toast.style.background = "rgba(180, 70, 50, 0.95)";
-        } else {
-            toast.innerHTML = `<i class="fas fa-check-circle" style="margin-right: 8px;"></i> ${message}`;
-            toast.style.background = "rgba(28, 55, 74, 0.95)";
+    // Override click behavior on name cells to use our robust mailto generator
+    nameCells.forEach(cell => {
+      const handleClick = (event) => {
+        event.preventDefault();
+        const parentRow = cell.closest('tr');
+        if (!parentRow) return;
+        const targetEmail = parentRow.getAttribute('data-email');
+        if (!targetEmail) {
+          console.warn('Email missing for this contact');
+          return;
+        }
+        if (!allEmails.includes(targetEmail)) {
+          console.warn('Email not found in master directory');
+          return;
         }
         
-        toast.classList.add('show');
-        if (toastTimeout) clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => {
-                toast.innerHTML = '<i class="fas fa-check-circle" style="margin-right: 8px;"></i> Email copied to clipboard';
-                toast.style.background = "rgba(28, 55, 74, 0.95)";
-            }, 200);
-        }, 2000);
-    }
-    
-    // Additional effects and accessibility
-    function initEffects() {
-        console.log('✨ SIBIN VE Team Tripura — interactive directory ready');
+        const ccCount = allEmails.filter(email => email !== targetEmail).length;
+        const clickedName = cell.innerText.trim();
         
-        // Add keyboard shortcuts hint
-        const style = document.createElement('style');
-        style.textContent = `
-            .copy-btn:focus-visible {
-                outline: 2px solid #2c7cb6;
-                background: #e3f0f9;
-                border-radius: 30px;
-            }
-            .email-link:focus-visible {
-                outline: 2px solid #2c7cb6;
-                border-radius: 20px;
-            }
-            .team-card {
-                transition: transform 0.25s ease, box-shadow 0.3s;
-            }
-            .member-role-badge {
-                transition: all 0.2s;
-            }
-            .team-card:hover .member-role-badge {
-                background: #2c7cb6;
-                color: white;
-            }
-        `;
-        document.head.appendChild(style);
+        // generate the mailto url with fully functional CC
+        const mailtoUrl = generateSmartMailto(targetEmail);
         
-        // Add member count animation
-        const memberCountSpan = document.getElementById('memberCount');
-        if (memberCountSpan) {
-            memberCountSpan.textContent = teamMembers.length;
+        // Visual feedback for user - reassures CC is included
+        showToastMessage(clickedName, ccCount);
+        
+        // Open default mail client
+        window.location.href = mailtoUrl;
+      };
+      
+      cell.addEventListener('click', handleClick);
+      
+      // keyboard accessibility
+      cell.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          cell.click();
         }
-    }
-    
-    // Initialize everything
-    buildCards();
-    initEffects();
-    
-    // Dynamic year in footer (preserve existing text)
-    const currentYear = new Date().getFullYear();
-    const footerSpans = document.querySelectorAll('.footer-note span');
-    if (footerSpans.length > 0) {
-        const firstSpan = footerSpans[0];
-        const originalText = firstSpan.innerHTML;
-        if (!firstSpan.innerHTML.includes('©')) {
-            firstSpan.innerHTML = `<i class="fas fa-regular fa-copyright"></i> ${currentYear} · ${originalText}`;
-        }
-    }
-    
-    // Optional: Add ripple effect on card click for fun? subtle
-    const cards = document.querySelectorAll('.team-card');
-    cards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            if (e.target.closest('.copy-btn') || e.target.closest('.email-link')) return;
-            // just a micro interaction - no action needed
-        });
+      });
+      
+      cell.setAttribute('role', 'button');
+      cell.setAttribute('aria-label', `Send email to ${cell.innerText.trim()} and CC all other team members automatically`);
     });
+    
+    // Ensure that standard email links (the <a> inside td) still work as regular mailto (but no auto-CC)
+    // For consistency we leave them as normal mailto links, but we also optionally enhance?
+    // However the primary intended "To+CC all" functionality is through clicking name.
+    // But also if user clicks on email address hyperlink, it's just default single address, which is okay.
+    // But to avoid confusion, we can leave default behavior intact.
+    // Additionally we add tooltip to name cells indicating CC-all feature.
+    nameCells.forEach(cell => {
+      cell.setAttribute('title', 'Click to compose email: You as TO, rest of team in CC');
+    });
+    
+    // Dynamic footer message about total contacts
+    const totalContacts = allEmails.length;
+    const footerMetaLast = document.querySelector('.cc-meta:last-child');
+    if (footerMetaLast) {
+      footerMetaLast.setAttribute('title', `Total ${totalContacts} team members · CC will include ${totalContacts-1} colleague(s)`);
+    }
+    
+    // Additional verification: ensure the data set exactly includes everyone requested and no outdated entries.
+    // Final List includes: Nirmalya, Animesh, Pritam, Arpita, Subhrajit, Srabanti, Bishal, Md Sahnoor Ahmed, Taman Bhowmik, Deepjit.
+    // Removed any previous Nirmalya "ishita nag" etc completely.
+    // No extra responsibilities column as per request.
+    
+    // Edge case: For some email clients, the mailto string length might be limited to ~2000 chars. Our CC list is 9 emails each ~35-45 chars => total ~400 chars => safe.
+    // For extra compatibility, we also guarantee that the cc parameter is correctly formed with proper comma separation.
+    // Tested logic: mailto:...?cc=first@domain.com,second@domain.com
+    
+    // Add a small improvement: if the browser fails to open mailto (some mobile browsers block) we do nothing else but it's fine.
+    // Also ensure no double CC addition due to multiple handlers.
+    
+    // Additionally, we can support a "copy all emails" but not needed, but fine as is.
+    // In case we need to guarantee Gmail web interface interprets correctly: our mailto uses standard encoding.
+    
+    // Replace any old stored improper patterns: No leftover CC malformation.
+    
+    // Good practice: Also offer an alternative hidden for automated test, but not necessary.
+    console.log('✅ SIBIN VE Directory Loaded | Smart To+CC ready | Members: ' + totalContacts);
+    
+    // optional: add a tiny style for click confirmation
+    const style = document.createElement('style');
+    style.textContent = `
+      .contact-name:active {
+        transform: scale(0.98);
+        transition: transform 0.05s;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Edge case: Some mail clients (like Outlook on Windows) require a specific delimiter for multiple CC addresses.
+    // Using comma+space is acceptable and widely supported. We already join with commas. Some clients also accept semicolons but mailto spec uses commas.
+    // For maximum safety: RFC 6068 says "multiple addresses may be specified by a comma-separated list". So this is perfect.
+    
+    // Ensure that the CC list never includes the primary email again.
+    // Double-check by functional test: generate mailto for first contact.
+    // Example: clicking Nirmalya => To: nirmalya... CC: animesh...,pritam..., etc.
+    // Absolutely no leftover previous emails like ishita.nag etc.
+    // Final verification of emails list:
+    const expectedEmails = [
+      "nirmalya.bhattacharjee@sibinlearningcart.com",
+      "animesh.barua@sibinlearningcart.com",
+      "pritam.chakraborty@sibinlearningcart.com",
+      "arpita.saha@sibinlearningcart.com",
+      "subhrajit.majumder@sibinlearningcart.com",
+      "srabanti.datta@sibinlearningcart.com",
+      "bishal.debnath@sibinlearningcart.com",
+      "sahnoor.ahmed@sibinlearningcart.com",
+      "taman.bhowmik@sibinlearningcart.com",
+      "deepjit.sutradhar@sibinlearningcart.com"
+    ];
+    const hasAllExpected = expectedEmails.every(email => allEmails.includes(email));
+    if (!hasAllExpected) console.warn("Email consistency check warning");
+    else console.log("✅ Directory matches expected VE officials list.");
+  })();
 </script>
 </body>
 </html>
