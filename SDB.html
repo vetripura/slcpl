@@ -578,7 +578,7 @@
             currentData = records;
             updateFilters(currentData);
             filterData();
-            statusDiv.innerHTML = `<span>✅</span> Loaded ${currentData.length} schools from VE.csv`;
+            statusDiv.innerHTML = `<span>✅</span> Loaded ${currentData.length} schools from databse`;
             statusDiv.style.color = '#b0ffb0';
             setTimeout(() => { statusDiv.style.color = '#ddd'; }, 2000);
         } catch (err) {
