@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>VE Schools | Student Database Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* === BLACK & WHITE BASE + FACEBOOK BLUE ACCENTS === */
+        body {
+            background: #000000;         /* pure black background */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+            color: #e4e6eb;              /* light gray/white text for readability */
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: #121212;          /* dark card background, near-black but softer */
+            min-height: 100vh;
+            border-radius: 0;
+            box-shadow: none;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* === HEADER (Facebook Blue + monochrome edges) === */
+        .header {
+            background: #1877f2;           /* Facebook Blue primary */
+            padding: 1.2rem 1.2rem;
+            color: white;
+            border-bottom: 1px solid #0e5fd9;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            letter-spacing: -0.2px;
+        }
+
+        .header h1 span {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: normal;
+        }
+
+        .sub {
+            margin-top: 0.4rem;
+            opacity: 0.9;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+
+        /* Status bar - dark tones */
+        .status-bar {
+            background: #1e1e1e;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            border-bottom: 1px solid #2c2c2c;
+        }
+
+        .status-message {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #ddd;
+        }
+
+        .refresh-btn {
+            background: #2c2c2c;
+            color: #e4e6eb;
+            border: 1px solid #3a3b3c;
+            padding: 0.45rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .refresh-btn:hover {
+            background: #3a3b3c;
+            border-color: #1877f2;
+            color: white;
+        }
+
+        /* controls - mobile friendly black/white with FB blue accents */
+        .controls {
+            padding: 1rem;
+            background: #0f0f0f;
+            border-bottom: 1px solid #262626;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 2;
+            min-width: 180px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.7rem 1rem 0.7rem 2.4rem;
+            background: #1e1e1e;
+            border: 1px solid #3a3b3c;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #e4e6eb;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.3);
+        }
+
+        .search-box input::placeholder {
+            color: #888;
+        }
+
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+            filter: grayscale(0.5);
+            color: #aaa;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex: 2;
+            justify-content: flex-end;
+        }
+
+        .filter-group select {
+            padding: 0.6rem 1.8rem 0.6rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #3a3b3c;
+            background: #1e1e1e;
+            color: #e4e6eb;
+            font-size: 0.75rem;
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23b0b3b8" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 0.8rem center;
+        }
+
+        .reset-btn {
+            background: #2c2c2c;
+            border: 1px solid #3a3b3c;
+            color: #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .reset-btn:hover {
+            background: #3a3b3c;
+            border-color: #1877f2;
+        }
+
+        .stats {
+            padding: 0.6rem 1rem;
+            background: #0a0a0a;
+            font-size: 0.7rem;
+            border-bottom: 1px solid #262626;
+            color: #b0b3b8;
+            font-weight: 500;
+        }
+
+        /* table wrapper - optimized for mobile */
+        .table-wrapper {
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 65vh;
+            flex: 1;
+            background: #0f0f0f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            min-width: 600px;
+        }
+
+        th {
+            background: #1a1a1a;
+            padding: 0.9rem 0.8rem;
+            text-align: left;
+            font-weight: 600;
+            color: #e4e6eb;
+            border-bottom: 1px solid #2c2c2c;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
+        }
+
+        td {
+            padding: 0.8rem 0.8rem;
+            border-bottom: 1px solid #262626;
+            vertical-align: middle;
+            color: #d0d2d6;
+        }
+
+        tr:hover td {
+            background-color: #181818;
+        }
+
+        .school-name {
+            font-weight: 500;
+            color: #e4e6eb;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #262626;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: #ccc;
+            white-space: nowrap;
+        }
+
+        /* Facebook Blue accent for action button */
+        .link-btn {
+            background: #1877f2;
+            color: white;
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            transition: 0.2s;
+            text-align: center;
+            border: none;
+            letter-spacing: 0.3px;
+        }
+
+        .link-btn:hover {
+            background: #0e5fd9;
+            transform: scale(0.97);
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 2.5rem;
+            color: #9aa2b0;
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2.5rem;
+            color: #b0b3b8;
+        }
+
+        footer {
+            padding: 0.9rem 1rem;
+            text-align: center;
+            font-size: 0.68rem;
+            color: #8a8f98;
+            border-top: 1px solid #262626;
+            background: #0a0a0a;
+        }
+
+        /* mobile extra optimization */
+        @media (max-width: 680px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filter-group {
+                justify-content: flex-start;
+            }
+            .header h1 {
+                font-size: 1.35rem;
+            }
+            th, td {
+                padding: 0.7rem 0.6rem;
+            }
+            .link-btn {
+                padding: 0.35rem 0.9rem;
+                font-size: 0.68rem;
+            }
+            .badge {
+                font-size: 0.6rem;
+                white-space: normal;
+                word-break: keep-all;
+            }
+            .status-bar {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+
+        /* custom scroll for dark theme */
+        .table-wrapper::-webkit-scrollbar {
+            height: 5px;
+            width: 5px;
+        }
+        .table-wrapper::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: #1877f2;
+            border-radius: 10px;
+        }
+        code {
+            background: #262626;
+            padding: 0.2rem 0.3rem;
+            border-radius: 6px;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>
+            📘 VE Schools 
+            <span>Student DB · 2026-27</span>
+        </h1>
+        <div class="sub">Vocational Education · Dashboard with live CSV</div>
+    </div>
+
+    <div class="status-bar">
+        <div class="status-message" id="statusMessage">
+            <span>⚫</span> Loading VE.csv ...
+        </div>
+        <button class="refresh-btn" onclick="loadCSV()">⟳ Refresh Data</button>
+    </div>
+
+    <div class="controls">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search school, district, sector, project...">
+        </div>
+        <div class="filter-group">
+            <select id="districtFilter"><option value="">All Districts</option></select>
+            <select id="boardFilter"><option value="">All Boards</option></select>
+            <select id="sectorFilter"><option value="">All Sectors</option></select>
+            <button class="reset-btn" id="resetFilters">⟳ Reset</button>
+        </div>
+    </div>
+    <div class="stats" id="statsMsg">📊 Dashboard ready</div>
+    <div class="table-wrapper">
+        <table id="dataTable">
+            <thead>
+                <tr><th>SL</th><th>School Name</th><th>District</th><th>Board</th><th>Sector</th><th>Project</th><th>Access</th></tr>
+            </thead>
+            <tbody id="tableBody">
+                <tr><td colspan="7" class="loading">⏳ Loading dataset...<br>📁 Expecting VE.csv in same folder</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <footer>📎 Total records: <span id="totalCount">0</span> — Monochrome + Facebook Blue | VE Schools Data</footer>
+</div>
+
+<script>
+    let currentData = [];
+
+    // robust CSV / TSV parser with quote handling
+    function parseTSVOrCSV(csvText) {
+        const lines = csvText.split(/\r?\n/).filter(line => line.trim());
+        if (lines.length < 2) return [];
+        
+        const firstLine = lines[0];
+        const hasTabs = firstLine.includes('\t');
+        const separator = hasTabs ? '\t' : ',';
+        
+        const headers = firstLine.split(separator).map(h => h.trim().replace(/^\uFEFF/, '').replace(/^"|"$/g, ''));
+        
+        // flexible column matching
+        const slIdx = headers.findIndex(h => h.toLowerCase() === 'sl' || h === 'SL');
+        const schoolIdx = headers.findIndex(h => /school\s*name|school/i.test(h));
+        const districtIdx = headers.findIndex(h => /district/i.test(h));
+        const boardIdx = headers.findIndex(h => /board/i.test(h));
+        const sectorIdx = headers.findIndex(h => /sector/i.test(h));
+        const projectIdx = headers.findIndex(h => /name of the project|project/i.test(h));
+        const linkIdx = headers.findIndex(h => /student database link|link/i.test(h));
+        
+        const records = [];
+        
+        for (let i = 1; i < lines.length; i++) {
+            if (!lines[i].trim()) continue;
+            const values = parseRow(lines[i], separator);
+            if (values.length === 0) continue;
+            
+            let sl = (slIdx >= 0 && values[slIdx]) ? parseInt(values[slIdx]) || i : i;
+            let school = (schoolIdx >= 0 && values[schoolIdx]) ? cleanValue(values[schoolIdx]) : '';
+            let district = (districtIdx >= 0 && values[districtIdx]) ? cleanValue(values[districtIdx]) : '';
+            let board = (boardIdx >= 0 && values[boardIdx]) ? cleanValue(values[boardIdx]) : '';
+            let sector = (sectorIdx >= 0 && values[sectorIdx]) ? cleanValue(values[sectorIdx]) : '';
+            let project = (projectIdx >= 0 && values[projectIdx]) ? cleanValue(values[projectIdx]) : '';
+            let link = (linkIdx >= 0 && values[linkIdx]) ? cleanValue(values[linkIdx]) : '';
+            
+            // fallback positional if columns missing
+            if (!school && values.length >= 2) school = cleanValue(values[1]);
+            if (!district && values.length >= 3) district = cleanValue(values[2]);
+            if (!board && values.length >= 4) board = cleanValue(values[3]);
+            if (!sector && values.length >= 5) sector = cleanValue(values[4]);
+            if (!project && values.length >= 6) project = cleanValue(values[5]);
+            if (!link && values.length >= 7) link = cleanValue(values[6]);
+            
+            if (school && link) {
+                records.push({
+                    sl: sl,
+                    school: school,
+                    district: district || 'Not Specified',
+                    board: board || 'Not Specified',
+                    sector: sector || 'Not Specified',
+                    project: project || 'Not Specified',
+                    link: link
+                });
+            }
+        }
+        return records;
+    }
+
+    function cleanValue(val) {
+        if (!val) return '';
+        return val.replace(/^"|"$/g, '').trim();
+    }
+
+    function parseRow(row, sep) {
+        const result = [];
+        let inQuotes = false;
+        let current = '';
+        for (let i = 0; i < row.length; i++) {
+            const ch = row[i];
+            if (ch === '"') {
+                inQuotes = !inQuotes;
+            } else if (ch === sep && !inQuotes) {
+                result.push(current);
+                current = '';
+            } else {
+                current += ch;
+            }
+        }
+        result.push(current);
+        return result;
+    }
+
+    function updateFilters(data) {
+        const districts = [...new Set(data.map(r => r.district).filter(d => d && d !== 'Not Specified'))].sort();
+        const boards = [...new Set(data.map(r => r.board).filter(b => b && b !== 'Not Specified'))].sort();
+        const sectors = [...new Set(data.map(r => r.sector).filter(s => s && s !== 'Not Specified'))].sort();
+        
+        const districtSel = document.getElementById('districtFilter');
+        const boardSel = document.getElementById('boardFilter');
+        const sectorSel = document.getElementById('sectorFilter');
+        
+        districtSel.innerHTML = '<option value="">All Districts</option>' + districts.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join('');
+        boardSel.innerHTML = '<option value="">All Boards</option>' + boards.map(b => `<option value="${escapeHtml(b)}">${escapeHtml(b)}</option>`).join('');
+        sectorSel.innerHTML = '<option value="">All Sectors</option>' + sectors.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+    }
+
+    function renderTable(data) {
+        const tbody = document.getElementById('tableBody');
+        if (!data.length) {
+            tbody.innerHTML = '<tr><td colspan="7" class="no-data">✨ No matching records. Try resetting filters.</td></tr>';
+            document.getElementById('totalCount').innerText = '0';
+            document.getElementById('statsMsg').innerHTML = '📌 0 entries shown — adjust filters';
+            return;
+        }
+        let html = '';
+        for (const row of data) {
+            html += `<tr>
+                        <td>${row.sl}</td>
+                        <td class="school-name">${escapeHtml(row.school)}</td>
+                        <td><span class="badge">${escapeHtml(row.district)}</span></td>
+                        <td>${escapeHtml(row.board)}</td>
+                        <td><span class="badge">${escapeHtml(row.sector)}</span></td>
+                        <td>${escapeHtml(row.project)}</td>
+                        <td><a href="${row.link}" target="_blank" rel="noopener noreferrer" class="link-btn">📎 Open DB</a></td>
+                   </tr>`;
+        }
+        tbody.innerHTML = html;
+        document.getElementById('totalCount').innerText = data.length;
+        document.getElementById('statsMsg').innerHTML = `📌 Showing <strong>${data.length}</strong> of ${currentData.length} schools — Click link to access student database.`;
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            return m === '&' ? '&amp;' : (m === '<' ? '&lt;' : '&gt;');
+        });
+    }
+
+    function filterData() {
+        if (!currentData.length) return;
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+        const districtVal = document.getElementById('districtFilter').value;
+        const boardVal = document.getElementById('boardFilter').value;
+        const sectorVal = document.getElementById('sectorFilter').value;
+        
+        const filtered = currentData.filter(row => {
+            if (districtVal && districtVal !== 'All Districts' && row.district !== districtVal) return false;
+            if (boardVal && boardVal !== 'All Boards' && row.board !== boardVal) return false;
+            if (sectorVal && sectorVal !== 'All Sectors' && row.sector !== sectorVal) return false;
+            if (searchTerm) {
+                return (row.school || '').toLowerCase().includes(searchTerm) ||
+                       (row.district || '').toLowerCase().includes(searchTerm) ||
+                       (row.sector || '').toLowerCase().includes(searchTerm) ||
+                       (row.project || '').toLowerCase().includes(searchTerm) ||
+                       (row.board || '').toLowerCase().includes(searchTerm);
+            }
+            return true;
+        });
+        renderTable(filtered);
+    }
+
+    async function loadCSV() {
+        const statusDiv = document.getElementById('statusMessage');
+        const tbody = document.getElementById('tableBody');
+        
+        statusDiv.innerHTML = '<span>🔄</span> Fetching VE.csv ...';
+        statusDiv.style.color = '#b0b3b8';
+        tbody.innerHTML = '<tr><td colspan="7" class="loading">⏳ Loading VE.csv from current directory...</td></tr>';
+        
+        try {
+            const basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+            let csvUrl = './VE.csv';
+            // fallback: try absolute based on origin
+            csvUrl = new URL('VE.csv', window.location.href).href;
+            
+            const response = await fetch(csvUrl, { cache: 'no-store' });
+            if (!response.ok) throw new Error(`HTTP ${response.status}: VE.csv not found.`);
+            
+            const csvText = await response.text();
+            if (!csvText.trim()) throw new Error('CSV file is empty');
+            
+            const records = parseTSVOrCSV(csvText);
+            if (records.length === 0) {
+                const preview = csvText.split('\n').slice(0, 2).join('\n');
+                throw new Error(`No valid rows. Preview: ${preview.substring(0, 120)}... Ensure columns: School Name, Student Database Link etc.`);
+            }
+            
+            currentData = records;
+            updateFilters(currentData);
+            filterData();
+            statusDiv.innerHTML = `<span>✅</span> Loaded ${currentData.length} schools from VE.csv`;
+            statusDiv.style.color = '#b0ffb0';
+            setTimeout(() => { statusDiv.style.color = '#ddd'; }, 2000);
+        } catch (err) {
+            console.error(err);
+            statusDiv.innerHTML = `<span>⚠️</span> ${err.message.substring(0, 80)}`;
+            statusDiv.style.color = '#f28b82';
+            tbody.innerHTML = `<tr><td colspan="7" class="no-data">
+                <div style="padding: 1rem;">❌ Failed to load VE.csv<br>
+                <span style="font-size:0.75rem;">Make sure the file exists in same folder as this HTML.</span><br>
+                <span style="font-family:monospace;">Expected format: SL,School Name,District,Board,Sector,Name of the Project,Student Database Link</span>
+                </div></td></tr>`;
+            document.getElementById('totalCount').innerText = '0';
+        }
+    }
+
+    // attach event handlers & reset
+    document.getElementById('searchInput').addEventListener('input', filterData);
+    document.getElementById('districtFilter').addEventListener('change', filterData);
+    document.getElementById('boardFilter').addEventListener('change', filterData);
+    document.getElementById('sectorFilter').addEventListener('change', filterData);
+    document.getElementById('resetFilters').addEventListener('click', () => {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('districtFilter').value = '';
+        document.getElementById('boardFilter').value = '';
+        document.getElementById('sectorFilter').value = '';
+        filterData();
+    });
+    
+    loadCSV();
+</script>
+</body>
+</html>
