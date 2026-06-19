@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industry Visit Expense Challan</title>
+
+<style>
+
+@page{
+    size: A4 landscape;
+    margin: 5mm;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:10px;
+    font-size:13px;
+    background: #f0f2f5;
+}
+
+h2{
+    text-align:center;
+    margin:0 0 10px;
+    font-size:24px;
+    font-weight:bold;
+    color: #1a2a3a;
+    letter-spacing: 1px;
+}
+
+.printbar{
+    margin-bottom:10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.printbar button{
+    padding:10px 30px;
+    cursor:pointer;
+    background: #1a3a5e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.printbar button:hover:not(:disabled){
+    background: #0f2b45;
+    transform: scale(1.02);
+}
+
+.printbar button:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #6f7f91;
+}
+
+.printbar .status{
+    font-size: 14px;
+    color: #555;
+    padding: 5px 12px;
+    background: #e8ecf1;
+    border-radius: 20px;
+}
+
+.printbar .status.ready{
+    background: #d4edda;
+    color: #155724;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:8px 20px;
+    margin-bottom:10px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.field{
+    display:flex;
+    align-items:center;
+    gap: 5px;
+}
+
+.field label{
+    min-width:140px;
+    font-weight: 500;
+    color: #1a2a3a;
+    font-size: 12px;
+}
+
+.field input{
+    border:none;
+    border-bottom:2px solid #1a3a5e;
+    width:100%;
+    outline:none;
+    padding: 4px 2px;
+    font-size: 13px;
+    background: transparent;
+    transition: 0.2s;
+}
+
+.field input:focus{
+    border-bottom-color: #e67e22;
+    background: #f8faff;
+}
+
+.field input:required{
+    border-bottom-color: #c0392b;
+}
+
+.field input:required:valid{
+    border-bottom-color: #27ae60;
+}
+
+.full{
+    grid-column:1 / span 3;
+}
+
+.full input{
+    width:70%;
+}
+
+.table-container{
+    background: white;
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    overflow-x: auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+th,
+td{
+    border:2px solid #1a2a3a;
+    padding:6px 4px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th{
+    background: #e8ecf1;
+    font-weight:bold;
+    color: #1a2a3a;
+    font-size: 12px;
+    padding: 8px 4px;
+}
+
+.small{
+    width:5%;
+    text-align:center;
+    font-weight: 600;
+    background: #f5f7fa;
+}
+
+.vehicle{
+    width:16%;
+}
+
+.qty{
+    width:8%;
+}
+
+.owner{
+    width:24%;
+}
+
+.contact{
+    width:14%;
+}
+
+.amount{
+    width:10%;
+}
+
+.signature{
+    width:30%;
+}
+
+/* Taller rows for manual writing */
+tbody tr{
+    height: 65px !important;
+}
+
+tbody td{
+    height: 65px !important;
+    padding: 4px;
+    font-size: 14px;
+    background: white;
+}
+
+/* Empty cells with dotted guide for manual writing */
+tbody td:not(.small){
+    background: white;
+    position: relative;
+}
+
+/* Subtle guide lines for manual writing - very light */
+tbody td:not(.small)::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: rgba(26, 42, 58, 0.1);
+    pointer-events: none;
+}
+
+tbody td.small{
+    font-weight: 700;
+    font-size: 16px;
+    color: #1a2a3a;
+    background: #f5f7fa;
+}
+
+tfoot td{
+    border:none;
+    padding: 10px 4px;
+}
+
+.note{
+    margin-top:15px;
+    font-style:italic;
+    padding: 12px 15px;
+    background: #f8faff;
+    border-left: 4px solid #1a3a5e;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.note span{
+    background: #dce6f2;
+    padding: 2px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin: 0 5px;
+}
+
+.amount-total{
+    font-weight: 700;
+    color: #1a3a5e;
+    font-size: 16px;
+}
+
+/* Print styles */
+@media print{
+
+    .printbar{
+        display:none !important;
+    }
+
+    body{
+        zoom:100%;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+        background: white;
+        padding: 5mm;
+    }
+
+    .form-grid{
+        box-shadow: none;
+        background: white;
+        padding: 10px 5px;
+        border: none;
+    }
+
+    .field input{
+        border-bottom: 1px solid #1a2a3a;
+        background: transparent;
+    }
+
+    .table-container{
+        box-shadow: none;
+        padding: 0;
+        border: none;
+    }
+
+    th{
+        background: #e8ecf1 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        border: 2px solid #1a2a3a;
+    }
+
+    td{
+        border: 2px solid #1a2a3a;
+    }
+
+    .small{
+        background: #f5f7fa !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    tbody tr{
+        height: 65px !important;
+    }
+
+    tbody td{
+        height: 65px !important;
+    }
+
+    .note{
+        background: #f8faff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        border-left: 4px solid #1a3a5e;
+    }
+
+    /* Remove guide lines in print */
+    tbody td:not(.small)::after {
+        display: none;
+    }
+
+    tfoot td{
+        border: none !important;
+    }
+}
+
+
+@media print{
+    h2{font-size:18px !important;margin-bottom:4px !important;}
+    .form-grid{padding:4px !important;margin-bottom:6px !important;gap:4px 10px !important;}
+    .field label{font-size:11px !important;}
+    .field input{font-size:11px !important;padding:1px !important;}
+    .note{margin-top:6px !important;padding:6px 10px !important;font-size:12px !important;}
+    table,.form-grid,.note{page-break-inside:avoid;}
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>📋 Industry Visit Expense Challan</h2>
+
+<div class="printbar">
+    <button id="printBtn" disabled onclick="printChallan()">
+        🖨️ Print Challan
+    </button>
+    <span class="status" id="statusMsg">
+        ⏳ Fill all fields to enable printing
+    </span>
+</div>
+
+<div class="form-grid" id="headerFields">
+
+    <div class="field">
+        <label>School Name:</label>
+        <input type="text" required placeholder="Enter school name">
+    </div>
+
+    <div class="field">
+        <label>VT Contact No:</label>
+        <input type="text" required placeholder="Enter VT contact">
+    </div>
+
+    <div class="field">
+        <label>Venue Name:</label>
+        <input type="text" required placeholder="Enter venue name">
+    </div>
+
+    <div class="field">
+        <label>VT Name:</label>
+        <input type="text" required placeholder="Enter VT name">
+    </div>
+
+    <div class="field">
+        <label>Sector:</label>
+        <input type="text" required placeholder="Enter sector">
+    </div>
+
+    <div></div>
+
+    <div class="field">
+        <label>Type of Vehicle:</label>
+        <input type="text" required placeholder="e.g. Bus, Van">
+    </div>
+
+    <div class="field">
+        <label>District:</label>
+        <input type="text" required placeholder="Enter district">
+    </div>
+
+    <div></div>
+
+    <div class="field full">
+        <label>Industry Visit Conducted for Class & Date of Conduction:</label>
+        <input type="text" required placeholder="e.g. Class 10 - 15th June 2026">
+    </div>
+
+    <div class="field full">
+        <label>Distance from School (As per Google Map) (Both Ways/Up/Down):</label>
+        <input type="text" required placeholder="e.g. 45 km (Both ways)">
+    </div>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+<tr>
+    <th class="small">SL No</th>
+    <th class="vehicle">Vehicle No</th>
+    <th class="qty">Qty. of vehicle</th>
+    <th class="owner">Vehicle Owner/Driver Name</th>
+    <th class="contact">Contact No</th>
+    <th class="amount">Amount (₹)</th>
+    <th class="signature">Full Signature</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+    <td class="small">1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+
+<tr>
+    <td class="small">2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+
+<tr>
+    <td class="small">3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+
+<tr>
+    <td class="small">4</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+
+<tr>
+    <td class="small">5</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+</tbody>
+
+<tfoot>
+    <tr>
+        <td colspan="5" style="text-align:right; font-weight:600; border:none; padding-right:20px;">
+            Total Amount
+        </td>
+        <td id="totalAmount" style="font-weight:700; color:#1a3a5e; font-size:16px; border:none;">
+            ₹ 
+        </td>
+        <td style="border:none; font-size:11px; color:#666;"></td>
+    </tr>
+</tfoot>
+
+</table>
+
+</div>
+
+<div class="note">
+    ✔️ I / We have received above mentioned amount <span>Cash / Online</span>
+</div>
+
+<script>
+
+// Disable browser print (Ctrl+P)
+document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+        e.preventDefault();
+        alert('Please use the "Print Challan" button to print.');
+    }
+});
+
+const headerInputs = document.querySelectorAll('#headerFields input');
+const printBtn = document.getElementById('printBtn');
+const statusMsg = document.getElementById('statusMsg');
+const totalDisplay = document.getElementById('totalAmount');
+
+function validateForm(){
+    // Check all header fields are filled
+    const headersFilled = [...headerInputs].every(
+        input => input.value.trim() !== ''
+    );
+
+    const allFilled = headersFilled;
+    printBtn.disabled = !allFilled;
+
+    if (allFilled) {
+        statusMsg.textContent = '✅ Ready to print';
+        statusMsg.className = 'status ready';
+    } else {
+        statusMsg.textContent = '⏳ Fill all header fields to enable printing';
+        statusMsg.className = 'status';
+    }
+}
+
+// Add event listeners to header inputs
+headerInputs.forEach(input => {
+    input.addEventListener('input', validateForm);
+    input.addEventListener('change', validateForm);
+});
+
+// Print function
+function printChallan() {
+    if (printBtn.disabled) {
+        alert('Please fill all required fields before printing.');
+        return;
+    }
+    window.print();
+}
+
+// Initial validation
+validateForm();
+
+</script>
+
+</body>
+</html>
