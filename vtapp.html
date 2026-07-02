@@ -3,472 +3,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIBIN - HR & Vocational Education Management Portal</title>
+    <title>SIBIN · Vocational Teacher Application</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: linear-gradient(135deg, #000000 0%, #1a0512 50%, #2d0b1e 100%);
-            background-attachment: fixed;
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        body {
+            background: #240418;
+            display: flex;
+            justify-content: center;
+            padding: 2rem 1rem;
+            min-height: 100vh;
         }
-
-        /* Smooth Glassmorphism Controls */
-        .premium-glass {
-            background: rgba(45, 11, 30, 0.4);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        .app-wrapper {
+            max-width: 1100px;
+            width: 100%;
+        }
+        .card-premium {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 32px;
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8);
         }
-
-        .form-container-white {
-            background: #ffffff;
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+        .card-premium:hover {
+            box-shadow: 0 40px 70px -20px rgba(0,0,0,0.9);
         }
-
-        /* Marquee Custom Optimization */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
+        .header-gradient {
+            background: linear-gradient(145deg, #1f0314, #2d051e);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .form-input {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 18px;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.9rem;
+            color: white;
+            transition: 0.2s ease;
+            width: 100%;
+            backdrop-filter: blur(4px);
+        }
+        .form-input:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #a85c7a;
+            box-shadow: 0 0 0 4px rgba(168, 92, 122, 0.15);
+            outline: none;
+            color: white;
+        }
+        .form-input:disabled {
+            background: rgba(255, 255, 255, 0.03);
+            opacity: 0.5;
+            border-color: rgba(255,255,255,0.05);
+            cursor: not-allowed;
+            color: #b0a0aa;
+        }
+        .form-input::placeholder { color: rgba(255,255,255,0.3); }
+        .form-input option { background: #240418; color: white; }
+        .form-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+        .form-label .required { color: #f28b9e; margin-left: 2px; }
+        .section-divider {
             display: flex;
             align-items: center;
+            gap: 1rem;
+            margin: 1.8rem 0 1.2rem 0;
         }
-        .marquee-content {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 28s linear infinite;
+        .section-divider span {
+            background: rgba(255,255,255,0.06);
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.04);
+            text-transform: uppercase;
         }
-        @keyframes marquee {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent);
         }
-        .marquee-container:hover .marquee-content {
-            animation-play-state: paused;
+        .btn-submit {
+            background: #a85c7a;
+            border: none;
+            border-radius: 40px;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            color: white;
+            transition: all 0.2s ease;
+            box-shadow: 0 12px 28px -10px rgba(168, 92, 122, 0.4);
+            width: 100%;
+            font-size: 0.95rem;
         }
-
-        /* Fluid Touch Component Adjustments */
-        input, select, textarea, button {
-            -webkit-tap-highlight-color: transparent;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        .btn-submit:hover {
+            background: #c47092;
+            transform: translateY(-2px);
+            box-shadow: 0 18px 36px -12px rgba(168, 92, 122, 0.5);
         }
-
-        input:disabled, select:disabled, textarea:disabled {
-            background-color: #f3f4f6 !important;
-            color: #9ca3af !important;
-            cursor: not-allowed;
-            opacity: 0.6;
-            border-color: #e5e7eb !important;
+        .btn-submit:active { transform: scale(0.98); }
+        .btn-submit:disabled {
+            opacity: 0.5;
+            transform: scale(0.98);
+            pointer-events: none;
+        }
+        .ack-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 24px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .ack-box input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            accent-color: #a85c7a;
+            border-radius: 6px;
+            flex-shrink: 0;
+            background: rgba(255,255,255,0.05);
+        }
+        .file-upload-area {
+            background: rgba(255,255,255,0.02);
+            border: 1.5px dashed rgba(255,255,255,0.10);
+            border-radius: 24px;
+            padding: 1.5rem;
+            transition: 0.2s;
+        }
+        .file-upload-area:hover {
+            border-color: rgba(168, 92, 122, 0.4);
+            background: rgba(255,255,255,0.03);
+        }
+        .file-upload-area input[type="file"] {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.75rem;
+        }
+        .file-upload-area input[type="file"]::file-selector-button {
+            background: rgba(168, 92, 122, 0.2);
+            border: none;
+            border-radius: 40px;
+            padding: 0.4rem 1.2rem;
+            font-weight: 600;
+            color: white;
+            margin-right: 1rem;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .file-upload-area input[type="file"]::file-selector-button:hover {
+            background: rgba(168, 92, 122, 0.4);
         }
     </style>
 </head>
-<body class="text-gray-200 antialiased min-h-screen">
+<body>
+<div class="app-wrapper">
 
-    <header class="premium-glass sticky top-0 z-50 shadow-2xl border-b border-white/5">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex items-center space-x-4">
-                <div class="bg-white p-2 rounded-xl shadow-inner shadow-black/20">
-                    <img src="slcpl.png" alt="SIBIN Logo" class="h-11 w-auto object-contain">
+    <!-- Header -->
+    <div class="card-premium overflow-hidden mb-8">
+        <div class="header-gradient px-8 py-6 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-5">
+                <div class="bg-white/10 backdrop-blur-sm p-2.5 rounded-2xl border border-white/5 shadow-sm">
+                    <img src="slcpl.png" alt="SIBIN" class="h-12 w-auto object-contain" style="filter: brightness(0) invert(1);">
                 </div>
                 <div>
-                    <h1 class="text-lg font-extrabold text-white tracking-tight">SIBIN Learning Cart Private Limited</h1>
-                    <p class="text-xs font-bold uppercase tracking-widest text-pink-400/90 mt-0.5">Online Application Portal</p>
+                    <h1 class="text-2xl font-extrabold text-white tracking-tight">SIBIN</h1>
+                    <p class="text-xs font-medium text-white/40 tracking-widest">Learning Cart · Vocational Division</p>
                 </div>
             </div>
-            <div class="text-right">
-                <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-white/5 text-white border border-white/10 shadow-sm backdrop-blur-sm">
-                    Tripura Division
-                </span>
+            <div class="flex items-center gap-3">
+                <span class="bg-white/5 text-white/50 text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-wider border border-white/5">Tripura · 2026</span>
             </div>
         </div>
-    </header>
+        <div class="px-8 py-3 bg-white/5 border-b border-white/5 flex justify-between items-center flex-wrap gap-2">
+            <span class="text-white/40 text-[11px] font-medium tracking-wider">Online Application · Vocational Teacher</span>
+            <span class="text-white/20 text-[10px] font-mono">v2.0</span>
+        </div>
+    </div>
 
-    <main class="max-w-5xl mx-auto px-4 py-12 space-y-12">
+    <!-- Form -->
+    <div class="card-premium overflow-hidden">
+        <div class="px-8 py-5 border-b border-white/5 bg-white/5">
+            <h2 class="text-xl font-bold text-white tracking-tight flex items-center gap-3">
+                <span class="w-1.5 h-7 rounded-full bg-[#a85c7a] inline-block"></span>
+                Application Form
+            </h2>
+            <p class="text-xs text-white/30 font-medium mt-0.5 ml-4">Fill each field to activate the next step</p>
+        </div>
 
-        <section class="premium-glass rounded-2xl overflow-hidden relative shadow-lg">
-            <div class="bg-gradient-to-r from-[#2d0b1e] to-[#000000] px-6 py-3 flex items-center justify-between z-10 relative border-b border-white/5">
-                <div class="flex items-center space-x-2.5">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
-                    </span>
-                    <h2 class="text-white font-bold text-xs tracking-widest uppercase">Live Notice Board</h2>
-                </div>
-            </div>
-            <div class="p-4 bg-black/40 marquee-container w-full">
-                <div id="noticeBoardContent" class="text-pink-100 font-medium text-xs tracking-wide marquee-content">
-                    Loading latest vacancy updates from registry...
-                </div>
-            </div>
-        </section>
+        <form id="applicationForm" class="px-8 py-8 space-y-6 text-white">
 
-        <section class="space-y-6">
-            <div class="border-l-4 border-pink-500 pl-4">
-                <h2 class="text-xl font-extrabold text-white tracking-tight">Sectors wise qualification pack</h2>
-                <p class="text-xs text-gray-400 mt-0.5">Candidates Must have sector specific qualification</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="premium-glass p-5 rounded-2xl hover:bg-white/[0.04] hover:border-pink-500/30 transition-all duration-300 group">
-                    <div class="flex justify-between items-start gap-4">
-                        <h3 class="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">Agriculture</h3>
-                        <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-white/5 text-gray-400">PG level</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed mt-2.5">Post-graduation in Agriculture / Horticulture from a recognized corporate university.</p>
-                </div>
-                <div class="premium-glass p-5 rounded-2xl hover:bg-white/[0.04] hover:border-pink-500/30 transition-all duration-300 group">
-                    <div class="flex justify-between items-start gap-4">
-                        <h3 class="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">Electronics & Hardware</h3>
-                        <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-white/5 text-gray-400">Eng / Dip</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed mt-2.5">B.E. / B. Tech. or 3 years specialized Diploma in Electrical / Electronics / Telecommunication.</p>
-                </div>
-                <div class="premium-glass p-5 rounded-2xl hover:bg-white/[0.04] hover:border-pink-500/30 transition-all duration-300 group">
-                    <div class="flex justify-between items-start gap-4">
-                        <h3 class="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">Retail</h3>
-                        <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-white/5 text-gray-400">Management</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed mt-2.5">MBA (Retail Marketing) and/or PG Diploma with at least a consolidated 50% marks index.</p>
-                </div>
-                <div class="premium-glass p-5 rounded-2xl hover:bg-white/[0.04] hover:border-pink-500/30 transition-all duration-300 group">
-                    <div class="flex justify-between items-start gap-4">
-                        <h3 class="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">IT & ITeS</h3>
-                        <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-white/5 text-gray-400">Technical</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed mt-2.5">B.E / B.Tech in Computer Science OR MCA OR Master of Information Technology standard.</p>
-                </div>
-                <div class="premium-glass p-5 rounded-2xl hover:bg-white/[0.04] hover:border-pink-500/30 transition-all duration-300 group">
-                    <div class="flex justify-between items-start gap-4">
-                        <h3 class="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">Power</h3>
-                        <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-white/5 text-gray-400">Technical</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed mt-2.5">B. Tech in Electrical with 1 year core experience OR Diploma with 3 years tracking experience.</p>
-                </div>
-                <div class="premium-glass p-5 rounded-2xl hover:bg-white/[0.04] hover:border-pink-500/30 transition-all duration-300 group">
-                    <div class="flex justify-between items-start gap-4">
-                        <h3 class="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">Beauty & Wellness</h3>
-                        <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-white/5 text-gray-400">Diploma</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed mt-2.5">Diploma in Cosmetology / Beauty Therapy / Beauty Culture. Minimum 1 year standard experience.</p>
-                </div>
-                <div class="premium-glass p-5 rounded-2xl hover:bg-white/[0.04] hover:border-pink-500/30 transition-all duration-300 group">
-                    <div class="flex justify-between items-start gap-4">
-                        <h3 class="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">Tourism & Hospitality</h3>
-                        <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-white/5 text-gray-400">Management</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed mt-2.5">Diploma/Degree in Hotel Management from a recognized Institute with 5 years experience criteria.</p>
-                </div>
-                <div class="premium-glass p-5 rounded-2xl hover:bg-white/[0.04] hover:border-pink-500/30 transition-all duration-300 group">
-                    <div class="flex justify-between items-start gap-4">
-                        <h3 class="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">Automotive</h3>
-                        <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-white/5 text-gray-400">Multi-Option</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed mt-2.5">Degree in Auto / Mechanical (1 yr exp) OR Diploma (3 yrs exp) OR B.Voc system degree (2 yrs exp).</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="form-container-white rounded-3xl overflow-hidden border border-white/10">
-            <div class="p-8 bg-gradient-to-r from-[#2d0b1e] to-[#000000] text-white">
-                <h2 class="text-2xl font-bold tracking-tight">Online Application for the Post of Vocational Teacher</h2>
-                <p class="text-pink-300/70 text-xs uppercase tracking-widest mt-1.5 font-medium">Fill each field to activate the next</p>
+            <!-- Sector -->
+            <div>
+                <label class="form-label">Sector applying for <span class="required">*</span></label>
+                <select name="sector" class="step-field form-input" required>
+                    <option value="" disabled selected>Select target vocational sector</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Electronics & Hardware">Electronics & Hardware</option>
+                    <option value="Retail">Retail</option>
+                    <option value="IT & ITeS">IT & ITeS</option>
+                    <option value="Power">Power</option>
+                    <option value="Beauty & Wellness">Beauty & Wellness</option>
+                    <option value="Tourism & Hospitality">Tourism & Hospitality</option>
+                    <option value="Automotive">Automotive</option>
+                </select>
             </div>
 
-            <form id="applicationForm" class="p-8 space-y-10 text-gray-800">
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-widest text-[#2d0b1e] mb-3">You are applying for which sector? *</label>
-                    <select name="sector" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white transition" required>
-                        <option value="" disabled selected>Select Target Vocational Sector</option>
-                        <option value="Agriculture">Agriculture</option>
-                        <option value="Electronics & Hardware">Electronics & Hardware</option>
-                        <option value="Retail">Retail</option>
-                        <option value="IT & ITeS">IT & ITeS</option>
-                        <option value="Power">Power</option>
-                        <option value="Beauty & Wellness">Beauty & Wellness</option>
-                        <option value="Tourism & Hospitality">Tourism & Hospitality</option>
-                        <option value="Automotive">Automotive</option>
-                    </select>
+            <!-- Personal Information -->
+            <div>
+                <div class="section-divider"><span>Personal information</span></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div><label class="form-label">Full name <span class="required">*</span></label><input type="text" name="name" class="step-field form-input" placeholder="e.g. Md. Rahman" required disabled></div>
+                    <div><label class="form-label">Email address <span class="required">*</span></label><input type="email" name="email" class="step-field form-input" placeholder="name@example.com" required disabled></div>
                 </div>
-
-                <div class="space-y-6">
-                    <div class="border-b border-gray-100 pb-2"><h3 class="text-xs font-bold text-[#2d0b1e] uppercase tracking-widest">Personal Information</h3></div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Your Name *</label><input type="text" name="name" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Email Address *</label><input type="email" name="email" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Father's Name *</label><input type="text" name="fatherName" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Mother's Name *</label><input type="text" name="motherName" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-500 mb-2">Mobile Number *</label>
-                            <input type="text" name="mobile" maxlength="10" placeholder="Exactly 10 digits" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-500 mb-2">WhatsApp Number *</label>
-                            <input type="text" name="whatsapp" maxlength="10" placeholder="Exactly 10 digits" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-500 mb-2">Aadhar Card Number *</label>
-                            <input type="text" name="aadhar" maxlength="12" placeholder="Exactly 12 digits" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Date of Birth *</label><input type="date" id="dobInput" name="dob" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Age As On Today *</label><input type="text" id="ageInput" name="age" placeholder="Auto Calculated" class="w-full bg-gray-100 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-600 outline-none font-bold" readonly></div>
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Gender *</label>
-                            <select name="gender" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white transition" required disabled>
-                                <option value="" disabled selected>Select Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+                    <div><label class="form-label">Father's name <span class="required">*</span></label><input type="text" name="fatherName" class="step-field form-input" placeholder="Father's full name" required disabled></div>
+                    <div><label class="form-label">Mother's name <span class="required">*</span></label><input type="text" name="motherName" class="step-field form-input" placeholder="Mother's full name" required disabled></div>
                 </div>
-
-                <div class="space-y-6">
-                    <div class="border-b border-gray-100 pb-2"><h3 class="text-xs font-bold text-[#2d0b1e] uppercase tracking-widest">Address Details</h3></div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">District *</label>
-                            <select name="district" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled>
-                                <option value="" disabled selected>Select District</option>
-                                <option value="North">North</option> <option value="West">West</option> <option value="Unokoti">Unokoti</option> <option value="Dhalai">Dhalai</option> <option value="Sepahijala">Sepahijala</option> <option value="Gomati">Gomati</option> <option value="South">South</option> <option value="Khowai">Khowai</option>
-                            </select>
-                        </div>
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Block *</label><input type="text" name="block" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Pin Code *</label><input type="text" maxlength="6" name="pincode" placeholder="Exactly 6 digits" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                    </div>
-                    <div><label class="block text-xs font-semibold text-gray-500 mb-2">Address Format *</label><textarea name="address" rows="4" placeholder="Vill:&#10;PO:&#10;PS:&#10;PIN:" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-mono focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></textarea></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
+                    <div><label class="form-label">Mobile (10 digits) <span class="required">*</span></label><input type="text" name="mobile" maxlength="10" class="step-field form-input" placeholder="9876543210" required disabled></div>
+                    <div><label class="form-label">WhatsApp (10 digits) <span class="required">*</span></label><input type="text" name="whatsapp" maxlength="10" class="step-field form-input" placeholder="9876543210" required disabled></div>
+                    <div><label class="form-label">Aadhar (12 digits) <span class="required">*</span></label><input type="text" name="aadhar" maxlength="12" class="step-field form-input" placeholder="1234 5678 9012" required disabled></div>
                 </div>
-
-                <div class="space-y-6">
-                    <div class="border-b border-gray-100 pb-2"><h3 class="text-xs font-bold text-[#2d0b1e] uppercase tracking-widest">Educational Background</h3></div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Your Highest Qualification *</label><input type="text" name="highestQualification" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Name of College *</label><input type="text" name="college" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Name of University *</label><input type="text" name="university" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Year of Passing Out *</label><input type="text" maxlength="4" name="passingYear" placeholder="YYYY" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" required disabled></div>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <div class="border-b border-gray-100 pb-2"><h3 class="text-xs font-bold text-[#2d0b1e] uppercase tracking-widest">Work Experience</h3></div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Number of Years in Experience (Write NA if Not applicable)</label><input type="text" name="experienceYears" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" disabled></div>
-                        <div><label class="block text-xs font-semibold text-gray-500 mb-2">Name of Organization/Company (Write NA if Not applicable)</label><input type="text" name="companyName" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white focus:outline-none transition" disabled></div>
-                    </div>
-                    <div><label class="block text-xs font-semibold text-gray-500 mb-2">Have you worked with SIBIN before? *</label>
-                        <select name="workedBefore" class="step-field w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d0b1e] focus:bg-white transition" required disabled>
-                            <option value="" disabled selected>Select Affiliation</option> <option value="Yes">Yes</option> <option value="No">No</option>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
+                    <div><label class="form-label">Date of birth <span class="required">*</span></label><input type="date" id="dobInput" name="dob" class="step-field form-input" required disabled></div>
+                    <div><label class="form-label">Age (auto)</label><input type="text" id="ageInput" name="age" class="form-input bg-white/5 text-white/60 font-semibold" readonly placeholder="--"></div>
+                    <div><label class="form-label">Gender <span class="required">*</span></label>
+                        <select name="gender" class="step-field form-input" required disabled>
+                            <option value="" disabled selected>Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                 </div>
+            </div>
 
-                <div class="space-y-6">
-                    <div class="border-b border-gray-100 pb-2"><h3 class="text-xs font-bold text-[#2d0b1e] uppercase tracking-widest">Required Document Uploads</h3></div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="border border-dashed border-gray-200 rounded-2xl p-5 bg-gray-50/50 hover:bg-white hover:border-[#2d0b1e]/40 transition-all cursor-pointer">
-                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Upload Final Mark-sheet *</label>
-                            <input type="file" id="marksheetFile" accept=".pdf" class="step-field block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-purple-50 file:text-[#2d0b1e] hover:file:bg-purple-100 cursor-pointer" required disabled>
-                        </div>
-                        <div class="border border-dashed border-gray-200 rounded-2xl p-5 bg-gray-50/50 hover:bg-white hover:border-[#2d0b1e]/40 transition-all cursor-pointer">
-                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Upload Experience Certificate</label>
-                            <input type="file" id="experienceFile" accept=".pdf" class="step-field block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-purple-50 file:text-[#2d0b1e] hover:file:bg-purple-100 cursor-pointer" disabled>
-                        </div>
+            <!-- Address -->
+            <div>
+                <div class="section-divider"><span>Address details</span></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div><label class="form-label">District <span class="required">*</span></label>
+                        <select name="district" class="step-field form-input" required disabled>
+                            <option value="" disabled selected>Select district</option>
+                            <option>North</option><option>West</option><option>Unokoti</option><option>Dhalai</option>
+                            <option>Sepahijala</option><option>Gomati</option><option>South</option><option>Khowai</option>
+                        </select>
+                    </div>
+                    <div><label class="form-label">Block <span class="required">*</span></label><input type="text" name="block" class="step-field form-input" placeholder="Block name" required disabled></div>
+                    <div><label class="form-label">Pin code (6 digits) <span class="required">*</span></label><input type="text" maxlength="6" name="pincode" class="step-field form-input" placeholder="799001" required disabled></div>
+                </div>
+                <div class="mt-5"><label class="form-label">Full address <span class="required">*</span></label><textarea name="address" rows="3" class="step-field form-input" placeholder="Village · PO · PS · PIN" required disabled></textarea></div>
+            </div>
+
+            <!-- Education -->
+            <div>
+                <div class="section-divider"><span>Educational background</span></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div><label class="form-label">Highest qualification <span class="required">*</span></label><input type="text" name="highestQualification" class="step-field form-input" placeholder="e.g. MBA, B.Tech" required disabled></div>
+                    <div><label class="form-label">College / institute <span class="required">*</span></label><input type="text" name="college" class="step-field form-input" placeholder="College name" required disabled></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+                    <div><label class="form-label">University <span class="required">*</span></label><input type="text" name="university" class="step-field form-input" placeholder="University name" required disabled></div>
+                    <div><label class="form-label">Year of passing <span class="required">*</span></label><input type="text" maxlength="4" name="passingYear" class="step-field form-input" placeholder="YYYY" required disabled></div>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div>
+                <div class="section-divider"><span>Work experience</span></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div><label class="form-label">Years of experience (NA if none)</label><input type="text" name="experienceYears" class="step-field form-input" placeholder="e.g. 3 or NA" disabled></div>
+                    <div><label class="form-label">Organisation (NA if none)</label><input type="text" name="companyName" class="step-field form-input" placeholder="Company name" disabled></div>
+                </div>
+                <div class="mt-5"><label class="form-label">Worked with SIBIN before? <span class="required">*</span></label>
+                    <select name="workedBefore" class="step-field form-input" required disabled>
+                        <option value="" disabled selected>Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Uploads -->
+            <div>
+                <div class="section-divider"><span>Document uploads (PDF only)</span></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="file-upload-area">
+                        <label class="form-label text-white/70">Final marksheet <span class="required">*</span></label>
+                        <input type="file" id="marksheetFile" accept=".pdf" class="step-field w-full text-white/50" required disabled>
+                    </div>
+                    <div class="file-upload-area">
+                        <label class="form-label text-white/70">Experience certificate</label>
+                        <input type="file" id="experienceFile" accept=".pdf" class="step-field w-full text-white/50" disabled>
                     </div>
                 </div>
+            </div>
 
-                <div class="flex items-start space-x-3 p-4 bg-purple-50/60 border border-purple-100 rounded-2xl">
-                    <input type="checkbox" id="ackCheckbox" class="mt-1 w-4 h-4 rounded text-[#2d0b1e] focus:ring-[#2d0b1e] cursor-pointer" required>
-                    <label for="ackCheckbox" class="text-sm font-semibold text-gray-700 cursor-pointer select-none leading-relaxed">
-                        I acknowledge that all the statements furnished above are true and correct to the best of my knowledge and belief.
-                    </label>
-                </div>
+            <!-- Acknowledgement -->
+            <div class="ack-box">
+                <input type="checkbox" id="ackCheckbox" required>
+                <label for="ackCheckbox" class="text-sm text-white/70 font-medium leading-relaxed cursor-pointer select-none">
+                    I acknowledge that all the statements furnished above are true and correct to the best of my knowledge and belief.
+                </label>
+            </div>
 
-                <div class="pt-2">
-                    <button type="submit" class="w-full bg-gradient-to-r from-[#2d0b1e] to-[#000000] text-white font-bold text-sm uppercase tracking-wider py-4 px-6 rounded-2xl shadow-xl hover:shadow-2xl active:scale-[0.98] transition-all duration-200 focus:outline-none border border-white/10">
-                        Submit Candidate Application Record
-                    </button>
-                </div>
-            </form>
-        </section>
-    </main>
+            <!-- Submit -->
+            <button type="submit" class="btn-submit">
+                Submit candidate application
+            </button>
+        </form>
+    </div>
 
-    <footer class="mt-24 py-8 text-center text-xs text-gray-500 tracking-widest font-light border-t border-white/5">
-        <p> 2026 SIBIN Vocational Education Division, Tripura.</p>
+    <footer class="mt-12 text-center text-[11px] font-medium text-white/20 tracking-widest border-t border-white/5 pt-6">
+        © 2026 SIBIN Vocational Education Division, Tripura.
     </footer>
+</div>
 
-    <script>
-        // আপনার নতুন API Web App URL এখানে বসানো হয়েছে
-        const webAppUrl = 'https://script.google.com/macros/s/AKfycbzqmp5Ax78NghZ_w5e_SXqkkm3vdtYbATRjRdvmAKbLA5_BsU4gCYcAVI8-EYn9HdhB/exec';
-        const form = document.getElementById('applicationForm');
+<script>
+    // ============================================
+    // CONFIGURATION - UPDATE THIS URL
+    // ============================================
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycbz32_0QAdHK4X6cw8GjRbwVEnALcpkZ0J1wCJZshc_B7GD6a0FIPFcmQXnmsnRSv1WMtg/exec';
+    
+    const form = document.getElementById('applicationForm');
 
-        // ১. নোটিশ বোর্ড ইন্টিগ্রেশন
-        async function loadNoticeBoard() {
-            try {
-                const response = await fetch(webAppUrl + "?action=getNotice");
-                const data = await response.json();
-                const noticeContainer = document.getElementById('noticeBoardContent');
-                
-                if(data.status === 'success' && data.vacancies.length > 0) {
-                    const noticeText = data.vacancies.map(v => `• ${v.text}`).join(" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ");
-                    noticeContainer.innerHTML = noticeText + " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " + noticeText; 
-                } else {
-                    noticeContainer.innerHTML = "Fill each details carefully for succesfull submission";
-                }
-            } catch (error) {
-                document.getElementById('noticeBoardContent').innerHTML = "Fill each details carefully for succesfull submission";
+    // Step unlock
+    const fields = Array.from(document.querySelectorAll('.step-field'));
+    fields.forEach((f, i) => {
+        const ev = f.type === 'file' ? 'change' : 'input';
+        f.addEventListener(ev, () => validateAndUnlock(i));
+        if(f.tagName === 'SELECT') f.addEventListener('change', () => validateAndUnlock(i));
+    });
+
+    function validateAndUnlock(idx) {
+        const current = fields[idx];
+        let ok = false;
+        if (current.type === 'checkbox') ok = current.checked;
+        else if (current.tagName === 'SELECT') ok = current.value !== "";
+        else if (current.type === 'file') ok = current.files.length > 0 || !current.hasAttribute('required');
+        else {
+            ok = current.value.trim() !== "";
+            if (current.name === 'mobile' || current.name === 'whatsapp') ok = /^\d{10}$/.test(current.value.trim());
+            else if (current.name === 'aadhar') ok = /^\d{12}$/.test(current.value.trim());
+            else if (current.name === 'pincode') ok = /^\d{6}$/.test(current.value.trim());
+        }
+        if (ok) {
+            if (idx + 1 < fields.length) fields[idx + 1].disabled = false;
+        } else {
+            for (let i = idx + 1; i < fields.length; i++) {
+                fields[i].disabled = true;
+                if (fields[i].type !== 'file' && fields[i].tagName !== 'SELECT') fields[i].value = "";
+                if (fields[i].tagName === 'SELECT') fields[i].selectedIndex = 0;
             }
         }
-        window.onload = loadNoticeBoard;
+    }
 
-        // ২. ধাপে ধাপে ইনপুট আনলক লজিক
-        const fields = Array.from(document.querySelectorAll('.step-field'));
-        
-        fields.forEach((field, index) => {
-            field.addEventListener('input', () => validateAndUnlockNext(index));
-            field.addEventListener('change', () => validateAndUnlockNext(index));
+    // Age calculator
+    const dobInput = document.getElementById('dobInput');
+    const ageInput = document.getElementById('ageInput');
+    const today = new Date("2026-07-02");
+    dobInput.addEventListener('change', () => {
+        if (!dobInput.value) return;
+        const dob = new Date(dobInput.value);
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+        ageInput.value = (age >= 0) ? age + " Years" : "Invalid";
+    });
+
+    // Submit handler
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const mobile = form.elements['mobile'].value.trim();
+        const whatsapp = form.elements['whatsapp'].value.trim();
+        const pincode = form.elements['pincode'].value.trim();
+        const aadhar = form.elements['aadhar'].value.trim();
+        const ack = document.getElementById('ackCheckbox');
+
+        if (!ack.checked) { alert('Please accept the acknowledgement.'); return; }
+        if (!/^\d{10}$/.test(mobile) || !/^\d{10}$/.test(whatsapp)) { alert('Mobile & WhatsApp must be exactly 10 digits.'); return; }
+        if (!/^\d{6}$/.test(pincode)) { alert('Pincode must be exactly 6 digits.'); return; }
+        if (!/^\d{12}$/.test(aadhar)) { alert('Aadhar must be exactly 12 digits.'); return; }
+
+        const dobVal = new Date(dobInput.value);
+        let age = today.getFullYear() - dobVal.getFullYear();
+        const m = today.getMonth() - dobVal.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dobVal.getDate())) age--;
+        if (age < 21) { alert('Applicant must be at least 21 years old.'); return; }
+
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.innerText = "Processing ...";
+
+        const formData = new FormData(form);
+        const object = {};
+        formData.forEach((v, k) => object[k] = v);
+
+        const toBase64 = (file) => new Promise((res, rej) => {
+            const r = new FileReader();
+            r.readAsDataURL(file);
+            r.onload = () => res(r.result.split(',')[1]);
+            r.onerror = rej;
         });
 
-        function validateAndUnlockNext(currentIndex) {
-            const currentField = fields[currentIndex];
-            let isValid = false;
+        const ms = document.getElementById('marksheetFile');
+        if (ms && ms.files[0]) object['marksheetFile'] = await toBase64(ms.files[0]);
+        const exp = document.getElementById('experienceFile');
+        if (exp && exp.files[0]) object['experienceFile'] = await toBase64(exp.files[0]);
 
-            if (currentField.type === 'checkbox') {
-                isValid = currentField.checked;
-            } else if (currentField.tagName === 'SELECT') {
-                isValid = currentField.value !== "";
-            } else if (currentField.type === 'file') {
-                isValid = currentField.files.length > 0 || !currentField.hasAttribute('required');
-            } else {
-                isValid = currentField.value.trim() !== "";
-                
-                if (currentField.name === 'mobile' || currentField.name === 'whatsapp') {
-                    isValid = /^\d{10}$/.test(currentField.value.trim());
-                } else if (currentField.name === 'aadhar') {
-                    isValid = /^\d{12}$/.test(currentField.value.trim());
-                } else if (currentField.name === 'pincode') {
-                    isValid = /^\d{6}$/.test(currentField.value.trim());
-                }
-            }
-
-            if (isValid) {
-                if (currentIndex + 1 < fields.length) {
-                    fields[currentIndex + 1].disabled = false;
-                }
-            } else {
-                for (let i = currentIndex + 1; i < fields.length; i++) {
-                    fields[i].disabled = true;
-                    if(fields[i].type !== 'file' && fields[i].tagName !== 'SELECT') fields[i].value = "";
-                    if(fields[i].tagName === 'SELECT') fields[i].selectedIndex = 0;
-                }
-            }
-        }
-
-        // ৩. স্বয়ংক্রিয় বয়স গণনা ইঞ্জিন (২০২৬ সালের ওপর ভিত্তি করে)
-        const dobInput = document.getElementById('dobInput');
-        const ageInput = document.getElementById('ageInput');
-        const today = new Date("2026-07-02");
-
-        dobInput.addEventListener('change', () => {
-            if (!dobInput.value) return;
-            const dobValue = new Date(dobInput.value);
-            
-            let calculatedAge = today.getFullYear() - dobValue.getFullYear();
-            const m = today.getMonth() - dobValue.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < dobValue.getDate())) { 
-                calculatedAge--; 
-            }
-            
-            if (calculatedAge >= 0) {
-                ageInput.value = calculatedAge + " Years";
-            } else {
-                ageInput.value = "Invalid DOB";
-            }
-        });
-
-        // ৪. ফর্ম সাবমিশন ও ফাইল প্রোসেসিং ইঞ্জিন
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const mobile = form.elements['mobile'].value.trim();
-            const whatsapp = form.elements['whatsapp'].value.trim();
-            const pincode = form.elements['pincode'].value.trim();
-            const aadhar = form.elements['aadhar'].value.trim();
-            const dobValue = new Date(dobInput.value);
-            const ackCheckbox = document.getElementById('ackCheckbox');
-
-            if (!ackCheckbox.checked) {
-                alert('Please check the acknowledgement box before final submission.');
-                return;
-            }
-
-            if(!/^\d{10}$/.test(mobile) || !/^\d{10}$/.test(whatsapp)){
-                alert('Error: Mobile and WhatsApp numbers must be EXACTLY 10 digits.'); return;
-            }
-            if(!/^\d{6}$/.test(pincode)){
-                alert('Error: Pincode must be EXACTLY 6 digits.'); return;
-            }
-            if(!/^\d{12}$/.test(aadhar)){
-                alert('Error: Aadhar Card number must be EXACTLY 12 digits.'); return;
-            }
-
-            let age = today.getFullYear() - dobValue.getFullYear();
-            const m = today.getMonth() - dobValue.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < dobValue.getDate())) { age--; }
-            if (age < 21) {
-                alert('Submission Rejected: Applicant must be 21+ years of age.'); return;
-            }
-            
-            const submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Processing Files & Submitting...";
-
-            const formData = new FormData(form);
-            const object = {};
-            formData.forEach((value, key) => { object[key] = value; });
-
-            const toBase64 = file => new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = error => reject(error);
+        try {
+            const response = await fetch(webAppUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(object)
             });
-
-            const marksheetInput = document.getElementById('marksheetFile');
-            if (marksheetInput && marksheetInput.files[0]) object['marksheetFile'] = await toBase64(marksheetInput.files[0]);
-
-            const experienceInput = document.getElementById('experienceFile');
-            if (experienceInput && experienceInput.files[0]) object['experienceFile'] = await toBase64(experienceInput.files[0]);
-
-            try {
-                const response = await fetch(webAppUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(object)
-                });
-                
-                const resText = await response.text();
-                const resData = JSON.parse(resText);
-                
-                if(resData.result === 'success') {
-                    alert('Application Submitted Successfully!');
-                    form.reset();
-                    fields.forEach((f, idx) => { if(idx > 0) f.disabled = true; });
-                } else { 
-                    alert('Server Error: ' + resData.error); 
-                }
-            } catch (error) {
-                alert('Record Synced Successfully! Please check your Master Google Sheet.');
+            const result = await response.json();
+            if (result.result === 'success') {
+                alert('✅ Application submitted successfully!');
                 form.reset();
-                fields.forEach((f, idx) => { if(idx > 0) f.disabled = true; });
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Submit Candidate Application Record";
+                fields.forEach((f, i) => { if (i > 0) f.disabled = true; });
+            } else {
+                alert('Server error: ' + (result.error || 'unknown'));
             }
-        });
-    </script>
+        } catch (error) {
+            alert('❌ Error: ' + error.message);
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "Submit candidate application";
+        }
+    });
+</script>
 </body>
 </html>
