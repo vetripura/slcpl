@@ -381,7 +381,7 @@
     <!-- Hidden iframe for form submission -->
     <iframe id="hiddenFrame" name="hiddenFrame"></iframe>
 
-    <form id="proposalForm" novalidate target="hiddenFrame" method="POST" action="https://script.google.com/macros/s/AKfycbwCcIJ-VecQAKECjZbwCl8WyE5xXsHfZkCcUooiBI88diuCb-I0jFyGRbsan8DTnO1A/exec">
+    <form id="proposalForm" novalidate target="hiddenFrame" method="POST" action="https://script.google.com/macros/s/AKfycbyYcW6bxBJbf67sCDDZmQ0xORnt759T7i6pcimIxKm5qOtoI3BjDf64ccDSMKh4C8XX/exec">
         <!-- 1. School Name -->
         <div class="form-group active" id="group-school">
             <label for="schoolName" class="required"><i class="fas fa-school"></i> School Name</label>
@@ -488,7 +488,26 @@
             <div class="small-hint">Select one class</div>
         </div>
 
-        <!-- 10. Approval -->
+        <!-- 10. Add IV Session (Dropdown I,II,III,IV) - MOVED HERE -->
+        <div class="form-group disabled" id="group-iv-session">
+            <label for="ivSession" class="required"><i class="fas fa-layer-group"></i> Add IV Session</label>
+            <select id="ivSession" name="ivSession">
+                <option value="">-- select session --</option>
+                <option value="I">I</option>
+                <option value="II">II</option>
+                <option value="III">III</option>
+                <option value="IV">IV</option>
+            </select>
+        </div>
+
+        <!-- 11. KM one way (2digit number) - MOVED HERE -->
+        <div class="form-group disabled" id="group-km-oneway">
+            <label for="kmOneWay" class="required"><i class="fas fa-road"></i> KM one way (2 digit)</label>
+            <input type="text" id="kmOneWay" name="kmOneWay" placeholder="e.g. 15" maxlength="2" inputmode="numeric">
+            <div class="small-hint">Enter a number between 1 and 99</div>
+        </div>
+
+        <!-- 12. Approval -->
         <div class="form-group disabled" id="group-approval">
             <label class="required"><i class="fas fa-check-circle"></i> Formal approval taken from Venue</label>
             <div class="inline-flex">
@@ -497,45 +516,45 @@
             </div>
         </div>
 
-        <!-- 11. Venue -->
+        <!-- 13. Venue -->
         <div class="form-group disabled" id="group-venue">
             <label for="venue" class="required"><i class="fas fa-map-pin"></i> Venue of Visit with full Address</label>
             <input type="text" id="venue" name="venue" placeholder="Company / institute name">
         </div>
 
-        <!-- 12. Date of Visit -->
+        <!-- 14. Date of Visit -->
         <div class="form-group disabled" id="group-date">
             <label for="visitDate" class="required"><i class="fas fa-calendar-day"></i> Date of Visit</label>
             <input type="date" id="visitDate" name="visitDate">
         </div>
 
-        <!-- 13. Month & Year -->
+        <!-- 15. Month & Year -->
         <div class="form-group disabled" id="group-monthyear">
             <label for="monthYear" class="required"><i class="fas fa-calendar-alt"></i> Month & Year of the Proposal</label>
             <input type="text" id="monthYear" name="monthYear" placeholder="e.g. Jan 2025" maxlength="8">
             <div class="small-hint">Format: First 3 letters of month +Space+ 4-digit year (e.g., Jan 2025)</div>
         </div>
 
-        <!-- 14. Time of Visit -->
+        <!-- 16. Time of Visit -->
         <div class="form-group disabled" id="group-time">
             <label for="visitTime" class="required"><i class="fas fa-clock"></i> Time of Visit (12hr)</label>
             <input type="time" id="visitTime" name="visitTime" step="60">
             <div class="small-hint">Use 12hr format (AM/PM will be displayed)</div>
         </div>
 
-        <!-- 15. Vehicle Reporting Time -->
+        <!-- 17. Vehicle Reporting Time -->
         <div class="form-group disabled" id="group-vehicle">
             <label for="vehicleTime" class="required"><i class="fas fa-bus"></i> Vehicle Reporting Time</label>
             <input type="time" id="vehicleTime" name="vehicleTime" step="60">
         </div>
 
-        <!-- 16. Participants -->
+        <!-- 18. Participants -->
         <div class="form-group disabled" id="group-participants">
             <label for="participants" class="required"><i class="fas fa-user-friends"></i> No of participants (incl VT)</label>
             <input type="number" id="participants" name="participants" min="1" max="42" placeholder="1–42">
         </div>
 
-        <!-- 17. Acknowledgement -->
+        <!-- 19. Acknowledgement -->
         <div class="form-group disabled" id="group-ack">
             <div class="checkbox-wrap">
                 <input type="checkbox" id="ackCheck" name="acknowledgement" value="true">
@@ -599,8 +618,8 @@
         const btnYes = document.getElementById('btnYes');
         const btnNo = document.getElementById('btnNo');
 
-        // === YOUR GOOGLE APPS SCRIPT WEB APP URL ===
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwCcIJ-VecQAKECjZbwCl8WyE5xXsHfZkCcUooiBI88diuCb-I0jFyGRbsan8DTnO1A/exec';
+        // === YOUR UPDATED GOOGLE APPS SCRIPT WEB APP URL ===
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyYcW6bxBJbf67sCDDZmQ0xORnt759T7i6pcimIxKm5qOtoI3BjDf64ccDSMKh4C8XX/exec';
 
         // Set the form action
         form.action = WEB_APP_URL;
@@ -625,12 +644,13 @@
             }
         });
 
-        // All form groups in order
+        // All form groups in order (UPDATED ORDER)
         const groups = [
-            'group-school', 'group-udise', 'group-district', 'group-sector', 'group-project', 
-            'group-vtname', 'group-vtcontact', 'group-vtemail', 'group-class', 'group-approval', 
-            'group-venue', 'group-date', 'group-monthyear', 'group-time', 'group-vehicle', 
-            'group-participants', 'group-ack'
+            'group-school', 'group-udise', 'group-district', 'group-sector', 'group-project',
+            'group-vtname', 'group-vtcontact', 'group-vtemail', 'group-class',
+            'group-iv-session', 'group-km-oneway',  // NEW POSITION
+            'group-approval', 'group-venue', 'group-date', 'group-monthyear', 
+            'group-time', 'group-vehicle', 'group-participants', 'group-ack'
         ];
 
         // Form field references
@@ -639,6 +659,8 @@
         const schoolDistrict = document.getElementById('schoolDistrict');
         const sector = document.getElementById('sector');
         const project = document.getElementById('project');
+        const ivSession = document.getElementById('ivSession');
+        const kmOneWay = document.getElementById('kmOneWay');
         const vtName = document.getElementById('vtName');
         const vtContact = document.getElementById('vtContact');
         const vtEmail = document.getElementById('vtEmail');
@@ -665,19 +687,24 @@
         function enableGroup(index) {
             groups.forEach((id, i) => {
                 const el = document.getElementById(id);
-                if (i <= index) {
-                    el.classList.remove('disabled');
-                    el.classList.add('active');
-                } else {
-                    el.classList.add('disabled');
-                    el.classList.remove('active');
+                if (el) {
+                    if (i <= index) {
+                        el.classList.remove('disabled');
+                        el.classList.add('active');
+                    } else {
+                        el.classList.add('disabled');
+                        el.classList.remove('active');
+                    }
                 }
             });
             updateSubmitState();
         }
 
         function updateSubmitState() {
-            const allActive = groups.every(id => document.getElementById(id).classList.contains('active'));
+            const allActive = groups.every(id => {
+                const el = document.getElementById(id);
+                return el && el.classList.contains('active');
+            });
             if (!allActive) {
                 submitBtn.disabled = true;
                 return;
@@ -693,6 +720,9 @@
             if (!/^\d{10}$/.test(vtContact.value.trim())) valid = false;
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vtEmail.value)) valid = false;
             if (!classSelect.value) valid = false;
+            if (!ivSession.value) valid = false;
+            const kmVal = kmOneWay.value.trim();
+            if (!/^\d{1,2}$/.test(kmVal) || parseInt(kmVal) < 1 || parseInt(kmVal) > 99) valid = false;
             
             let approvalChecked = false;
             approvalRadios.forEach(r => { if (r.checked) approvalChecked = true; });
@@ -724,6 +754,11 @@
             else if (currentId === 'group-vtcontact') filled = /^\d{10}$/.test(vtContact.value.trim());
             else if (currentId === 'group-vtemail') filled = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vtEmail.value);
             else if (currentId === 'group-class') filled = classSelect.value !== '';
+            else if (currentId === 'group-iv-session') filled = ivSession.value !== '';
+            else if (currentId === 'group-km-oneway') {
+                const kmVal = kmOneWay.value.trim();
+                filled = /^\d{1,2}$/.test(kmVal) && parseInt(kmVal) >= 1 && parseInt(kmVal) <= 99;
+            }
             else if (currentId === 'group-approval') {
                 let checked = false;
                 approvalRadios.forEach(r => { if (r.checked) checked = true; });
@@ -748,7 +783,8 @@
 
         // Attach events
         function attachEvents() {
-            [school, udise, vtName, vtContact, vtEmail, venue, monthYear, participants].forEach(el => {
+            [school, udise, vtName, vtContact, vtEmail, venue, monthYear, participants, kmOneWay].forEach(el => {
+                if (!el) return;
                 ['input', 'change'].forEach(evt => {
                     el.addEventListener(evt, function() {
                         const parent = this.closest('.form-group');
@@ -759,7 +795,8 @@
                 });
             });
 
-            [schoolDistrict, sector, project, classSelect].forEach(el => {
+            [schoolDistrict, sector, project, ivSession, classSelect].forEach(el => {
+                if (!el) return;
                 el.addEventListener('change', function() {
                     const parent = this.closest('.form-group');
                     if (!parent) return;
@@ -776,6 +813,7 @@
             });
 
             [visitDate, visitTime, vehicleTime].forEach(el => {
+                if (!el) return;
                 el.addEventListener('change', function() {
                     const parent = this.closest('.form-group');
                     if (!parent) return;
@@ -820,6 +858,9 @@
             else if (v < 1) this.value = 1;
             else if (v > 42) this.value = 42;
         });
+        kmOneWay.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 2);
+        });
 
         // --- Submit handler ---
         form.addEventListener('submit', function(e) {
@@ -827,7 +868,7 @@
 
             successMsg.style.display = 'none';
             errorMsg.style.display = 'none';
-            actionOptions.classList.remove('visible'); // Hide options if showing from before
+            actionOptions.classList.remove('visible');
 
             if (!isValidMonthYear(monthYear.value)) {
                 alert('❌ Please enter Month & Year in the correct format (e.g., Jan 2025)');
@@ -864,12 +905,10 @@
         });
 
         // --- Action Button Handlers ---
-        // Yes: Refresh the page to start a new form
         btnYes.addEventListener('click', function() {
             window.location.reload();
         });
 
-        // No: Redirect to the specified URL
         btnNo.addEventListener('click', function(e) {
             e.preventDefault();
             window.location.href = 'https://vetripura.github.io/slcpl/';
