@@ -178,6 +178,23 @@
             font-weight: 400;
             margin-left: 4px;
         }
+        .debug-panel {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow: auto;
+            display: none;
+        }
+        .debug-panel pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.8rem;
+        }
         @media (max-width: 600px) {
             .container { padding: 15px; }
             th, td { padding: 8px 6px; font-size: 0.75rem; }
@@ -233,24 +250,23 @@
                     </table>
                 </div>
             </div>
+            
+            <!-- Debug Panel -->
+            <div class="debug-panel" id="debugPanel">
+                <strong>🔍 Debug Info - API Response:</strong>
+                <pre id="debugContent">Waiting for login...</pre>
+            </div>
         </div>
     </div>
 
     <script>
         // ======================================================================
-        // CONFIGURATION - Your Google Apps Script Web App URL
+        // CONFIGURATION - UPDATED with your new Google Apps Script URL
         // ======================================================================
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwnNzqBu5ieNBKPyn562RyBcBeWoIZaizdyiK7OmSdJKAtxHetskPqI-PWD4s9e_QMW8A/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz55ATzEVMdklSDeDiFgtNc40qjAxFHK6UpRbaMKX4mUaDHpqVC0WqRSyco47gvj8MK/exec';
 
         // ======================================================================
         // COLUMN MAPPING (0-based indices from your "main" sheet)
-        // Based on your uploaded file:
-        // E=4 (Employee ID), F=5 (Password), G=6 (Employee Name)
-        // D=3 (Sector), H=7 (Associated Project)
-        // AN=39 (No of Days in Month), AO=40 (Holidays including Sundays)
-        // AP=41 (Days on Leave), AQ=42 (Leave without Pay)
-        // AR=43 (Days Present), AS=44 (Total Payable Days)
-        // AT=45 (CL), AU=46 (ML)
         // ======================================================================
         const COL_EMPLOYEE_ID = 4;
         const COL_PASSWORD = 5;
@@ -301,9 +317,19 @@
         const tableContainer = document.getElementById('tableContainer');
         const tableHead = document.getElementById('tableHead');
         const tableBody = document.getElementById('tableBody');
+        const debugPanel = document.getElementById('debugPanel');
+        const debugContent = document.getElementById('debugContent');
 
         let currentEmployee = null;
         let currentRowData = null;
+
+        // ======================================================================
+        // Debug Helper
+        // ======================================================================
+        function showDebug(data) {
+            debugPanel.style.display = 'block';
+            debugContent.textContent = JSON.stringify(data, null, 2);
+        }
 
         // ======================================================================
         // API Calls
@@ -317,9 +343,12 @@
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
-                return await response.json();
+                const result = await response.json();
+                showDebug({ request: params, response: result });
+                return result;
             } catch (error) {
                 console.error('API Error:', error);
+                showDebug({ error: error.message });
                 throw new Error('Failed to connect to server. Please check your internet connection.');
             }
         }
@@ -470,6 +499,7 @@
             hideSuccess();
             tableBody.innerHTML = '';
             tableHead.innerHTML = '';
+            debugPanel.style.display = 'none';
         }
 
         async function handleRefresh() {
