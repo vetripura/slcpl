@@ -178,6 +178,23 @@
             font-weight: 400;
             margin-left: 4px;
         }
+        .debug-panel {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow: auto;
+            display: none;
+        }
+        .debug-panel pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.8rem;
+        }
         @media (max-width: 600px) {
             .container { padding: 15px; }
             th, td { padding: 8px 6px; font-size: 0.75rem; }
@@ -233,12 +250,18 @@
                     </table>
                 </div>
             </div>
+            
+            <!-- Debug Panel -->
+            <div class="debug-panel" id="debugPanel">
+                <strong>🔍 Debug Info - API Response:</strong>
+                <pre id="debugContent">Waiting for login...</pre>
+            </div>
         </div>
     </div>
 
     <script>
         // ======================================================================
-        // CONFIGURATION - Your Google Apps Script URL
+        // CONFIGURATION - UPDATED with your new Google Apps Script URL
         // ======================================================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzD2ULvR2X3E16kzOq19JL5ILvm1edsWGE97hhYdDNi_Thq9Iowxwoec2MEKaxxEmn4/exec';
 
@@ -261,17 +284,17 @@
 
         // Display configuration
         const DISPLAY_FIELDS = [
-            { header: 'Employee Name', col: COL_NAME, ref: 'G' },
-            { header: 'Sector', col: COL_SECTOR, ref: 'D' },
-            { header: 'Associated Project', col: COL_PROJECT, ref: 'H' },
-            { header: 'No of Days in the Month', col: COL_DAYS_IN_MONTH, ref: 'AN' },
-            { header: 'No of Holidays (Including Sundays)', col: COL_HOLIDAYS, ref: 'AO' },
-            { header: 'No of Days on Leave', col: COL_LEAVE, ref: 'AP' },
-            { header: 'No of Leave without Pay (LWP)', col: COL_LWP, ref: 'AQ' },
-            { header: 'No of Days Present', col: COL_PRESENT, ref: 'AR' },
-            { header: 'Total Payable Days', col: COL_PAYABLE, ref: 'AS' },
-            { header: 'CL', col: COL_CL, ref: 'AT' },
-            { header: 'ML', col: COL_ML, ref: 'AU' }
+            { header: 'Employee Name', col: COL_NAME, ref: '' },
+            { header: 'Sector', col: COL_SECTOR, ref: '' },
+            { header: 'Associated Project', col: COL_PROJECT, ref: '' },
+            { header: 'No of Days in the Month', col: COL_DAYS_IN_MONTH, ref: '' },
+            { header: 'No of Holidays (Including Sundays)', col: COL_HOLIDAYS, ref: '' },
+            { header: 'No of Days on Leave', col: COL_LEAVE, ref: '' },
+            { header: 'No of Leave without Pay (LWP)', col: COL_LWP, ref: '' },
+            { header: 'No of Days Present', col: COL_PRESENT, ref: '' },
+            { header: 'Total Payable Days', col: COL_PAYABLE, ref: '' },
+            { header: 'CL', col: COL_CL, ref: '' },
+            { header: 'ML', col: COL_ML, ref: '' }
         ];
 
         // ======================================================================
@@ -294,9 +317,19 @@
         const tableContainer = document.getElementById('tableContainer');
         const tableHead = document.getElementById('tableHead');
         const tableBody = document.getElementById('tableBody');
+        const debugPanel = document.getElementById('debugPanel');
+        const debugContent = document.getElementById('debugContent');
 
         let currentEmployee = null;
         let currentRowData = null;
+
+        // ======================================================================
+        // Debug Helper
+        // ======================================================================
+        function showDebug(data) {
+            debugPanel.style.display = 'block';
+            debugContent.textContent = JSON.stringify(data, null, 2);
+        }
 
         // ======================================================================
         // API Calls
@@ -310,9 +343,12 @@
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
-                return await response.json();
+                const result = await response.json();
+                showDebug({ request: params, response: result });
+                return result;
             } catch (error) {
                 console.error('API Error:', error);
+                showDebug({ error: error.message });
                 throw new Error('Failed to connect to server. Please check your internet connection.');
             }
         }
@@ -463,6 +499,7 @@
             hideSuccess();
             tableBody.innerHTML = '';
             tableHead.innerHTML = '';
+            debugPanel.style.display = 'none';
         }
 
         async function handleRefresh() {
