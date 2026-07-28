@@ -1,151 +1,783 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Compatible Alerts</title>
-    <style>
-        /* --- RESET & BASE STYLES --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>Attendance Portal · Professional</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* ----- reset & base ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    body {
+      background: #eef2f7;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      margin: 0;
+    }
 
-        /* --- ALERT CONTAINER --- */
-        .alert-container {
-            width: 100%;
-            max-width: 600px; /* Keeps it readable on desktop */
-            display: flex;
-            flex-direction: column;
-            gap: 16px; /* Space between alerts */
-        }
+    /* ----- main card (mobile-first) ----- */
+    .app-card {
+      max-width: 1200px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 16px 48px rgba(0, 20, 40, 0.06), 0 6px 16px rgba(0, 20, 40, 0.03);
+      padding: 20px 18px;
+      transition: all 0.2s ease;
+    }
 
-        /* --- ALERT COMPONENT --- */
-        .alert {
-            display: flex;
-            align-items: flex-start;
-            padding: 16px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            /* Default border to prevent layout shift */
-            border: 1px solid transparent; 
-        }
+    @media (min-width: 600px) {
+      .app-card {
+        padding: 32px 36px;
+      }
+    }
 
-        /* --- ERROR STYLES (Red) --- */
-        .alert-error {
-            background-color: #fef2f2;
-            border-color: #fecaca;
-            color: #991b1b;
-        }
-        .alert-error .alert-icon {
-            color: #dc2626;
-        }
+    /* ----- header ----- */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
 
-        /* --- SUCCESS STYLES (Green) --- */
-        .alert-success {
-            background-color: #f0fdf4;
-            border-color: #bbf7d0;
-            color: #166534;
-        }
-        .alert-success .alert-icon {
-            color: #16a34a;
-        }
+    .app-header h1 {
+      font-weight: 600;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      color: #0b1e33;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        /* --- ALERT ELEMENTS --- */
-        .alert-icon {
-            flex-shrink: 0;
-            width: 24px;
-            height: 24px;
-            margin-right: 12px;
-            margin-top: 2px; /* Visually aligns top of icon with first line of text */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .app-header h1 i {
+      color: #1f6390;
+      font-size: 1.6rem;
+    }
 
-        .alert-content {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex: 1;
-        }
+    .header-badge {
+      background: #eef3f9;
+      padding: 6px 14px;
+      border-radius: 60px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #1f3b54;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
 
-        .alert-title {
-            font-weight: 700;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
+    .header-badge i {
+      color: #1f6390;
+      font-size: 0.8rem;
+    }
 
-        .alert-message {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            line-height: 1.5;
-        }
+    @media (max-width: 400px) {
+      .app-header h1 { font-size: 1.2rem; }
+      .header-badge { font-size: 0.6rem; padding: 4px 10px; }
+    }
 
-        /* --- MOBILE RESPONSIVE TWEAKS --- */
-        /* On very small screens, stack the icon on top of the text */
-        @media (max-width: 480px) {
-            .alert {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 20px; /* Larger touch area for mobile */
-            }
-            .alert-icon {
-                margin-bottom: 8px;
-                margin-right: 0;
-                margin-top: 0;
-            }
-            .alert-title {
-                font-size: 1.05rem;
-            }
-        }
-    </style>
+    /* ----- SIMPLIFIED PROFESSIONAL LOGIN (clean, minimal) ----- */
+    .login-wrapper {
+      max-width: 400px;
+      margin: 0 auto 12px;
+    }
+
+    .login-card {
+      background: #ffffff;
+      padding: 28px 22px;
+      border-radius: 24px;
+      border: 1px solid #e6ecf3;
+      box-shadow: 0 8px 24px rgba(0, 20, 40, 0.04);
+      transition: 0.2s;
+    }
+
+    @media (min-width: 480px) {
+      .login-card { padding: 36px 32px; }
+    }
+
+    .login-card .field {
+      margin-bottom: 20px;
+    }
+
+    .login-card label {
+      display: block;
+      font-weight: 500;
+      font-size: 0.8rem;
+      color: #1f3b54;
+      margin-bottom: 4px;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .login-card label i {
+      width: 20px;
+      color: #4f7b9c;
+      margin-right: 4px;
+      opacity: 0.6;
+    }
+
+    .login-card input {
+      width: 100%;
+      padding: 14px 16px;
+      background: #f8faff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      transition: 0.2s;
+      color: #0b1e33;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .login-card input:focus {
+      outline: none;
+      border-color: #1f6390;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(31, 99, 144, 0.06);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 15px;
+      background: #0b1e33;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    .login-btn:hover {
+      background: #1a3350;
+      transform: scale(1.01);
+      box-shadow: 0 8px 20px rgba(11, 30, 51, 0.12);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.7;
+      cursor: default;
+      transform: none;
+    }
+
+    /* ----- message boxes (minimal) ----- */
+    .msg-box {
+      padding: 12px 14px;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .msg-box.error {
+      background: #fee9e7;
+      color: #b13a34;
+      border-left: 4px solid #b13a34;
+      display: flex;
+    }
+
+    .msg-box.success {
+      background: #e3f3eb;
+      color: #0e6242;
+      border-left: 4px solid #0e6242;
+      display: flex;
+    }
+
+    /* ----- dashboard (mobile first) ----- */
+    .dashboard {
+      display: none;
+    }
+
+    .dashboard.active {
+      display: block;
+    }
+
+    /* greeting bar */
+    .greeting-bar {
+      background: #f5f9ff;
+      border-radius: 20px;
+      padding: 16px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      border: 1px solid #e3eaf2;
+      gap: 12px;
+    }
+
+    .greeting-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1 1 160px;
+    }
+
+    .greeting-left .name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #0b1e33;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .greeting-left .name i {
+      color: #1f6390;
+      font-size: 1.2rem;
+    }
+
+    .greeting-left .sub {
+      font-size: 0.8rem;
+      color: #3b5e7a;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+    }
+
+    .greeting-left .sub i {
+      margin-right: 4px;
+      color: #4f7b9c;
+      width: 16px;
+    }
+
+    .badge-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .badge-id {
+      background: white;
+      padding: 4px 14px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.75rem;
+      color: #1f3b54;
+      border: 1px solid #d0dceb;
+      white-space: nowrap;
+    }
+
+    .action-btn {
+      background: white;
+      border: 1px solid #d0dceb;
+      padding: 6px 16px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.75rem;
+      color: #1f3b54;
+      cursor: pointer;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fafcff;
+      white-space: nowrap;
+    }
+
+    .action-btn:hover {
+      background: #eef3f9;
+      border-color: #b0c4db;
+    }
+
+    .action-btn.out {
+      background: transparent;
+      border-color: #d8dfe8;
+      color: #4b637c;
+    }
+
+    .action-btn.out:hover {
+      background: #f1f4f9;
+      border-color: #b8c6d6;
+    }
+
+    @media (max-width: 480px) {
+      .greeting-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .badge-group {
+        justify-content: flex-start;
+        gap: 6px;
+      }
+      .action-btn { padding: 6px 12px; font-size: 0.7rem; }
+      .greeting-left .name { font-size: 1.1rem; }
+    }
+
+    /* ----- metric grid (mobile responsive) ----- */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    @media (min-width: 480px) {
+      .metric-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    }
+
+    @media (min-width: 700px) {
+      .metric-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+
+    .metric-card {
+      background: #fafcff;
+      border-radius: 18px;
+      padding: 12px 10px;
+      border: 1px solid #e3eaf2;
+      transition: 0.15s;
+      text-align: center;
+    }
+
+    .metric-card .label {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #5b7895;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .metric-card .label i {
+      font-size: 0.7rem;
+      color: #4f7b9c;
+    }
+
+    .metric-card .value {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #0b1e33;
+      line-height: 1.2;
+    }
+
+    .metric-card .value small {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #4f7b9c;
+      margin-left: 2px;
+    }
+
+    @media (max-width: 380px) {
+      .metric-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .metric-card .value { font-size: 1.2rem; }
+    }
+
+    /* ----- table (mobile friendly) ----- */
+    .table-wrapper {
+      background: #fafcff;
+      border-radius: 20px;
+      border: 1px solid #e3eaf2;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .table-header {
+      background: #f2f7fe;
+      padding: 12px 16px;
+      font-weight: 500;
+      color: #1f3b54;
+      border-bottom: 1px solid #e3eaf2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .table-header i {
+      color: #1f6390;
+    }
+
+    .attendance-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    .attendance-table th {
+      text-align: left;
+      padding: 10px 12px;
+      background: #f5f9ff;
+      color: #1f3b54;
+      font-weight: 600;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      border-bottom: 1px solid #e3eaf2;
+      white-space: nowrap;
+    }
+
+    .attendance-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #edf2f8;
+      color: #0b1e33;
+      word-break: break-word;
+    }
+
+    .attendance-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .attendance-table tr:hover td {
+      background: #f5f9ff;
+    }
+
+    /* loading */
+    .loading-state {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 36px 16px;
+      color: #3b5e7a;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .spinner {
+      width: 26px;
+      height: 26px;
+      border: 4px solid #e3eaf2;
+      border-top: 4px solid #1f6390;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hidden { display: none !important; }
+
+    /* small screen table tweaks */
+    @media (max-width: 500px) {
+      .attendance-table th, .attendance-table td {
+        padding: 8px 8px;
+        font-size: 0.7rem;
+      }
+      .table-header { font-size: 0.75rem; padding: 10px 12px; }
+      .attendance-table th { font-size: 0.6rem; }
+    }
+
+    @media (max-width: 400px) {
+      .attendance-table th, .attendance-table td {
+        padding: 6px 6px;
+        font-size: 0.65rem;
+      }
+    }
+
+    /* hide debug / code remnants */
+    .debug-panel, .col-ref, .readonly-badge { display: none !important; }
+  </style>
 </head>
 <body>
+<div class="app-card">
 
-    <div class="alert-container">
+  <!-- Header -->
+  <div class="app-header">
+    <h1><i class="fas fa-clipboard-check"></i> Attendance Portal</h1>
+    <div class="header-badge"><i class="fas fa-shield-alt"></i> secure · view</div>
+  </div>
+
+  <!-- LOGIN (simplified professional) -->
+  <div id="loginSection">
+    <div class="login-wrapper">
+      <div class="login-card">
         
-        <!-- Error Alert -->
-        <div class="alert alert-error">
-            <div class="alert-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-            </div>
-            <div class="alert-content">
-                <span class="alert-title">Error</span>
-                <span class="alert-message">There was a problem with your request. Please check your connection and try again.</span>
-            </div>
-        </div>
 
-        <!-- Success Alert -->
-        <div class="alert alert-success">
-            <div class="alert-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-            </div>
-            <div class="alert-content">
-                <span class="alert-title">Success</span>
-                <span class="alert-message">Your changes have been saved successfully.</span>
-            </div>
+        <div class="field">
+          <label><i class="fas fa-id-badge"></i> Employee ID</label>
+          <input type="text" id="employeeId" placeholder="TR0000084" />
         </div>
+        <div class="field">
+          <label><i class="fas fa-lock"></i> Password</label>
+          <input type="password" id="password" placeholder="••••••••" />
+        </div>
+        <button class="login-btn" id="loginBtn"><i class="fas fa-arrow-right-to-bracket"></i> Sign in</button>
+      </div>
+    </div>
+  </div>
 
+  <!-- DASHBOARD -->
+  <div id="dashboardSection" class="dashboard">
+    <!-- Greeting -->
+    <div class="greeting-bar">
+      <div class="greeting-left">
+        <div class="name"><i class="fas fa-user-circle"></i> <span id="userName">Employee</span></div>
+        <div class="sub">
+          <span><i class="fas fa-layer-group"></i> <span id="userSector">Sector</span></span>
+          <span><i class="fas fa-project-diagram"></i> <span id="userProject">Project</span></span>
+        </div>
+      </div>
+      <div class="badge-group">
+        <span class="badge-id"><i class="far fa-id-card"></i> <span id="userEmpId">ID: ---</span></span>
+        <button class="action-btn" id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
+        <button class="action-btn out" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Exit</button>
+      </div>
     </div>
 
+    <!-- METRICS -->
+    <div id="metricContainer" class="metric-grid"></div>
+
+    <!-- TABLE -->
+    <div class="table-wrapper">
+      <div class="table-header"><i class="fas fa-calendar-alt"></i> Attendance summary · current month</div>
+      <div id="loadingMsg" class="loading-state">
+        <div class="spinner"></div> <span>Loading your data...</span>
+      </div>
+      <div id="tableContainer" class="hidden">
+        <table class="attendance-table" id="attendanceTable">
+          <thead id="tableHead"></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ----- config -----
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzD2ULvR2X3E16kzOq19JL5ILvm1edsWGE97hhYdDNi_Thq9Iowxwoec2MEKaxxEmn4/exec';
+
+    const C = {
+      EMP_ID: 4, PWD: 5, NAME: 6, SECTOR: 3, PROJECT: 7,
+      DAYS: 39, HOLIDAYS: 40, LEAVE: 41, LWP: 42, PRESENT: 43,
+      PAYABLE: 44, CL: 45, ML: 46
+    };
+
+    const DISPLAY_FIELDS = [
+      { header: 'Employee', col: C.NAME },
+      { header: 'Sector', col: C.SECTOR },
+      { header: 'Project', col: C.PROJECT },
+      { header: 'Days in month', col: C.DAYS },
+      { header: 'Holidays', col: C.HOLIDAYS },
+      { header: 'Leave', col: C.LEAVE },
+      { header: 'LWP', col: C.LWP },
+      { header: 'Present', col: C.PRESENT },
+      { header: 'Payable', col: C.PAYABLE },
+      { header: 'CL', col: C.CL },
+      { header: 'ML', col: C.ML }
+    ];
+
+    const METRIC_KEYS = [
+      { label: 'Present', col: C.PRESENT, icon: 'fa-calendar-check' },
+      { label: 'Leave', col: C.LEAVE, icon: 'fa-calendar-xmark' },
+      { label: 'LWP', col: C.LWP, icon: 'fa-clock' },
+      { label: 'Payable', col: C.PAYABLE, icon: 'fa-coins' },
+      { label: 'CL', col: C.CL, icon: 'fa-umbrella' },
+      { label: 'ML', col: C.ML, icon: 'fa-heart-pulse' }
+    ];
+
+    // ----- DOM refs -----
+    const $ = id => document.getElementById(id);
+    const loginSection = $('loginSection');
+    const dashboardSection = $('dashboardSection');
+    const loginError = $('loginError');
+    const loginSuccess = $('loginSuccess');
+    const employeeIdInput = $('employeeId');
+    const passwordInput = $('password');
+    const loginBtn = $('loginBtn');
+    const logoutBtn = $('logoutBtn');
+    const refreshBtn = $('refreshBtn');
+    const userName = $('userName');
+    const userSector = $('userSector');
+    const userProject = $('userProject');
+    const userEmpId = $('userEmpId');
+    const loadingMsg = $('loadingMsg');
+    const tableContainer = $('tableContainer');
+    const tableHead = $('tableHead');
+    const tableBody = $('tableBody');
+    const metricContainer = $('metricContainer');
+
+    let currentEmployee = null;
+    let currentRowData = null;
+
+    // ----- helpers -----
+    function hideError() { loginError.style.display = 'none'; }
+    function showError(msg) {
+      loginError.querySelector('span').textContent = msg;
+      loginError.style.display = 'flex';
+    }
+    function hideSuccess() { loginSuccess.style.display = 'none'; }
+    function showSuccess(msg) {
+      loginSuccess.querySelector('span').textContent = msg;
+      loginSuccess.style.display = 'flex';
+    }
+
+    async function callScript(params) {
+      const url = new URL(SCRIPT_URL);
+      Object.keys(params).forEach(k => url.searchParams.append(k, params[k]));
+      const resp = await fetch(url.toString());
+      if (!resp.ok) throw new Error(`Server error (${resp.status})`);
+      return await resp.json();
+    }
+
+    async function login(empId, pwd) {
+      return callScript({ action: 'login', id: empId, pwd });
+    }
+
+    async function refreshData(empId) {
+      return callScript({ action: 'getData', id: empId });
+    }
+
+    // ----- render -----
+    function renderMetrics(row) {
+      let html = '';
+      METRIC_KEYS.forEach(m => {
+        const val = (row[m.col] !== undefined && row[m.col] !== '') ? row[m.col] : '—';
+        html += `
+          <div class="metric-card">
+            <div class="label"><i class="fas ${m.icon}"></i> ${m.label}</div>
+            <div class="value">${val}</div>
+          </div>
+        `;
+      });
+      metricContainer.innerHTML = html;
+    }
+
+    function renderTable(row) {
+      let h = '<tr>';
+      DISPLAY_FIELDS.forEach(f => { h += `<th>${f.header}</th>`; });
+      h += '</tr>';
+      tableHead.innerHTML = h;
+
+      let r = '<tr>';
+      DISPLAY_FIELDS.forEach(f => {
+        const v = (row[f.col] !== undefined && row[f.col] !== '') ? row[f.col] : '—';
+        r += `<td>${v}</td>`;
+      });
+      r += '</tr>';
+      tableBody.innerHTML = r;
+    }
+
+    function showDashboard() {
+      loginSection.style.display = 'none';
+      dashboardSection.classList.add('active');
+      userName.textContent = currentEmployee.name || 'Employee';
+      userSector.textContent = currentEmployee.sector || 'N/A';
+      userProject.textContent = currentEmployee.project || 'N/A';
+      userEmpId.textContent = 'ID: ' + (currentEmployee.id || '---');
+      renderAttendance();
+    }
+
+    async function renderAttendance() {
+      loadingMsg.classList.remove('hidden');
+      tableContainer.classList.add('hidden');
+      metricContainer.innerHTML = '';
+
+      try {
+        let rowData;
+        if (currentRowData && Object.keys(currentRowData).length) {
+          rowData = currentRowData;
+        } else {
+          const result = await refreshData(currentEmployee.id);
+          if (result.success) rowData = result.rowData || result.employee;
+          else throw new Error(result.error || 'Failed to load');
+        }
+
+        currentRowData = rowData;
+        renderMetrics(rowData);
+        renderTable(rowData);
+
+        loadingMsg.classList.add('hidden');
+        tableContainer.classList.remove('hidden');
+      } catch (err) {
+        loadingMsg.innerHTML = `<i class="fas fa-triangle-exclamation" style="color:#b13a34;"></i> ${err.message} <button onclick="window.renderAttendance()" style="margin-left:12px;background:#0b1e33;color:white;border:none;border-radius:60px;padding:6px 16px;cursor:pointer;font-size:0.8rem;">Retry</button>`;
+      }
+    }
+    // expose for retry
+    window.renderAttendance = renderAttendance;
+
+    // ----- login handler -----
+    async function handleLogin() {
+      const empId = employeeIdInput.value.trim();
+      const pwd = passwordInput.value.trim();
+      if (!empId || !pwd) { showError('Please enter ID and password.'); return; }
+      hideError();
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in';
+      showSuccess('Authenticating...');
+
+      try {
+        const result = await login(empId, pwd);
+        if (result.success) {
+          currentEmployee = result.employee;
+          currentRowData = result.rowData || null;
+          hideSuccess();
+          showSuccess('Welcome back!');
+          setTimeout(hideSuccess, 1200);
+          showDashboard();
+        } else {
+          showError(result.error || 'Invalid credentials.');
+          hideSuccess();
+        }
+      } catch (err) {
+        showError(err.message || 'Connection error.');
+        hideSuccess();
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = '<i class="fas fa-arrow-right-to-bracket"></i> Sign in';
+      }
+    }
+
+    // ----- logout & refresh -----
+    function handleLogout() {
+      currentEmployee = null; currentRowData = null;
+      dashboardSection.classList.remove('active');
+      loginSection.style.display = 'block';
+      employeeIdInput.value = ''; passwordInput.value = '';
+      hideError(); hideSuccess();
+      metricContainer.innerHTML = '';
+      tableBody.innerHTML = ''; tableHead.innerHTML = '';
+    }
+
+    async function handleRefresh() {
+      currentRowData = null;
+      if (currentEmployee) await renderAttendance();
+      showSuccess('Refreshed');
+      setTimeout(hideSuccess, 1400);
+    }
+
+    // ----- events -----
+    loginBtn.addEventListener('click', handleLogin);
+    logoutBtn.addEventListener('click', handleLogout);
+    refreshBtn.addEventListener('click', handleRefresh);
+    employeeIdInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
+    passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
+
+    console.log('✅ Attend portal (mobile-ready)');
+  })();
+</script>
 </body>
 </html>
