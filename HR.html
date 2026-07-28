@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-  <title>Attendance Portal · Professional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attend · Professional</title>
+  <!-- Font & Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
-    /* ----- reset & base ----- */
     * {
       margin: 0;
       padding: 0;
@@ -15,98 +15,79 @@
     }
 
     body {
-      background: #eef2f7;
+      background: #f2f5f9;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
-      margin: 0;
+      padding: 24px;
     }
 
-    /* ----- main card (mobile-first) ----- */
+    /* MAIN CARD */
     .app-card {
       max-width: 1200px;
       width: 100%;
       background: #ffffff;
-      border-radius: 28px;
-      box-shadow: 0 16px 48px rgba(0, 20, 40, 0.06), 0 6px 16px rgba(0, 20, 40, 0.03);
-      padding: 20px 18px;
+      border-radius: 32px;
+      box-shadow: 0 20px 60px rgba(0, 20, 40, 0.08), 0 8px 24px rgba(0, 20, 40, 0.04);
+      padding: 32px 36px;
       transition: all 0.2s ease;
     }
 
-    @media (min-width: 600px) {
-      .app-card {
-        padding: 32px 36px;
-      }
-    }
-
-    /* ----- header ----- */
+    /* HEADER */
     .app-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 16px;
     }
 
     .app-header h1 {
       font-weight: 600;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       letter-spacing: -0.02em;
       color: #0b1e33;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .app-header h1 i {
       color: #1f6390;
-      font-size: 1.6rem;
+      font-size: 2rem;
     }
 
     .header-badge {
       background: #eef3f9;
-      padding: 6px 14px;
+      padding: 8px 18px;
       border-radius: 60px;
-      font-size: 0.7rem;
+      font-size: 0.85rem;
       font-weight: 500;
       color: #1f3b54;
       letter-spacing: 0.3px;
       display: flex;
       align-items: center;
-      gap: 6px;
-      white-space: nowrap;
+      gap: 8px;
     }
 
     .header-badge i {
       color: #1f6390;
-      font-size: 0.8rem;
     }
 
-    @media (max-width: 400px) {
-      .app-header h1 { font-size: 1.2rem; }
-      .header-badge { font-size: 0.6rem; padding: 4px 10px; }
-    }
-
-    /* ----- SIMPLIFIED PROFESSIONAL LOGIN (clean, minimal) ----- */
+    /* LOGIN CARD */
     .login-wrapper {
-      max-width: 400px;
+      max-width: 420px;
       margin: 0 auto 12px;
     }
 
     .login-card {
-      background: #ffffff;
-      padding: 28px 22px;
+      background: #f8faff;
+      padding: 32px 28px;
       border-radius: 24px;
-      border: 1px solid #e6ecf3;
-      box-shadow: 0 8px 24px rgba(0, 20, 40, 0.04);
-      transition: 0.2s;
-    }
-
-    @media (min-width: 480px) {
-      .login-card { padding: 36px 32px; }
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      border: 1px solid #eaedf2;
     }
 
     .login-card .field {
@@ -116,39 +97,33 @@
     .login-card label {
       display: block;
       font-weight: 500;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       color: #1f3b54;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       letter-spacing: 0.2px;
-      text-transform: uppercase;
-      opacity: 0.7;
     }
 
     .login-card label i {
       width: 20px;
       color: #4f7b9c;
-      margin-right: 4px;
-      opacity: 0.6;
+      margin-right: 6px;
     }
 
     .login-card input {
       width: 100%;
       padding: 14px 16px;
-      background: #f8faff;
-      border: 1.5px solid #e2e8f0;
+      background: white;
+      border: 1.5px solid #dce3ec;
       border-radius: 16px;
       font-size: 0.95rem;
       transition: 0.2s;
       color: #0b1e33;
-      -webkit-appearance: none;
-      appearance: none;
     }
 
     .login-card input:focus {
       outline: none;
       border-color: #1f6390;
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(31, 99, 144, 0.06);
+      box-shadow: 0 0 0 4px rgba(31, 99, 144, 0.08);
     }
 
     .login-btn {
@@ -166,14 +141,14 @@
       gap: 10px;
       cursor: pointer;
       transition: 0.2s;
-      margin-top: 8px;
+      margin-top: 6px;
       letter-spacing: 0.3px;
     }
 
     .login-btn:hover {
       background: #1a3350;
       transform: scale(1.01);
-      box-shadow: 0 8px 20px rgba(11, 30, 51, 0.12);
+      box-shadow: 0 8px 20px rgba(11, 30, 51, 0.15);
     }
 
     .login-btn:disabled {
@@ -182,33 +157,32 @@
       transform: none;
     }
 
-    /* ----- message boxes (minimal) ----- */
     .msg-box {
-      padding: 12px 14px;
+      padding: 14px 16px;
       border-radius: 16px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       font-weight: 500;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       display: none;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .msg-box.error {
       background: #fee9e7;
       color: #b13a34;
-      border-left: 4px solid #b13a34;
+      border-left: 5px solid #b13a34;
       display: flex;
     }
 
     .msg-box.success {
       background: #e3f3eb;
       color: #0e6242;
-      border-left: 4px solid #0e6242;
+      border-left: 5px solid #0e6242;
       display: flex;
     }
 
-    /* ----- dashboard (mobile first) ----- */
+    /* DASHBOARD */
     .dashboard {
       display: none;
     }
@@ -217,89 +191,92 @@
       display: block;
     }
 
-    /* greeting bar */
     .greeting-bar {
       background: #f5f9ff;
-      border-radius: 20px;
-      padding: 16px 18px;
+      border-radius: 24px;
+      padding: 20px 28px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 22px;
+      margin-bottom: 28px;
       border: 1px solid #e3eaf2;
-      gap: 12px;
     }
 
     .greeting-left {
       display: flex;
       flex-direction: column;
       gap: 2px;
-      flex: 1 1 160px;
     }
 
     .greeting-left .name {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 600;
       color: #0b1e33;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
     }
 
     .greeting-left .name i {
       color: #1f6390;
-      font-size: 1.2rem;
+      margin-right: 8px;
     }
 
     .greeting-left .sub {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       color: #3b5e7a;
       display: flex;
       flex-wrap: wrap;
-      gap: 8px 16px;
+      gap: 12px;
     }
 
     .greeting-left .sub i {
       margin-right: 4px;
       color: #4f7b9c;
-      width: 16px;
+      width: 18px;
     }
 
     .badge-group {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       align-items: center;
       flex-wrap: wrap;
     }
 
     .badge-id {
       background: white;
-      padding: 4px 14px;
+      padding: 6px 18px;
       border-radius: 60px;
       font-weight: 500;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       color: #1f3b54;
       border: 1px solid #d0dceb;
-      white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .badge-view {
+      background: #eef3f9;
+      padding: 6px 16px;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #2f577a;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
     }
 
     .action-btn {
       background: white;
       border: 1px solid #d0dceb;
-      padding: 6px 16px;
+      padding: 8px 20px;
       border-radius: 60px;
       font-weight: 500;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       color: #1f3b54;
       cursor: pointer;
       transition: 0.15s;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       background: #fafcff;
-      white-space: nowrap;
     }
 
     .action-btn:hover {
@@ -318,86 +295,49 @@
       border-color: #b8c6d6;
     }
 
-    @media (max-width: 480px) {
-      .greeting-bar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-      }
-      .badge-group {
-        justify-content: flex-start;
-        gap: 6px;
-      }
-      .action-btn { padding: 6px 12px; font-size: 0.7rem; }
-      .greeting-left .name { font-size: 1.1rem; }
-    }
-
-    /* ----- metric grid (mobile responsive) ----- */
+    /* SUMMARY METRICS */
     .metric-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 22px;
-    }
-
-    @media (min-width: 480px) {
-      .metric-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    }
-
-    @media (min-width: 700px) {
-      .metric-grid { grid-template-columns: repeat(6, 1fr); }
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
     }
 
     .metric-card {
       background: #fafcff;
-      border-radius: 18px;
-      padding: 12px 10px;
+      border-radius: 20px;
+      padding: 16px 18px;
       border: 1px solid #e3eaf2;
       transition: 0.15s;
-      text-align: center;
     }
 
     .metric-card .label {
-      font-size: 0.6rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.5px;
       color: #5b7895;
       font-weight: 600;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-    }
-
-    .metric-card .label i {
-      font-size: 0.7rem;
-      color: #4f7b9c;
+      margin-bottom: 6px;
     }
 
     .metric-card .value {
-      font-size: 1.4rem;
+      font-size: 1.8rem;
       font-weight: 600;
       color: #0b1e33;
       line-height: 1.2;
     }
 
     .metric-card .value small {
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       font-weight: 400;
       color: #4f7b9c;
-      margin-left: 2px;
+      margin-left: 4px;
     }
 
-    @media (max-width: 380px) {
-      .metric-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .metric-card .value { font-size: 1.2rem; }
-    }
-
-    /* ----- table (mobile friendly) ----- */
+    /* TABLE */
     .table-wrapper {
       background: #fafcff;
-      border-radius: 20px;
+      border-radius: 24px;
       border: 1px solid #e3eaf2;
       overflow: hidden;
       margin-top: 6px;
@@ -405,15 +345,14 @@
 
     .table-header {
       background: #f2f7fe;
-      padding: 12px 16px;
+      padding: 16px 24px;
       font-weight: 500;
       color: #1f3b54;
       border-bottom: 1px solid #e3eaf2;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
-      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.95rem;
     }
 
     .table-header i {
@@ -423,27 +362,25 @@
     .attendance-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
 
     .attendance-table th {
       text-align: left;
-      padding: 10px 12px;
+      padding: 16px 18px;
       background: #f5f9ff;
       color: #1f3b54;
       font-weight: 600;
-      font-size: 0.65rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.4px;
       border-bottom: 1px solid #e3eaf2;
-      white-space: nowrap;
     }
 
     .attendance-table td {
-      padding: 10px 12px;
+      padding: 14px 18px;
       border-bottom: 1px solid #edf2f8;
       color: #0b1e33;
-      word-break: break-word;
     }
 
     .attendance-table tr:last-child td {
@@ -454,21 +391,19 @@
       background: #f5f9ff;
     }
 
-    /* loading */
     .loading-state {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      padding: 36px 16px;
+      gap: 16px;
+      padding: 48px 20px;
       color: #3b5e7a;
       font-weight: 500;
-      font-size: 0.9rem;
     }
 
     .spinner {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border: 4px solid #e3eaf2;
       border-top: 4px solid #1f6390;
       border-radius: 50%;
@@ -479,24 +414,20 @@
 
     .hidden { display: none !important; }
 
-    /* small screen table tweaks */
-    @media (max-width: 500px) {
-      .attendance-table th, .attendance-table td {
-        padding: 8px 8px;
-        font-size: 0.7rem;
-      }
-      .table-header { font-size: 0.75rem; padding: 10px 12px; }
-      .attendance-table th { font-size: 0.6rem; }
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .app-card { padding: 20px 16px; }
+      .greeting-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .attendance-table th, .attendance-table td { padding: 10px 12px; font-size: 0.8rem; }
     }
 
-    @media (max-width: 400px) {
-      .attendance-table th, .attendance-table td {
-        padding: 6px 6px;
-        font-size: 0.65rem;
-      }
+    @media (max-width: 480px) {
+      .app-header h1 { font-size: 1.4rem; }
+      .metric-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     }
 
-    /* hide debug / code remnants */
+    /* no code / counts only */
     .debug-panel, .col-ref, .readonly-badge { display: none !important; }
   </style>
 </head>
@@ -505,19 +436,20 @@
 
   <!-- Header -->
   <div class="app-header">
-    <h1><i class="fas fa-clipboard-check"></i> Attendance Portal</h1>
-    <div class="header-badge"><i class="fas fa-shield-alt"></i> secure · view</div>
+    <h1><i class="fas fa-clipboard-check"></i> Attend</h1>
+    <div class="header-badge"><i class="fas fa-shield-alt"></i> secure · view only</div>
   </div>
 
-  <!-- LOGIN (simplified professional) -->
+  <!-- LOGIN -->
   <div id="loginSection">
     <div class="login-wrapper">
       <div class="login-card">
-        
+        <div id="loginError" class="msg-box error"><i class="fas fa-exclamation-circle"></i> <span></span></div>
+        <div id="loginSuccess" class="msg-box success"><i class="fas fa-check-circle"></i> <span></span></div>
 
         <div class="field">
           <label><i class="fas fa-id-badge"></i> Employee ID</label>
-          <input type="text" id="employeeId" placeholder="TR0000084" />
+          <input type="text" id="employeeId" placeholder="e.g. E1001" />
         </div>
         <div class="field">
           <label><i class="fas fa-lock"></i> Password</label>
@@ -546,8 +478,10 @@
       </div>
     </div>
 
-    <!-- METRICS -->
-    <div id="metricContainer" class="metric-grid"></div>
+    <!-- METRICS (summary counts) -->
+    <div id="metricContainer" class="metric-grid">
+      <!-- filled by js -->
+    </div>
 
     <!-- TABLE -->
     <div class="table-wrapper">
@@ -563,221 +497,229 @@
       </div>
     </div>
   </div>
+
+  <!-- hidden debug removed (no coding visible) -->
 </div>
 
 <script>
-  (function() {
-    // ----- config -----
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzD2ULvR2X3E16kzOq19JL5ILvm1edsWGE97hhYdDNi_Thq9Iowxwoec2MEKaxxEmn4/exec';
+  // ============================================================
+  //  CONFIG — only counts, no coding exposed to user
+  // ============================================================
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzD2ULvR2X3E16kzOq19JL5ILvm1edsWGE97hhYdDNi_Thq9Iowxwoec2MEKaxxEmn4/exec';
 
-    const C = {
-      EMP_ID: 4, PWD: 5, NAME: 6, SECTOR: 3, PROJECT: 7,
-      DAYS: 39, HOLIDAYS: 40, LEAVE: 41, LWP: 42, PRESENT: 43,
-      PAYABLE: 44, CL: 45, ML: 46
-    };
+  // column indices (based on main sheet)
+  const C = {
+    EMP_ID: 4, PWD: 5, NAME: 6, SECTOR: 3, PROJECT: 7,
+    DAYS: 39, HOLIDAYS: 40, LEAVE: 41, LWP: 42, PRESENT: 43,
+    PAYABLE: 44, CL: 45, ML: 46
+  };
 
-    const DISPLAY_FIELDS = [
-      { header: 'Employee', col: C.NAME },
-      { header: 'Sector', col: C.SECTOR },
-      { header: 'Project', col: C.PROJECT },
-      { header: 'Days in month', col: C.DAYS },
-      { header: 'Holidays', col: C.HOLIDAYS },
-      { header: 'Leave', col: C.LEAVE },
-      { header: 'LWP', col: C.LWP },
-      { header: 'Present', col: C.PRESENT },
-      { header: 'Payable', col: C.PAYABLE },
-      { header: 'CL', col: C.CL },
-      { header: 'ML', col: C.ML }
-    ];
+  // display fields (only counts & identity)
+  const DISPLAY_FIELDS = [
+    { header: 'Employee', col: C.NAME },
+    { header: 'Sector', col: C.SECTOR },
+    { header: 'Project', col: C.PROJECT },
+    { header: 'Days in month', col: C.DAYS },
+    { header: 'Holidays', col: C.HOLIDAYS },
+    { header: 'Leave', col: C.LEAVE },
+    { header: 'LWP', col: C.LWP },
+    { header: 'Present', col: C.PRESENT },
+    { header: 'Payable', col: C.PAYABLE },
+    { header: 'CL', col: C.CL },
+    { header: 'ML', col: C.ML }
+  ];
 
-    const METRIC_KEYS = [
-      { label: 'Present', col: C.PRESENT, icon: 'fa-calendar-check' },
-      { label: 'Leave', col: C.LEAVE, icon: 'fa-calendar-xmark' },
-      { label: 'LWP', col: C.LWP, icon: 'fa-clock' },
-      { label: 'Payable', col: C.PAYABLE, icon: 'fa-coins' },
-      { label: 'CL', col: C.CL, icon: 'fa-umbrella' },
-      { label: 'ML', col: C.ML, icon: 'fa-heart-pulse' }
-    ];
+  // metric cards (key counts)
+  const METRIC_KEYS = [
+    { label: 'Present', col: C.PRESENT, icon: 'fa-calendar-check' },
+    { label: 'Leave', col: C.LEAVE, icon: 'fa-calendar-xmark' },
+    { label: 'LWP', col: C.LWP, icon: 'fa-clock' },
+    { label: 'Payable', col: C.PAYABLE, icon: 'fa-coins' },
+    { label: 'CL', col: C.CL, icon: 'fa-umbrella' },
+    { label: 'ML', col: C.ML, icon: 'fa-heart-pulse' }
+  ];
 
-    // ----- DOM refs -----
-    const $ = id => document.getElementById(id);
-    const loginSection = $('loginSection');
-    const dashboardSection = $('dashboardSection');
-    const loginError = $('loginError');
-    const loginSuccess = $('loginSuccess');
-    const employeeIdInput = $('employeeId');
-    const passwordInput = $('password');
-    const loginBtn = $('loginBtn');
-    const logoutBtn = $('logoutBtn');
-    const refreshBtn = $('refreshBtn');
-    const userName = $('userName');
-    const userSector = $('userSector');
-    const userProject = $('userProject');
-    const userEmpId = $('userEmpId');
-    const loadingMsg = $('loadingMsg');
-    const tableContainer = $('tableContainer');
-    const tableHead = $('tableHead');
-    const tableBody = $('tableBody');
-    const metricContainer = $('metricContainer');
+  // DOM
+  const $ = id => document.getElementById(id);
+  const loginSection = $('loginSection');
+  const dashboardSection = $('dashboardSection');
+  const loginError = $('loginError');
+  const loginSuccess = $('loginSuccess');
+  const employeeIdInput = $('employeeId');
+  const passwordInput = $('password');
+  const loginBtn = $('loginBtn');
+  const logoutBtn = $('logoutBtn');
+  const refreshBtn = $('refreshBtn');
+  const userName = $('userName');
+  const userSector = $('userSector');
+  const userProject = $('userProject');
+  const userEmpId = $('userEmpId');
+  const loadingMsg = $('loadingMsg');
+  const tableContainer = $('tableContainer');
+  const tableHead = $('tableHead');
+  const tableBody = $('tableBody');
+  const metricContainer = $('metricContainer');
 
-    let currentEmployee = null;
-    let currentRowData = null;
+  let currentEmployee = null;
+  let currentRowData = null;
 
-    // ----- helpers -----
-    function hideError() { loginError.style.display = 'none'; }
-    function showError(msg) {
-      loginError.querySelector('span').textContent = msg;
-      loginError.style.display = 'flex';
-    }
-    function hideSuccess() { loginSuccess.style.display = 'none'; }
-    function showSuccess(msg) {
-      loginSuccess.querySelector('span').textContent = msg;
-      loginSuccess.style.display = 'flex';
-    }
+  // ---------- helpers ----------
+  function hideError() { loginError.style.display = 'none'; }
+  function showError(msg) { 
+    loginError.querySelector('span').textContent = msg;
+    loginError.style.display = 'flex';
+  }
+  function hideSuccess() { loginSuccess.style.display = 'none'; }
+  function showSuccess(msg) {
+    loginSuccess.querySelector('span').textContent = msg;
+    loginSuccess.style.display = 'flex';
+  }
 
-    async function callScript(params) {
-      const url = new URL(SCRIPT_URL);
-      Object.keys(params).forEach(k => url.searchParams.append(k, params[k]));
-      const resp = await fetch(url.toString());
-      if (!resp.ok) throw new Error(`Server error (${resp.status})`);
-      return await resp.json();
-    }
+  // API call
+  async function callScript(params) {
+    const url = new URL(SCRIPT_URL);
+    Object.keys(params).forEach(k => url.searchParams.append(k, params[k]));
+    const resp = await fetch(url.toString());
+    if (!resp.ok) throw new Error(`Server error (${resp.status})`);
+    return await resp.json();
+  }
 
-    async function login(empId, pwd) {
-      return callScript({ action: 'login', id: empId, pwd });
-    }
+  async function login(empId, pwd) {
+    return callScript({ action: 'login', id: empId, pwd });
+  }
 
-    async function refreshData(empId) {
-      return callScript({ action: 'getData', id: empId });
-    }
+  async function refreshData(empId) {
+    return callScript({ action: 'getData', id: empId });
+  }
 
-    // ----- render -----
-    function renderMetrics(row) {
-      let html = '';
-      METRIC_KEYS.forEach(m => {
-        const val = (row[m.col] !== undefined && row[m.col] !== '') ? row[m.col] : '—';
-        html += `
-          <div class="metric-card">
-            <div class="label"><i class="fas ${m.icon}"></i> ${m.label}</div>
-            <div class="value">${val}</div>
-          </div>
-        `;
-      });
-      metricContainer.innerHTML = html;
-    }
+  // ---------- render dashboard ----------
+  function renderMetrics(row) {
+    let html = '';
+    METRIC_KEYS.forEach(m => {
+      const val = (row[m.col] !== undefined && row[m.col] !== '') ? row[m.col] : '—';
+      html += `
+        <div class="metric-card">
+          <div class="label"><i class="fas ${m.icon}"></i> ${m.label}</div>
+          <div class="value">${val}</div>
+        </div>
+      `;
+    });
+    metricContainer.innerHTML = html;
+  }
 
-    function renderTable(row) {
-      let h = '<tr>';
-      DISPLAY_FIELDS.forEach(f => { h += `<th>${f.header}</th>`; });
-      h += '</tr>';
-      tableHead.innerHTML = h;
+  function renderTable(row) {
+    // headers
+    let h = '<tr>';
+    DISPLAY_FIELDS.forEach(f => { h += `<th>${f.header}</th>`; });
+    h += '</tr>';
+    tableHead.innerHTML = h;
 
-      let r = '<tr>';
-      DISPLAY_FIELDS.forEach(f => {
-        const v = (row[f.col] !== undefined && row[f.col] !== '') ? row[f.col] : '—';
-        r += `<td>${v}</td>`;
-      });
-      r += '</tr>';
-      tableBody.innerHTML = r;
-    }
+    // row
+    let r = '<tr>';
+    DISPLAY_FIELDS.forEach(f => {
+      const v = (row[f.col] !== undefined && row[f.col] !== '') ? row[f.col] : '—';
+      r += `<td>${v}</td>`;
+    });
+    r += '</tr>';
+    tableBody.innerHTML = r;
+  }
 
-    function showDashboard() {
-      loginSection.style.display = 'none';
-      dashboardSection.classList.add('active');
-      userName.textContent = currentEmployee.name || 'Employee';
-      userSector.textContent = currentEmployee.sector || 'N/A';
-      userProject.textContent = currentEmployee.project || 'N/A';
-      userEmpId.textContent = 'ID: ' + (currentEmployee.id || '---');
-      renderAttendance();
-    }
+  function showDashboard() {
+    loginSection.style.display = 'none';
+    dashboardSection.classList.add('active');
+    userName.textContent = currentEmployee.name || 'Employee';
+    userSector.textContent = currentEmployee.sector || 'N/A';
+    userProject.textContent = currentEmployee.project || 'N/A';
+    userEmpId.textContent = 'ID: ' + (currentEmployee.id || '---');
+    renderAttendance();
+  }
 
-    async function renderAttendance() {
-      loadingMsg.classList.remove('hidden');
-      tableContainer.classList.add('hidden');
-      metricContainer.innerHTML = '';
+  async function renderAttendance() {
+    loadingMsg.classList.remove('hidden');
+    tableContainer.classList.add('hidden');
+    metricContainer.innerHTML = '';
 
-      try {
-        let rowData;
-        if (currentRowData && Object.keys(currentRowData).length) {
-          rowData = currentRowData;
-        } else {
-          const result = await refreshData(currentEmployee.id);
-          if (result.success) rowData = result.rowData || result.employee;
-          else throw new Error(result.error || 'Failed to load');
-        }
-
-        currentRowData = rowData;
-        renderMetrics(rowData);
-        renderTable(rowData);
-
-        loadingMsg.classList.add('hidden');
-        tableContainer.classList.remove('hidden');
-      } catch (err) {
-        loadingMsg.innerHTML = `<i class="fas fa-triangle-exclamation" style="color:#b13a34;"></i> ${err.message} <button onclick="window.renderAttendance()" style="margin-left:12px;background:#0b1e33;color:white;border:none;border-radius:60px;padding:6px 16px;cursor:pointer;font-size:0.8rem;">Retry</button>`;
+    try {
+      let rowData;
+      if (currentRowData && Object.keys(currentRowData).length) {
+        rowData = currentRowData;
+      } else {
+        const result = await refreshData(currentEmployee.id);
+        if (result.success) rowData = result.rowData || result.employee;
+        else throw new Error(result.error || 'Failed to load');
       }
+
+      // update current
+      currentRowData = rowData;
+      renderMetrics(rowData);
+      renderTable(rowData);
+
+      loadingMsg.classList.add('hidden');
+      tableContainer.classList.remove('hidden');
+    } catch (err) {
+      loadingMsg.innerHTML = `<i class="fas fa-triangle-exclamation" style="color:#b13a34;"></i> ${err.message} <button onclick="renderAttendance()" style="margin-left:16px;background:#0b1e33;color:white;border:none;border-radius:60px;padding:6px 18px;cursor:pointer;">Retry</button>`;
     }
-    // expose for retry
-    window.renderAttendance = renderAttendance;
+  }
 
-    // ----- login handler -----
-    async function handleLogin() {
-      const empId = employeeIdInput.value.trim();
-      const pwd = passwordInput.value.trim();
-      if (!empId || !pwd) { showError('Please enter ID and password.'); return; }
-      hideError();
-      loginBtn.disabled = true;
-      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in';
-      showSuccess('Authenticating...');
+  // ---------- login handler ----------
+  async function handleLogin() {
+    const empId = employeeIdInput.value.trim();
+    const pwd = passwordInput.value.trim();
+    if (!empId || !pwd) { showError('Please enter ID and password.'); return; }
+    hideError();
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in';
+    showSuccess('Authenticating...');
 
-      try {
-        const result = await login(empId, pwd);
-        if (result.success) {
-          currentEmployee = result.employee;
-          currentRowData = result.rowData || null;
-          hideSuccess();
-          showSuccess('Welcome back!');
-          setTimeout(hideSuccess, 1200);
-          showDashboard();
-        } else {
-          showError(result.error || 'Invalid credentials.');
-          hideSuccess();
-        }
-      } catch (err) {
-        showError(err.message || 'Connection error.');
+    try {
+      const result = await login(empId, pwd);
+      if (result.success) {
+        currentEmployee = result.employee;
+        currentRowData = result.rowData || null;
         hideSuccess();
-      } finally {
-        loginBtn.disabled = false;
-        loginBtn.innerHTML = '<i class="fas fa-arrow-right-to-bracket"></i> Sign in';
+        showSuccess('Welcome back!');
+        setTimeout(hideSuccess, 1200);
+        showDashboard();
+      } else {
+        showError(result.error || 'Invalid credentials.');
+        hideSuccess();
       }
+    } catch (err) {
+      showError(err.message || 'Connection error.');
+      hideSuccess();
+    } finally {
+      loginBtn.disabled = false;
+      loginBtn.innerHTML = '<i class="fas fa-arrow-right-to-bracket"></i> Sign in';
     }
+  }
 
-    // ----- logout & refresh -----
-    function handleLogout() {
-      currentEmployee = null; currentRowData = null;
-      dashboardSection.classList.remove('active');
-      loginSection.style.display = 'block';
-      employeeIdInput.value = ''; passwordInput.value = '';
-      hideError(); hideSuccess();
-      metricContainer.innerHTML = '';
-      tableBody.innerHTML = ''; tableHead.innerHTML = '';
-    }
+  // ---------- logout & refresh ----------
+  function handleLogout() {
+    currentEmployee = null; currentRowData = null;
+    dashboardSection.classList.remove('active');
+    loginSection.style.display = 'block';
+    employeeIdInput.value = ''; passwordInput.value = '';
+    hideError(); hideSuccess();
+    metricContainer.innerHTML = '';
+    tableBody.innerHTML = ''; tableHead.innerHTML = '';
+  }
 
-    async function handleRefresh() {
-      currentRowData = null;
-      if (currentEmployee) await renderAttendance();
-      showSuccess('Refreshed');
-      setTimeout(hideSuccess, 1400);
-    }
+  async function handleRefresh() {
+    currentRowData = null;
+    if (currentEmployee) await renderAttendance();
+    showSuccess('Refreshed');
+    setTimeout(hideSuccess, 1400);
+  }
 
-    // ----- events -----
-    loginBtn.addEventListener('click', handleLogin);
-    logoutBtn.addEventListener('click', handleLogout);
-    refreshBtn.addEventListener('click', handleRefresh);
-    employeeIdInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
-    passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
+  // ---------- events ----------
+  loginBtn.addEventListener('click', handleLogin);
+  logoutBtn.addEventListener('click', handleLogout);
+  refreshBtn.addEventListener('click', handleRefresh);
+  employeeIdInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
+  passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
 
-    console.log('✅ Attend portal (mobile-ready)');
-  })();
+  // remove any debug / code display
+  console.log('✅ Attendance Portal ready (professional UI)');
 </script>
 </body>
 </html>
