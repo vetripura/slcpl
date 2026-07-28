@@ -144,14 +144,6 @@
             padding: 4px 14px;
             border-radius: 20px;
         }
-        .badge {
-            background: #1a3c5e;
-            color: white;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            margin-left: 10px;
-        }
         .loading {
             text-align: center;
             color: #4a6a85;
@@ -246,18 +238,12 @@
 
     <script>
         // ======================================================================
-        // CONFIGURATION - UPDATED with your new Web App URL
+        // CONFIGURATION - NEW Google Apps Script URL
         // ======================================================================
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyk8vies5eadGPoF2j3CQ5rutwIpgWj8RErpdcIzX_3gxJdO8L1JuFhVuqjHfuYFeROVg/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwnNzqBu5ieNBKPyn562RyBcBeWoIZaizdyiK7OmSdJKAtxHetskPqI-PWD4s9e_QMW8A/exec';
 
         // ======================================================================
         // COLUMN MAPPING (0-based indices)
-        // E=4 (Employee ID), F=5 (Password), G=6 (Employee Name)
-        // D=3 (Sector), H=7 (Associated Project)
-        // AN=39 (No of Days in Month), AO=40 (Holidays including Sundays)
-        // AP=41 (Days on Leave), AQ=42 (Leave without Pay)
-        // AR=43 (Days Present), AS=44 (Total Payable Days)
-        // AT=45 (CL), AU=46 (ML)
         // ======================================================================
         const COL_EMPLOYEE_ID = 4;
         const COL_PASSWORD = 5;
@@ -324,7 +310,9 @@
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
-                return await response.json();
+                const result = await response.json();
+                console.log('API Response:', result); // Debug log
+                return result;
             } catch (error) {
                 console.error('API Error:', error);
                 throw new Error('Failed to connect to server. Please check your internet connection.');
@@ -362,12 +350,16 @@
                 if (result.success) {
                     currentEmployee = result.employee;
                     currentRowData = result.rowData || null;
+                    
+                    console.log('Employee:', currentEmployee);
+                    console.log('Row Data:', currentRowData);
+                    
                     showDashboard();
                     hideSuccess();
                     showSuccess('✅ Login successful! Loading your data...');
                     setTimeout(hideSuccess, 2000);
                 } else {
-                    showError('❌ ' + (result.error || 'Invalid credentials. Please check your Employee ID and Password.'));
+                    showError('❌ ' + (result.error || 'Invalid credentials.'));
                     hideSuccess();
                 }
             } catch (error) {
@@ -386,7 +378,6 @@
             loginSection.classList.add('hidden');
             dashboardSection.classList.remove('hidden');
             
-            // Update welcome banner with user info
             userName.textContent = currentEmployee.name || 'Employee';
             userSector.textContent = currentEmployee.sector || 'N/A';
             userProject.textContent = currentEmployee.project || 'N/A';
@@ -402,8 +393,7 @@
             try {
                 let rowData;
                 
-                // If we have currentRowData from login, use it, otherwise fetch
-                if (currentRowData) {
+                if (currentRowData && Object.keys(currentRowData).length > 0) {
                     rowData = currentRowData;
                 } else {
                     const result = await refreshData(currentEmployee.id);
@@ -422,11 +412,12 @@
                 headersHtml += '</tr>';
                 tableHead.innerHTML = headersHtml;
 
-                // Build row
+                // Build row - using column index as key
                 let rowHtml = '<tr>';
                 DISPLAY_FIELDS.forEach(field => {
-                    const value = (rowData[field.col] !== undefined && rowData[field.col] !== '') 
-                        ? rowData[field.col] 
+                    const key = field.col.toString();
+                    const value = (rowData[key] !== undefined && rowData[key] !== '') 
+                        ? rowData[key] 
                         : '—';
                     rowHtml += `<td>${value}</td>`;
                 });
@@ -476,7 +467,7 @@
         }
 
         async function handleRefresh() {
-            currentRowData = null; // Clear cached data to force refresh
+            currentRowData = null;
             loadingMsg.classList.remove('hidden');
             tableContainer.classList.add('hidden');
             await renderAttendanceTable();
@@ -496,7 +487,6 @@
 
         console.log('✅ Attendance Portal loaded successfully!');
         console.log(`🔗 Connected to: ${SCRIPT_URL}`);
-        console.log('📊 Column Mapping:', DISPLAY_FIELDS);
     </script>
 </body>
 </html>
