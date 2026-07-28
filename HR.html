@@ -178,23 +178,6 @@
             font-weight: 400;
             margin-left: 4px;
         }
-        .debug-panel {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 0.85rem;
-            max-height: 300px;
-            overflow: auto;
-            display: none;
-        }
-        .debug-panel pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-size: 0.8rem;
-        }
         @media (max-width: 600px) {
             .container { padding: 15px; }
             th, td { padding: 8px 6px; font-size: 0.75rem; }
@@ -250,18 +233,12 @@
                     </table>
                 </div>
             </div>
-            
-            <!-- Debug Panel -->
-            <div class="debug-panel" id="debugPanel">
-                <strong>🔍 Debug Info - API Response:</strong>
-                <pre id="debugContent">Waiting for login...</pre>
-            </div>
         </div>
     </div>
 
     <script>
         // ======================================================================
-        // CONFIGURATION - UPDATED with your new Google Apps Script URL
+        // CONFIGURATION - Your Google Apps Script URL
         // ======================================================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzD2ULvR2X3E16kzOq19JL5ILvm1edsWGE97hhYdDNi_Thq9Iowxwoec2MEKaxxEmn4/exec';
 
@@ -317,19 +294,9 @@
         const tableContainer = document.getElementById('tableContainer');
         const tableHead = document.getElementById('tableHead');
         const tableBody = document.getElementById('tableBody');
-        const debugPanel = document.getElementById('debugPanel');
-        const debugContent = document.getElementById('debugContent');
 
         let currentEmployee = null;
         let currentRowData = null;
-
-        // ======================================================================
-        // Debug Helper
-        // ======================================================================
-        function showDebug(data) {
-            debugPanel.style.display = 'block';
-            debugContent.textContent = JSON.stringify(data, null, 2);
-        }
 
         // ======================================================================
         // API Calls
@@ -343,12 +310,9 @@
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
-                const result = await response.json();
-                showDebug({ request: params, response: result });
-                return result;
+                return await response.json();
             } catch (error) {
                 console.error('API Error:', error);
-                showDebug({ error: error.message });
                 throw new Error('Failed to connect to server. Please check your internet connection.');
             }
         }
@@ -499,7 +463,6 @@
             hideSuccess();
             tableBody.innerHTML = '';
             tableHead.innerHTML = '';
-            debugPanel.style.display = 'none';
         }
 
         async function handleRefresh() {
