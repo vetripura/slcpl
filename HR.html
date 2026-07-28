@@ -178,6 +178,22 @@
             font-weight: 400;
             margin-left: 4px;
         }
+        .debug-panel {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow: auto;
+            display: none;
+        }
+        .debug-panel pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
         @media (max-width: 600px) {
             .container { padding: 15px; }
             th, td { padding: 8px 6px; font-size: 0.75rem; }
@@ -233,18 +249,22 @@
                     </table>
                 </div>
             </div>
+            
+            <!-- Debug Panel -->
+            <div class="debug-panel" id="debugPanel">
+                <strong>🔍 API Response:</strong>
+                <pre id="debugContent">Waiting for login...</pre>
+            </div>
         </div>
     </div>
 
     <script>
         // ======================================================================
-        // CONFIGURATION - NEW Google Apps Script URL
+        // CONFIGURATION
         // ======================================================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwnNzqBu5ieNBKPyn562RyBcBeWoIZaizdyiK7OmSdJKAtxHetskPqI-PWD4s9e_QMW8A/exec';
 
-        // ======================================================================
-        // COLUMN MAPPING (0-based indices)
-        // ======================================================================
+        // Column mapping (0-based indices)
         const COL_EMPLOYEE_ID = 4;
         const COL_PASSWORD = 5;
         const COL_NAME = 6;          // G
@@ -294,9 +314,19 @@
         const tableContainer = document.getElementById('tableContainer');
         const tableHead = document.getElementById('tableHead');
         const tableBody = document.getElementById('tableBody');
+        const debugPanel = document.getElementById('debugPanel');
+        const debugContent = document.getElementById('debugContent');
 
         let currentEmployee = null;
         let currentRowData = null;
+
+        // ======================================================================
+        // Debug Helper
+        // ======================================================================
+        function showDebug(data) {
+            debugPanel.style.display = 'block';
+            debugContent.textContent = JSON.stringify(data, null, 2);
+        }
 
         // ======================================================================
         // API Calls
@@ -311,11 +341,12 @@
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
                 const result = await response.json();
-                console.log('API Response:', result); // Debug log
+                showDebug({ request: params, response: result });
                 return result;
             } catch (error) {
                 console.error('API Error:', error);
-                throw new Error('Failed to connect to server. Please check your internet connection.');
+                showDebug({ error: error.message });
+                throw new Error('Failed to connect to server.');
             }
         }
 
@@ -356,7 +387,7 @@
                     
                     showDashboard();
                     hideSuccess();
-                    showSuccess('✅ Login successful! Loading your data...');
+                    showSuccess('✅ Login successful!');
                     setTimeout(hideSuccess, 2000);
                 } else {
                     showError('❌ ' + (result.error || 'Invalid credentials.'));
@@ -412,13 +443,15 @@
                 headersHtml += '</tr>';
                 tableHead.innerHTML = headersHtml;
 
-                // Build row - using column index as key
+                // Build row
                 let rowHtml = '<tr>';
                 DISPLAY_FIELDS.forEach(field => {
                     const key = field.col.toString();
-                    const value = (rowData[key] !== undefined && rowData[key] !== '') 
-                        ? rowData[key] 
-                        : '—';
+                    // Check if value exists in rowData
+                    let value = '—';
+                    if (rowData && rowData[key] !== undefined && rowData[key] !== '') {
+                        value = rowData[key];
+                    }
                     rowHtml += `<td>${value}</td>`;
                 });
                 rowHtml += '</tr>';
@@ -464,6 +497,7 @@
             hideSuccess();
             tableBody.innerHTML = '';
             tableHead.innerHTML = '';
+            debugPanel.style.display = 'none';
         }
 
         async function handleRefresh() {
@@ -471,7 +505,7 @@
             loadingMsg.classList.remove('hidden');
             tableContainer.classList.add('hidden');
             await renderAttendanceTable();
-            showSuccess('✅ Data refreshed successfully!');
+            showSuccess('✅ Data refreshed!');
             setTimeout(hideSuccess, 2000);
         }
 
@@ -485,8 +519,8 @@
         employeeIdInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') loginBtn.click(); });
         passwordInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') loginBtn.click(); });
 
-        console.log('✅ Attendance Portal loaded successfully!');
-        console.log(`🔗 Connected to: ${SCRIPT_URL}`);
+        console.log('✅ Attendance Portal loaded!');
+        console.log(`🔗 URL: ${SCRIPT_URL}`);
     </script>
 </body>
 </html>
