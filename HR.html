@@ -299,10 +299,10 @@
       border-color: #b8c6d6;
     }
 
-    /* SUMMARY METRICS */
+    /* SUMMARY METRICS - Boxed layout */
     .metric-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 12px;
       margin-bottom: 24px;
     }
@@ -310,13 +310,14 @@
     .metric-card {
       background: #fafcff;
       border-radius: 16px;
-      padding: 12px 14px;
+      padding: 14px 16px;
       border: 1px solid #e3eaf2;
       transition: 0.15s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
 
     .metric-card .label {
-      font-size: 0.6rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: #5b7895;
@@ -330,7 +331,7 @@
     }
 
     .metric-card .value {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: 600;
       color: #0b1e33;
       line-height: 1.2;
@@ -343,7 +344,7 @@
       margin-left: 4px;
     }
 
-    /* TABLE - Responsive */
+    /* TABLE - Card view for mobile */
     .table-wrapper {
       background: #fafcff;
       border-radius: 20px;
@@ -368,7 +369,7 @@
       color: #1f6390;
     }
 
-    /* Mobile-friendly table - horizontal scroll + card view */
+    /* Desktop table view */
     .table-responsive {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -407,6 +408,49 @@
 
     .attendance-table tr:hover td {
       background: #f5f9ff;
+    }
+
+    /* Mobile card view for table data */
+    .mobile-card-container {
+      display: none;
+      padding: 12px;
+      gap: 12px;
+    }
+
+    .data-card {
+      background: white;
+      border: 1px solid #e3eaf2;
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: 0.15s;
+    }
+
+    .data-card:hover {
+      background: #f5f9ff;
+    }
+
+    .data-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #edf2f8;
+    }
+
+    .data-item:last-child {
+      border-bottom: none;
+    }
+
+    .data-item .label {
+      font-weight: 500;
+      color: #5b7895;
+      font-size: 0.8rem;
+    }
+
+    .data-item .value {
+      font-weight: 600;
+      color: #0b1e33;
+      font-size: 0.9rem;
     }
 
     .loading-state {
@@ -456,15 +500,15 @@
       }
       
       .metric-card {
-        padding: 10px 8px;
+        padding: 10px 12px;
       }
       
       .metric-card .value {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
       }
       
       .metric-card .label {
-        font-size: 0.5rem;
+        font-size: 0.55rem;
       }
       
       .app-header h1 {
@@ -473,6 +517,40 @@
       
       .app-header h1 i {
         font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      /* Hide table on mobile */
+      .table-responsive {
+        display: none;
+      }
+      
+      /* Show card view on mobile */
+      .mobile-card-container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .attendance-table {
+        min-width: auto;
+      }
+      
+      .data-card {
+        padding: 12px 14px;
+      }
+      
+      .data-item {
+        padding: 6px 0;
+        font-size: 0.85rem;
+      }
+      
+      .data-item .label {
+        font-size: 0.75rem;
+      }
+      
+      .data-item .value {
+        font-size: 0.85rem;
       }
     }
 
@@ -502,12 +580,16 @@
       }
       
       .metric-card {
-        padding: 8px 6px;
+        padding: 8px 10px;
         border-radius: 12px;
       }
       
       .metric-card .value {
-        font-size: 1rem;
+        font-size: 1.1rem;
+      }
+      
+      .metric-card .label {
+        font-size: 0.5rem;
       }
       
       .greeting-left .name {
@@ -537,14 +619,21 @@
         padding: 10px 12px;
       }
       
-      .attendance-table {
-        font-size: 0.7rem;
-        min-width: 450px;
+      .data-card {
+        padding: 10px 12px;
       }
       
-      .attendance-table th,
-      .attendance-table td {
-        padding: 8px 10px;
+      .data-item {
+        padding: 5px 0;
+        font-size: 0.8rem;
+      }
+      
+      .data-item .label {
+        font-size: 0.7rem;
+      }
+      
+      .data-item .value {
+        font-size: 0.8rem;
       }
     }
 
@@ -625,17 +714,20 @@
         <div class="spinner"></div> <span>Loading your data...</span>
       </div>
       <div id="tableContainer" class="hidden">
+        <!-- Desktop Table View -->
         <div class="table-responsive">
           <table class="attendance-table" id="attendanceTable">
             <thead id="tableHead"></thead>
             <tbody id="tableBody"></tbody>
           </table>
         </div>
+        <!-- Mobile Card View -->
+        <div id="mobileCardContainer" class="mobile-card-container">
+          <!-- Filled by JS -->
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- hidden debug removed (no coding visible) -->
 </div>
 
 <script>
@@ -696,6 +788,7 @@
   const tableHead = $('tableHead');
   const tableBody = $('tableBody');
   const metricContainer = $('metricContainer');
+  const mobileCardContainer = $('mobileCardContainer');
 
   let currentEmployee = null;
   let currentRowData = null;
@@ -745,13 +838,12 @@
   }
 
   function renderTable(row) {
-    // headers
+    // Desktop table
     let h = '<tr>';
     DISPLAY_FIELDS.forEach(f => { h += `<th>${f.header}</th>`; });
     h += '</tr>';
     tableHead.innerHTML = h;
 
-    // row
     let r = '<tr>';
     DISPLAY_FIELDS.forEach(f => {
       const v = (row[f.col] !== undefined && row[f.col] !== '') ? row[f.col] : '—';
@@ -759,6 +851,20 @@
     });
     r += '</tr>';
     tableBody.innerHTML = r;
+
+    // Mobile card view
+    let mobileHtml = '<div class="data-card">';
+    DISPLAY_FIELDS.forEach(f => {
+      const v = (row[f.col] !== undefined && row[f.col] !== '') ? row[f.col] : '—';
+      mobileHtml += `
+        <div class="data-item">
+          <span class="label">${f.header}</span>
+          <span class="value">${v}</span>
+        </div>
+      `;
+    });
+    mobileHtml += '</div>';
+    mobileCardContainer.innerHTML = mobileHtml;
   }
 
   function showDashboard() {
@@ -839,6 +945,7 @@
     hideError(); hideSuccess();
     metricContainer.innerHTML = '';
     tableBody.innerHTML = ''; tableHead.innerHTML = '';
+    mobileCardContainer.innerHTML = '';
   }
 
   async function handleRefresh() {
@@ -855,7 +962,6 @@
   employeeIdInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
   passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
 
-  // remove any debug / code display
   console.log('✅ Attendance Portal ready (professional UI)');
 </script>
 </body>
